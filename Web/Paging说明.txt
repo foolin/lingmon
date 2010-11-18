@@ -1,0 +1,156 @@
+v1.0.1更新记录(2010-4-29)：
+ ·增加语言属性，新增默认：0-默认，1-中文，2-英语
+ ·控件集成CSS样式，默认不用另外加样式。
+
+
+一、分页控件的属性：
+
+---可显示设置属性
+ ID		//分页控件ID（同页内必须唯一）	(string)
+ CssClass    	// Css样式 			(string)
+ ShowPreNext   	//是否显示上一页下一页		(bool)
+ ShowPageNum   	//是否显示页码连接		(bool)
+ PageSplitNum   	//页码隔多少数字	(int：当ShowPageNum属性为true时生效)
+ ShowPageTips  	//是否显示当前页、记录数等信息	(bool)
+ ShowPageJump  	//是否显示下来框跳转		(bool)
+ ShowPageGo    	//是否显示输入页码跳转		(bool)
+ ShowPageLan	//显示语言的类型		(int: 0 - 默认， 1 - 中文， 2 - 英语)
+
+---不可显示设置属性
+ PageSize   	//每页记录数(int)
+ PageIndex  	//当前页码(int)
+ PageTotal  	//总页数(int：只读)
+ Records    	//总记录数(int)
+
+二、分页控件的方法：
+
+
+ void InitPage(int records);
+ ------ 函数说明 ------
+ 功能：初始化分页控件
+ 参数：records - 总记录数
+ 输出：无
+
+
+三、控件使用说明：
+
+    //一般获取数据绑定函数可写成如下：
+    
+    /// <summary>
+    /// 获取数据集（可用存储过程进行分页再返回数据）
+    /// </summary>
+    /// <param name="pageSize">每页显示记录数</param>
+    /// <param name="pageIndex">当前页数</param>
+    /// <param name="records">输出记录数</param>
+    /// <returns></returns>
+    public DataSet GetList(int pageSize, int pageIndex, out int records)
+    {
+        DataSet ds; 		//返回的数据集
+	//....			//（从数据库读取数据省略）
+        records = ...; 		//赋值给总记录数（省略）
+        return ds;
+    }
+
+    //假如前台Repeater控件ID为： Repeater1
+    //前台分页Paging控件ID为：   Pg1
+    //则调用格式如下：
+
+    int records = 0;    //输出
+    Repeater1.DataSource = GetList( Pg1.PageSize, Pg1.PageIndex, out records);  //获取数据源
+    Repeater1.DataBind();   //绑定数据
+    Pg1.InitPage(records);  //初始化分页
+
+
+
+分页存储过程实例：
+
+-- =============================================
+-- Author:		Foolin
+-- Create date: 2010-09-22
+-- Description:	存储过程分页
+-- 调用：(排序ASC不可少)
+--       exec PR_Paging 'select * from [order] ', 20, 0, 'CreateTime ASC,  Money DESC' 
+-- =============================================
+ALTER PROCEDURE [dbo].[PR_Paging]
+(
+ @SQL nvarchar(1024),   --查询语句
+ @PageSize int = 20,    --分页大小
+ @PageIndex int = 0,    --分页索引
+ @Sort nvarchar(100) = '',    --排序字段
+ @TotalCount int = 0 output --总数    
+)
+AS
+
+-- 值默认值
+if (IsNUll(@PageSize,0)=0)
+	Set @PageSize=20
+if (IsNull(@PageIndex,0)=0)
+	Set @PageIndex=0
+
+set nocount on
+/*声明查询字符串*/
+declare @strSQL nvarchar(4000)
+
+set @strSQL = ' select @TotalCount=count(*) from ('+@SQL+') as t ' 
+
+/*取得查询结果总数*/
+exec sp_executesql
+@strSQL, 
+N'@TotalCount int=0 OUTPUT', 
+@TotalCount=@TotalCount OUTPUT 
+
+declare @ItemCount int 
+declare @_PageIndex int
+
+set @_PageIndex = @PageIndex + 1;
+/*确定搜索边界*/
+set @ItemCount = @TotalCount - @PageSize * @_PageIndex
+
+if(@ItemCount < 0) 
+    set @ItemCount = @ItemCount + @PageSize 
+else 
+    set @ItemCount = @PageSize 
+
+if(@ItemCount < 0) return 1 
+
+if(@Sort != '')
+begin
+    /*声明排序变量*/
+    declare @IndexSort1 nvarchar(50), @IndexSort2 nvarchar(50), @Sort1 nvarchar(50), @Sort2 nvarchar(50)
+    
+    SET @Sort1 = @Sort
+    SET @Sort2 = Replace(Replace(Replace(@Sort, 'DESC', '@SORT'), 'ASC', 'DESC'), '@SORT', 'ASC')
+
+    set @strSQL = 'SELECT * FROM 
+    (SELECT TOP ' + STR(@ItemCount) + ' * FROM 
+    (SELECT TOP ' + STR(@PageSize * @_PageIndex) + ' * FROM 
+    ('+@SQL+') AS t0 
+    ORDER BY '+@Sort1 +') AS t1 
+    ORDER BY '+@Sort2 +') AS t2 
+    ORDER BY ' +@Sort 
+end
+else
+begin
+    set @strSQL = 'SELECT * FROM 
+    (SELECT TOP ' + STR(@ItemCount) + ' * FROM 
+    (SELECT TOP ' + STR(@PageSize * @_PageIndex) + ' * FROM 
+    ('+@SQL+') As t0) 
+    aS t1) 
+    AS t2'
+end
+
+exec sp_executesql 
+@strSQL
+
+
+
+---------
+姓名：刘付灵（Foolin）
+职务：技术部运营技术支持
+部门：深圳深讯和科技有限公司
+地址：深圳市南山区高新中四道31号研祥科技大厦7A
+邮编：518057
+手机：13616187178
+邮箱：LiufuLing@sxmobi.com
+网址：http://www.sxmobi.com
+ 

@@ -22,18 +22,18 @@ namespace Sxmobi.Utility.Web
         private static string Prefix = "LFL_";    //缓存前缀
 
         /// <summary>
-        /// 设置缓存，默认一个小时
+        /// 设置缓存，默认永久缓存
         /// </summary>
         /// <param name="key">缓存Key</param>
         /// <param name="value">缓存值</param>
         /// <returns>返回布尔值</returns>
         public static bool SetCache(string key, object value)
         {
-            return SetCache(Prefix ,key, value, 1, 0, 0);
+            return SetCache(Prefix, key, value);
         }
 
         /// <summary>
-        /// 设置缓存，默认一个小时
+        /// 设置缓存，默认永久缓存
         /// </summary>
         /// <param name="prefix">前缀</param>
         /// <param name="key">缓存Key</param>
@@ -41,7 +41,25 @@ namespace Sxmobi.Utility.Web
         /// <returns>返回布尔值</returns>
         public static bool SetCache(string prefix, string key, object value)
         {
-            return SetCache(prefix, key, value, 1, 0, 0);
+            bool blReturn = false;
+            if (string.IsNullOrEmpty(prefix))
+            {
+                prefix = Prefix;
+            }
+            if (value != null)
+            {
+                try
+                {
+                    HttpRuntime.Cache.Insert(prefix + key, value, null, System.Web.Caching.Cache.NoAbsoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration);
+                    blReturn = true;
+                }
+                catch
+                {
+                    blReturn = false;
+                    throw;
+                }
+            }
+            return blReturn;
         }
 
         /// <summary>

@@ -97,6 +97,7 @@
     <EmbeddedResource Include="Web\Paging.css" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="updatelog.txt" />
     <Content Include="Web\Paging说明.txt" />
     <Content Include="公共类库说明.txt" />
   </ItemGroup>

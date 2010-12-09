@@ -1,0 +1,50 @@
+/*************************/
+/*   Css style for table */
+/*   Auhtor:   Foolin    */
+/*   Created: 2010-8-11  */
+/*   Updated: 2010-8-12  */
+/*   Version: 1.0.0      */
+/*************************/
+
+table.Foolin
+{
+	margin:5px auto;
+	width:100%;
+	border-collapse:collapse;
+	border:#4cacc5 solid 1px;
+}
+
+table.Foolin th, table.Foolin .title
+{
+	padding:3px 5px;
+	/*background:#cfecf2;*/
+	border:#4cacc5 solid 1px;
+	border-bottom:#4cacc5 solid 3px;
+	font-size:14px;
+	font-weight:bold;
+	text-align:left;
+}
+
+table.Foolin td
+{
+	padding:3px 5px;
+	border:#4cacc5 solid 1px;
+	font-size:14px;
+	text-align:left;
+}
+
+table.Foolin .evenRowClass
+{
+	background:#cfecf2;
+}
+
+table.Foolin .oddRowClass
+{
+	background:#ffffff;
+}
+
+table.Foolin .onRowClass
+{
+	background:#83d1f8;
+	color:#F00;
+}

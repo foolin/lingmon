@@ -1,0 +1,17 @@
+2010/12/4 2:30:17 Msg:注册失败！原因：在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: SQL 网络接口, error: 26 - 定位指定的服务器/实例时出错), User:Admin, URL:http://localhost:53012/Code/Register.aspx
+2010/12/4 13:28:02 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'strUsername' 无效。
+列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:29:47 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'strUsername' 无效。
+列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:30:49 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'strUsername' 无效。
+列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:31:44 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:33:37 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:34:05 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：列名 'foolin' 无效。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 13:34:15 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:00:47 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:01:05 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:06:16 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:07:10 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:07:58 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80
+2010/12/4 14:09:54 Msg:激活用户名：foolin，验证码：ab4a7a1335d9499bd00645af8fdd5a80失败，原因：正在中止线程。, User:Admin, URL:http://localhost:53012/Code/User/UserAtivate.aspx?UserName=foolin&ActivateCode=ab4a7a1335d9499bd00645af8fdd5a80

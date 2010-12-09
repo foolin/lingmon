@@ -789,12 +789,47 @@ namespace Sxmobi.Utility.Web
 
 
         /// <summary>
+        /// 取IP
+        /// </summary>
+        /// <returns></returns>
+        public static string GetIP()
+        {
+            string user_IP = "";
+            if (HttpContext.Current.Request.ServerVariables["HTTP_VIA"] != null)
+            {
+                user_IP = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+            }
+            else
+            {
+                user_IP = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString();
+            }
+            return user_IP;
+        }
+
+
+        /// <summary>
+        /// 获取主机URL，包括虚拟目录
+        /// </summary>
+        /// <returns></returns>
+        public static string GetDomainURL()
+        {
+            string strUrl = "http://" + HttpContext.Current.Request.ServerVariables["HTTP_HOST"].ToString();
+            if (HttpContext.Current.Request.ApplicationPath.Length > 1)
+            {
+                strUrl += HttpContext.Current.Request.ApplicationPath;
+            }
+            return strUrl;
+
+        }
+
+
+        /// <summary>
         /// 创建弹出信息
         /// </summary>
         /// <param name="msg">弹出的信息</param>
         public static void Alert(string msg)
         {
-            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "") + "');</script>");
+            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "").Replace("\n","\\n").Replace("\r","\\r").Replace("\\","\\\\") + "');</script>");
         }
 
         /// <summary>
@@ -804,74 +839,29 @@ namespace Sxmobi.Utility.Web
         public static void AlertAndBack(string msg)
         {
             HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "") + "');history.go(-1);</script>");
+            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "").Replace("\n", "\\n").Replace("\r", "\\r") + "');history.go(-1);</script>");
             HttpContext.Current.Response.End();
         }
 
-        public static void ConfirmGo(string msg, string trueUrl, string falseUrl)
+        public static void ConfirmAndGo(string msg, string trueUrl, string falseUrl)
         {
             HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write(string.Format("<script language='javascript'>if( confirm('{0}')) document.location.href='{1}'; else document.location.href='{2}';</script>", msg.Replace("'", ""), trueUrl, falseUrl));
+            HttpContext.Current.Response.Write(string.Format("<script language='javascript'>if( confirm('{0}')) document.location.href='{1}'; else document.location.href='{2}';</script>", msg.Replace("'", "").Replace("\n", "\\n").Replace("\r", "\\r"), trueUrl, falseUrl));
             HttpContext.Current.Response.End();
         }
 
         /// <summary>
-        /// 弹出一条成功消息,点确定后跳转到指定Url
+        /// 弹出一条消息,点确定后跳转到指定Url
         /// </summary>
         /// <param name="msg">弹出的信息</param>
         /// <param name="goUrl">要跳转的Url</param>
-        public static void SuccAndGo(string msg, string goUrl)
+        public static void AlertAndGo(string msg, string goUrl)
         {
             HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>alert('{0}');document.location.href='{1}';</script>", msg.Replace("'", ""), goUrl));
+            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>alert('{0}');document.location.href='{1}';</script>", msg.Replace("'", "").Replace("\n", "\\n").Replace("\r", "\\r"), goUrl));
             HttpContext.Current.Response.End();
         }
 
-        /// <summary>
-        /// 弹出一条成功消息,点确定后跳转到指定Url
-        /// </summary>
-        /// <param name="msg">弹出的信息</param>
-        /// <param name="goUrl">要跳转的Url</param>
-        public static void SuccAndGo(string msg)
-        {
-            HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>alert('{0}');history.back();</script>", msg.Replace("'", "")));
-            HttpContext.Current.Response.End();
-        }
-
-        /// <summary>
-        /// 弹出一条失败消息,点确定后跳转到指定Url
-        /// </summary>
-        /// <param name="msg">弹出的信息</param>
-        /// <param name="goUrl">要跳转的Url</param>
-        public static void FailAndGo(string msg, string goUrl)
-        {
-            HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>alert('{0}');document.location.href='{1}';</script>", msg.Replace("'", ""), goUrl));
-            HttpContext.Current.Response.End();
-        }
-
-        /// <summary>
-        /// 弹出一条失败消息,点确定后跳转回原页面
-        /// Author:turboc
-        /// CreateDate:2006-02-05
-        /// </summary>
-        /// <param name="msg">弹出的信息</param>
-        public static void FailAndGo(string msg)
-        {
-            HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>alert('{0}');history.back();</script>", msg.Replace("'", "")));
-            HttpContext.Current.Response.End();
-        }
-
-        /// <summary>
-        /// 在当前请求中输出一个隐藏的Iframe
-        /// </summary>
-        /// <param name="url">Iframe在源地址</param>
-        public static void CreateHiddenIFrame(string url)
-        {
-            HttpContext.Current.Response.Write("<iframe style='width:100px;height:100px;' frameborder=0 src='" + url + "'></iframe>");
-        }
 
         /// <summary>
         /// 在页面上停留一段时间(通常是几钞钟),显示一条等待信息,然后跳转到指定页面
@@ -888,11 +878,27 @@ namespace Sxmobi.Utility.Web
             }
 
             HttpContext.Current.Response.Write(alterMsg);
-            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>setTimeout(\"document.location.href='{1}';\", {2}*1000);</script>", alterMsg.Replace("'", ""), goUrl, sec));
+            HttpContext.Current.Response.Write(String.Format("<script language='javascript'>setTimeout(\"document.location.href='{1}';\", {2}*1000);</script>", alterMsg.Replace("'", "").Replace("\n", "\\n").Replace("\r", "\\r"), goUrl, sec));
 
             HttpContext.Current.Response.End();
         }
 
+        /// <summary>
+        /// 在当前请求中输出一个隐藏的Iframe
+        /// </summary>
+        /// <param name="url">Iframe在源地址</param>
+        public static void CreateHiddenIFrame(string url)
+        {
+            HttpContext.Current.Response.Write("<iframe style='width:100px;height:100px;' frameborder=0 src='" + url + "'></iframe>");
+        }
+
+
+
+        /// <summary>
+        /// 取文本，格式化掉HTML
+        /// </summary>
+        /// <param name="htmlText"></param>
+        /// <returns></returns>
         public static string GetText(string htmlText)
         {
             if (string.IsNullOrEmpty(htmlText))
@@ -919,12 +925,12 @@ namespace Sxmobi.Utility.Web
                 strReturn = AppDomain.CurrentDomain.BaseDirectory;
             }
             strReturn += strPath;
-            //如果后面没有\，则添加\
-            string lastChar = strPath.Substring(strPath.Length - 1, 1);
-            if (lastChar != "\\" && lastChar != "/")
-            {
-                strReturn += "\\";
-            }
+            ////如果后面没有\，则添加\
+            //string lastChar = strPath.Substring(strPath.Length - 1, 1);
+            //if (lastChar != "\\" && lastChar != "/")
+            //{
+            //    strReturn += "\\";
+            //}
             return strReturn.Replace("/", "\\");
         }
 

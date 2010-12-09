@@ -829,7 +829,7 @@ namespace Sxmobi.Utility.Web
         /// <param name="msg">弹出的信息</param>
         public static void Alert(string msg)
         {
-            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "").Replace("\n","\\n").Replace("\r","\\r").Replace("\\","\\\\") + "');</script>");
+            HttpContext.Current.Response.Write("<script language='javascript'>alert('" + msg.Replace("'", "").Replace("\n","\\n").Replace("\r","\\r") + "');</script>");
         }
 
         /// <summary>

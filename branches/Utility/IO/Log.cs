@@ -41,7 +41,15 @@ namespace Sxmobi.Utility.IO
             string strDir = System.Web.HttpContext.Current.Request.MapPath("~\\Log");
             if (!Directory.Exists(strDir))     //如果目录不存在 
             {
-                Directory.CreateDirectory(strDir);//创建日期目录
+                try
+                {
+                    Directory.CreateDirectory(strDir);//创建日期目录
+                }
+                catch
+                {
+                    //没权限创建目录
+                    return false;
+                }
             }
             return WriteFile(strDir + "\\" + DateTime.Now.ToString("yyyyMMdd") +".txt", strMessage, true, false);
         }

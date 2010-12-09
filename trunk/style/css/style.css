@@ -170,8 +170,14 @@ a:hover{ color:#F00; text-decoration:none;}
 	border:solid 4px #C6EBEE;
 	background:#FFF;
 }
-.gridNavURL dl.on{
+.thumbURL dl.on{
 	border:solid 4px #53A9FF;
+	color:#F00;
+/*	background:#06F;
+	color:#FFF;*/
+}
+.thumbURL dl.over{
+	border:solid 4px #C60;
 	color:#F00;
 /*	background:#06F;
 	color:#FFF;*/
@@ -183,13 +189,13 @@ a:hover{ color:#F00; text-decoration:none;}
 }
 .thumbURL dl dd img{
 	width:160px;
-	height:80px;
+	height:90px;
 }
 .thumbURL dl dd a img{
-	border:solid 1px #FFF;
+	border:solid 2px #FFF;
 }
 .thumbURL dl dd a:hover img{
-	border:solid 1px #F00;
+	border:solid 2px #F00;
 }
 .thumbURL dl dt,.thumbURL .title{
 	text-align:center;

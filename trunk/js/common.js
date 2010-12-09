@@ -24,7 +24,13 @@ function _LFL_getUrlParams(){
     var paras = paraString[1].split('&');
     var allParas=new Array(paras.length);
     for(var i = 0;i<paras.length; i++){
-           allParas[_LFL_getParam(paras[i])[0].toLowerCase()] = _LFL_getParam(paras[i])[1].toLowerCase();
+        var _key = _LFL_getParam(paras[i])[0];
+        var _value = _LFL_getParam(paras[i])[1];
+           if(!_key || !_value)
+           {
+                continue;
+           }
+           allParas[_key.toLowerCase()] = _value.toLowerCase();
     }
     return allParas;
 }

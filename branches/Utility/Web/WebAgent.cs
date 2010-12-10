@@ -862,6 +862,15 @@ namespace Sxmobi.Utility.Web
             HttpContext.Current.Response.End();
         }
 
+        /// <summary>
+        /// 创建弹出信息并返回刷新
+        /// </summary>
+        /// <param name="msg">弹出的信息</param>
+        public static void AlertAndRefresh(string msg)
+        {
+            AlertAndGo(msg, HttpContext.Current.Request.ServerVariables["HTTP_REFERER"].ToString());
+        }
+
 
         /// <summary>
         /// 在页面上停留一段时间(通常是几钞钟),显示一条等待信息,然后跳转到指定页面

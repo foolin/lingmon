@@ -7,15 +7,16 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
+using System.Net.Mail;
 
 /// <summary>
 ///Email 的摘要说明
 /// </summary>
 public class Email
 {
-    public string SendFrom = SysConfig.Sys_SiteName + "<service@liufu.org>";
-    public string SendUsername = "252687345";
-    public string SendPassword = "fu860820";
+    public string SendFrom = SysConfig.Sys_SiteName + "<service@7dong.net>";
+    public string SendUsername = "service";
+    public string SendPassword = "foolinivy";
     public string SmtpServer = "smtp.qq.com";
 
     public Email()
@@ -110,6 +111,51 @@ public class Email
 
         //开始发送邮件 
         System.Web.Mail.SmtpMail.Send(objMailMessage); 
+    }
+
+
+    public void Send()
+    {
+        string mailServerName = "smtp.exmail.qq.com"; //发送邮件的SMTP服务器
+        string mailFrom = "service@7dong.net";   //发件人邮箱（用126的邮件服务器，就必须用126邮箱的用户名）
+        string mailTo = "傅零<foolin@liufu.org>,测试<1000@7dong.net>,服务<service@7dong.net>";   //收件人邮箱
+        string subject = "用代码方式发送邮件";//邮件主题
+        string body = "这里是邮件正文了"; //邮件正文
+
+        //using (MailMessage message = new MailMessage(mailFrom, mailTo, subject, body))
+        using (MailMessage message = new MailMessage())
+        {
+            message.To.Add(new MailAddress(mailTo));
+
+            //MailMessage message = new MailMessage();
+            //message.To = mailTo;
+            //message.CC = "service@7dong.net";
+            //message.From = "service@7dong.net";
+            message.From =  new MailAddress("service@7dong.net");
+            message.IsBodyHtml = true;
+            message.Subject = "启动网欢迎您！";
+            message.Body = "尊敬的用户，你正在使用刘傅网服务，详情请访问：http://www.liufu.org";
+            message.To.Add("ling@liufu.org");
+           // message.Priority = MailPriority.High; //发送邮件的优先等级 
+            //SmtpClient是发送邮件的主体，这个构造函数是告知SmtpClient发送邮件时使用哪个SMTP服务器
+            SmtpClient mailClient = new SmtpClient(mailServerName);
+            //将认证实例赋予mailClient,也就是访问SMTP服务器的用户名和密码
+            mailClient.Credentials = new System.Net.NetworkCredential("service@7dong.net", "foolinivy"); 
+            //最终的发送方法
+            try
+            {
+                mailClient.Send(message);
+               // mailClient.SendAsync(message,message.Body);
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+
+            }
+
+        }
     }
 
 

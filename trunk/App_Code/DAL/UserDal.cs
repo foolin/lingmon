@@ -432,23 +432,25 @@ namespace LFL.Favorite.DAL
 			return db.GetDs(strSql.ToString());
 		}
 
-		/*
+
+        
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
-		public DataSet GetList(int pageSize, int pageIndex, out int totalCount)
+		public DataSet GetList(string strWhere, string strOrder,int pageSize, int pageIndex, out int totalCount)
 		{
 			StringBuilder strSql = new StringBuilder();
-			StringBuilder strSort = new StringBuilder();
 			//Sql语句
+			strSql.Append(" Select ");
 			strSql.Append(" UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
 			strSql.Append(" FROM T_User ");
-			//排序
-			//strSort.Append(" ID Asc");
-			
-			return db.GetPageDs(strSql.ToString(), strSort.ToString(), pageSize, pageIndex, out totalCount);
+			if(strWhere.Trim()!="")
+			{
+				strSql.Append(" where "+strWhere);
+			}
+			return db.GetPageDs(strSql.ToString(), strOrder, pageSize, pageIndex, out totalCount);
 		}
-		*/
+		
 
 		#endregion  成员方法
 	}

@@ -177,32 +177,32 @@ namespace LFL.Favorite.BLL
 			return GetList("");
 		}
 
-		/*
-		/// <summary>
-		/// 分页数据
-		/// </summary>
-		/// <param name="pageSize">每页记录大小</param>
-		/// <param name="pageIndex">当前索引页</param>
-		/// <param name="totalCount">总记录数</param>
-		/// <returns></returns>
-		public DataSet GetList(int pageSize, int pageIndex, out int totalCount)
-		{
-			return dal.GetList(pageSize, pageIndex, out totalCount);
-		}
+        
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="pageSize">每页记录大小</param>
+        /// <param name="pageIndex">当前索引页</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <returns></returns>
+        public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
+        {
+            return dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount);
+        }
 		
 		
-		/// <summary>
-		/// 分页数据
-		/// </summary>
-		/// <param name="pageSize">每页记录大小</param>
-		/// <param name="pageIndex">当前索引页</param>
-		/// <param name="totalCount">总记录数</param>
-		/// <returns></returns>
-		public List<LFL.Favorite.Model.User> GetModelList(int pageSize, int pageIndex, out int totalCount)
-		{
-			return DataTableToList(dal.GetList(pageSize, pageIndex, out totalCount).Tables[0]);
-		}
-		*/
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="pageSize">每页记录大小</param>
+        /// <param name="pageIndex">当前索引页</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <returns></returns>
+        public List<LFL.Favorite.Model.User> GetModelList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
+        {
+            return DataTableToList(dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount).Tables[0]);
+        }
+        
 
 		#endregion  成员方法
 	}

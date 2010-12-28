@@ -6,7 +6,7 @@ using LFL.Favorite.Model;
   *  BLL业务逻辑层 
   *  Author       : Foolin 
   *  Email        : LingLiufu@gmail.com
-  *  Created Date : 2010/12/4 0:31:57
+  *  Created Date : 2010/12/17 23:30:46
   *  Copyright(C) 2010 灵梦团队 保留所有权利。
 ***********************************************/
 namespace LFL.Favorite.BLL
@@ -123,9 +123,9 @@ namespace LFL.Favorite.BLL
 		/// <param name="pageIndex">当前索引页</param>
 		/// <param name="totalCount">总记录数</param>
 		/// <returns></returns>
-		public DataSet GetList(int pageSize, int pageIndex, out int totalCount)
+		public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
 		{
-			return dal.GetList(pageSize, pageIndex, out totalCount);
+			return dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount);
 		}
 		
 		
@@ -136,9 +136,9 @@ namespace LFL.Favorite.BLL
 		/// <param name="pageIndex">当前索引页</param>
 		/// <param name="totalCount">总记录数</param>
 		/// <returns></returns>
-		public List<LFL.Favorite.Model.Favorite> GetModelList(int pageSize, int pageIndex, out int totalCount)
+		public List<LFL.Favorite.Model.Favorite> GetModelList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
 		{
-			return DataTableToList(dal.GetList(pageSize, pageIndex, out totalCount).Tables[0]);
+			return DataTableToList(dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount).Tables[0]);
 		}
 		*/
 

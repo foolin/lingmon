@@ -1,31 +1,49 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetThumbUrlList.aspx.cs" Inherits="Ajax_GetThumbUrlList" %>
 
 [
-    {   "title":"测试测试1",
-        "url":"http://www.baidu.com",
+    {   "title":"CNBeta网友媒体与言论平台",
+        "url":"http://www.cnbeta.com",
         "img":"style/images/img1.png",
         "target":""
     },
-    {   "title":"测试测试2",
-        "url":"http://www.baidu.com",
-        "img":"style/images/img2.png",
+    {   "title":"DoNews",
+        "url":"http://www.donews.com",
+        "img":"style/images/img1.png",
         "target":" "
     },
-    {   "title":"测试测试3-顶窗口",
-        "url":"http://www.baidu.com",
-        "img":"style/images/img3.png",
+    {   "title":"CSDN",
+        "url":"http://www.csdn.net",
+        "img":"style/images/img1.png",
+        "target":""
+    },
+    {   "title":"腾讯网",
+        "url":"http://www.qq.com",
+        "img":"style/images/img1.png",
         "target":"_top"
     }
     ,
-    {   "title":"测试测试3-本窗口",
-        "url":"http://www.baidu.com",
-        "img":"style/images/img3.png",
+    {   "title":"新浪网",
+        "url":"http://www.sina.com",
+        "img":"style/images/img1.png",
         "target":"_self"
     }
     ,
-    {   "title":"测试测试3-新窗口",
-        "url":"http://www.baidu.com",
-        "img":"style/images/img3.png",
-        "target":"_blank"
+    {   "title":"网领科技有限公司",
+        "url":"http://www.sxmobi.com",
+        "img":"style/images/img1.png",
+        "target":""
+    }
+    ,
+    {   "title":"悠米论坛",
+        "url":"http://bbs.52um.com",
+        "img":"style/images/img1.png",
+        "target":""
+    }
+    
+    ,
+    {   "title":"深讯和查询平台",
+        "url":"http://pl.sxmobi.com",
+        "img":"style/images/img1.png",
+        "target":""
     }
 ]

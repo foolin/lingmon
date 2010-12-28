@@ -59,3 +59,38 @@ $(document).ready(function(){
 });
 
 /**********************/
+
+
+/***** cookies *****/
+//function setCookie(key, value){
+//    $.cookie("www_7dong_net_" + key, value, {expires: 7, path: '/', domain: 'www.7dong.com', secure: true});  //存储
+//}
+
+//function getCookie(key){
+//    return $.cookie("www_7dong_net_" + key);
+//}
+
+//写cookies函数
+function setCookie(key, value)//两个参数，一个是cookie的名子，一个是值
+{
+    var Days = 30; //此 cookie 将被保存 30 天
+    var exp  = new Date();    //new Date("December 31, 9998");
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = key + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+//取cookies函数    
+function getCookie(key)    
+{
+    var arr = document.cookie.match(new RegExp("(^| )"+ key +"=([^;]*)(;|$)"));
+     if(arr != null) return unescape(arr[2]); return null;
+
+}
+//删除cookie
+function delCookie(key)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(key);
+    if(cval!=null) document.cookie= key + "="+cval+";expires="+exp.toGMTString();
+}
+

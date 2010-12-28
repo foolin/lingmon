@@ -6,7 +6,7 @@ using System.Data.SqlClient;
   *  DAL数据层 
   *  Author       : Foolin 
   *  Email        : LingLiufu@gmail.com
-  *  Created Date : 2010/12/4 0:33:01
+  *  Created Date : 2010/12/17 23:34:46
   *  Copyright(C) 2010 灵梦团队 保留所有权利。。
 ***********************************************/
 namespace LFL.Favorite.DAL
@@ -174,17 +174,18 @@ namespace LFL.Favorite.DAL
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
-		public DataSet GetList(int pageSize, int pageIndex, out int totalCount)
+		public DataSet GetList(string strWhere, string strOrder,int pageSize, int pageIndex, out int totalCount)
 		{
 			StringBuilder strSql = new StringBuilder();
-			StringBuilder strSort = new StringBuilder();
 			//Sql语句
+			strSql.Append(" Select ");
 			strSql.Append(" FavCategoryID,CategoryName,ParentID ");
 			strSql.Append(" FROM T_FavCategory ");
-			//排序
-			//strSort.Append(" ID Asc");
-			
-			return db.GetPageDs(strSql.ToString(), strSort.ToString(), pageSize, pageIndex, out totalCount);
+			if(strWhere.Trim()!="")
+			{
+				strSql.Append(" where "+strWhere);
+			}
+			return db.GetPageDs(strSql.ToString(), strOrder, pageSize, pageIndex, out totalCount);
 		}
 		*/
 

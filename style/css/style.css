@@ -161,6 +161,29 @@ a:hover{ color:#F00; text-decoration:none;}
 	margin:0px auto;
 }
 
+.thumbURL .item
+{
+	float:left;
+	width:188px;
+	height:148px;
+	margin:10px;
+	padding:0;
+	overflow:hidden;
+}
+
+.thumbURL dl
+{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	width:180px;
+	height:120px;
+	border:solid 4px #C6EBEE;
+	background:#FFF;
+}
+
+
+/* bak 2010-12-31
 .thumbURL dl{
 	float:left;
 	margin:10px;
@@ -170,11 +193,14 @@ a:hover{ color:#F00; text-decoration:none;}
 	border:solid 4px #C6EBEE;
 	background:#FFF;
 }
-.thumbURL dl.on{
+*/
+.thumbURL dl.on
+{
+	overflow:hidden;
+	width:180px;
+	height:140px;
 	border:solid 4px #53A9FF;
 	color:#F00;
-/*	background:#06F;
-	color:#FFF;*/
 }
 .thumbURL dl.over{
 	border:solid 4px #C60;
@@ -207,6 +233,14 @@ a:hover{ color:#F00; text-decoration:none;}
 .thumbURL .url{
 	line-height:20px;
 	height:20px;
+}
+
+.thumbURL .url a
+{
+	color:#06F;
+}
+.thumbURL .url a:hover{
+	color:#F00
 }
 
 /************ icoURL *******/

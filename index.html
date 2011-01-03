@@ -7,6 +7,7 @@
 
     <link href="style/css/style.css" rel="stylesheet" type="text/css" />
     <link href="js/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="js/themes/icon.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
 	html { overflow-y:auto; }
 	.over{
@@ -59,10 +60,12 @@
 		
 
 		
+        /******************** ThumbUrl载入数据 **********************/
+		
 		//初始化URL数据
 		function initThumbUrl()
 		{
-		     var datThumbUrl = getCookie("ThumbUrl");
+		    var datThumbUrl = getCookie("ThumbUrl");
 		    
 		    if(!datThumbUrl)
 		    {
@@ -94,13 +97,61 @@
                }
             });
         }
+        
+        //取得Json数据，将数据进行填充
+		function FillThumbUrl(data){
+				/* 2011-1-2 21:28:29
+			    <div class="item">
+                <dl>
+        	            <dt class="title">启动网1</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png" /></a>
+                        </dd>
+                        <dd class="url"><a href="http://www.7dong.net" target="_blank">http://www.7dong.net</a></dd>
+                 </dl>
+                 </div>
+                */
+		        var thumHtml = "<div class=\"thumbURL\">";
+		        
+                for(var i = 0; i < data.length; i++)
+                {
+                    if(!data[i].title || data[i].title == "")  data[i].title="启动网";
+                    if(!data[i].url || data[i].url == "") data[i].url = "http://www.7dong.net";
+                    if(!data[i].img || data[i].img == "") data[i].img = "style/images/thumburl/nopic.jpg";
+                    if(!data[i].target || data[i].target == "") data[i].target = "_self";
+                    thumHtml += "<div class=\"item\">";
+		            thumHtml += "<dl>";
+		            thumHtml += "  <dt class=\"title\">"+ data[i].title +"</dt>";
+		            thumHtml += "  <dd class=\"img\">";
+		            thumHtml += "  <a href=\""+ data[i].url +"\" target=\""+ data[i].target +"\">";
+		            thumHtml += "    <img src=\""+ data[i].img +"\" />";
+		            thumHtml += "  </a>";
+		            thumHtml += "  </dd>"
+		            thumHtml += "  <dd class=\"url\">";
+		            thumHtml += "  <a href=\""+ data[i].url +"\" title=\""+ data[i].title +"\" target=\""+ data[i].target +"\">";
+		            thumHtml += "    "+ data[i].url +"";
+		            thumHtml += "  </a>";
+		            thumHtml += "  </dd>"
+		            thumHtml += "</dl>";
+		            thumHtml += "</div>";
+                }
+    		    
+		        thumHtml += "</div>"
+    		    
+		        $("#thumbURL").html(thumHtml);
+                initThumbUrlJs(); //初始化JS功能
+		}
+        
+        
+        
+        /************* ThumbUrl保存数据 **************/
 		
 		//保存URL数据
 		function saveThumbUrl(){
 		    var strJson = "";
 		    $("#thumbURL dl").each(function(i){
 		        var title = $(this).find(".title").html();
-		        var img = $(this).find(".img img").attr("src");
+		        var img = $(this).find(".img img").attr("src").replace(/\s/g,"").replace($Domain + "/", "");    //replace($Domain,"")过滤掉IE自动添加成绝对路径
 		        var url = $(this).find(".img a").attr("href");
 		        var target = $(this).find(".img a").attr("target");
 		        
@@ -125,79 +176,254 @@
 		    $("#saveThumbUrl").hide();  //隐藏保存
 		}
 		
-		//取得Json数据，将数据进行填充
-		function FillThumbUrl(data){
-				/* 2010-12-10 0:04:36 */
-		        var thumHtml = "<div class=\"thumbURL\">";
-		        
-                for(var i = 0; i < data.length; i++)
-                {
-                    if(!data[i].title)  data[i].title="启动网";
-                    if(!data[i].url) data[i].url = "http://www.7dong.net";
-                    if(!data[i].img) data[i].img = "style/images/thumburl/nopic.jpg";
-                    
-		            thumHtml += "<dl>";
-		            thumHtml += "  <dt class=\"title\">"+ data[i].title +"</dt>";
-		            thumHtml += "  <dd class=\"img\">";
-		            var tagert = ""
-		            if(!data[i].target || data[i].target  == "")
-		            {
-		                thumHtml += "  <a href=\""+ data[i].url +"\" target=\"_blank\">";
-		            }
-		            else
-		            {
-		                thumHtml += "  <a href=\""+ data[i].url +"\" target=\""+ data[i].target +"\">";
-		                
-		            }
-		            
-		            thumHtml += "    <img src=\""+ data[i].img +"\"  alt=\""+ data[i].title +"\" />";
-		            thumHtml += "  </a>";
-		            thumHtml += "  </dd>"
-		            thumHtml += "</dl>";
-                }
-    		    
-		        thumHtml += "</div>"
-    		    
-		        $("#thumbURL").html(thumHtml);
-				
-				$('.thumbURL dl').draggable({
+		
+		
+    
+        /********************* ThumbUrl编辑功能 Code Begin ***********************/
+		
+		//全局变量
+		var currThumbUrlItemIndex = -1; //找当前ThumbUrl索引
+		var isLockThumbUrlItemIndex = false;    //是否锁定
+		
+		
+		//初始化Javascipt脚本
+		function initThumbUrlJs()
+		{
+		    //添加拖动排序
+			$('.thumbURL dl').draggable({
+					revert:true,
+					proxy:'clone',
+					handle:'.title'
+			}).droppable({
+				onDragEnter:function(){
+					$(this).addClass('over');
+				},
+				onDragLeave:function(){
+					$(this).removeClass('over');
+				},
+				onDrop:function(e,source){
+					$(this).removeClass('over');
+					var src = $(source).children().clone();	//复制源子元素
+					var thi = $(this).children().clone();	//复制this元素
+					$(this).empty().append(src);
+					$(source).empty().append(thi);
+					$(this).draggable({
 						revert:true,
 						proxy:'clone',
 						handle:'.title'
-				}).droppable({
-					onDragEnter:function(){
-						$(this).addClass('over');
-					},
-					onDragLeave:function(){
-						$(this).removeClass('over');
-					},
-					onDrop:function(e,source){
-						$(this).removeClass('over');
-						var src = $(source).children().clone();	//复制源子元素
-						var thi = $(this).children().clone();	//复制this元素
-						$(this).empty().append(src);
-						$(source).empty().append(thi);
-						$(this).draggable({
-							revert:true,
-							proxy:'clone',
-							handle:'.title'
-						});
-						$(source).draggable({
-							revert:true,
-							proxy:'clone',
-							handle:'.title'
-						});
-						
-						//提示保存
-						$("#saveThumbUrl").show();
-					}
+					});
+					$(source).draggable({
+						revert:true,
+						proxy:'clone',
+						handle:'.title'
+					});
+					
+					//提示保存
+					$("#saveThumbUrl").show();
+				}
+			});
+	        
+	        //移动添加时激活特效
+		    $("#thumbURL dl").mouseover(function(){
+		        $(this).addClass("on");
+		     });
+		     $("#thumbURL dl").mouseout(function(){
+		        $(this).removeClass("on");
+		     });
+		    
+		    //添加右键菜单
+		    $(".item").bind('contextmenu',function(e){
+				$('#mmThumbUrl').menu('show', {
+					left: e.pageX,
+					top: e.pageY
 				});
-
+				return false;
+			});
+		
+			
+			//查找当前索引，右键菜单选项传递当前索引
+			$("#thumbURL .item").mouseover(function(){
+			    if(isLockThumbUrlItemIndex == false)
+			    {
+			        currThumbUrlItemIndex = $(this).prevAll().length;
+			    }
+			});
 		}
 		
 		
-	
+		//编辑：isAdd=是否添加
+		function mmEditThumbUrl(isAdd){
+
+            //如果不存在isAdd或者isAdd=false
+		    if(isAdd && isAdd == true)
+		    {
+		        $("#ddEditThumbUrl input[name='txtTitle']").val('');
+	            $("#ddEditThumbUrl input[name='txtUrl']").val('');
+	            $("#ddEditThumbUrl input[name='txtImg']").val('');
+	            $("#ddEditThumbUrl select[name='selTarget']").val('');
+		    }
+		    else
+		    {
+		        if(currThumbUrlItemIndex == -1)
+		        {
+		            return false;
+		        }
+		        //找当前节点
+		        var thisNode = $("#thumbURL .item").get(currThumbUrlItemIndex);
+		        if(!thisNode)
+		        {
+		            return false;
+		        }
+		        
+		        //取内容
+		        var title = $(thisNode).find(".title").html();
+	            var img = $(thisNode).find(".img img").attr("src").replace(/\s/g,"").replace($Domain + "/", "");    //replace($Domain,"")过滤掉IE自动添加成绝对路径
+	            var url = $(thisNode).find(".img a").attr("href").replace(/\s/g,"");
+	            var target = $(thisNode).find("a").attr("target").replace(/\s/g,"");
+    	        
+    	        
+	            $("#ddEditThumbUrl input[name='txtTitle']").val(title);
+	            $("#ddEditThumbUrl input[name='txtUrl']").val(url);
+	            $("#ddEditThumbUrl input[name='txtImg']").val(img);
+	            $("#ddEditThumbUrl select[name='selTarget']").val(target);
+		        
+		    }
+
+	        var dlgTitle = "编辑URL—启动网";
+	        if(isAdd && isAdd == true)
+		    {
+		        dlgTitle = "添加URL—启动网";
+		    }
+	        //打开Dailog
+		    $('#ddEditThumbUrl').dialog({
+		        title: dlgTitle,
+				buttons:[{
+					text:'保存',
+					iconCls:'icon-ok',
+					handler:function(){
+					    if(mmEditThumbUrl_Save(isAdd))
+					    {
+					        $('#ddEditThumbUrl').dialog('close');
+					    }
+					}
+				},{
+					text:'取消',
+					handler:function(){
+					    mmEditThumbUrl_Cancel();
+						$('#ddEditThumbUrl').dialog('close');
+					}
+				}]
+			});
+			
+			//锁定
+			isLockThumbUrlItemIndex = true;
+			
+		    
+		};
+		
+		//编辑网址保存
+		function mmEditThumbUrl_Save(isAdd){
+
+		    if(currThumbUrlItemIndex == -1)
+		    {
+		        return false;
+		    }
+		    //找当前节点
+		    var thisNode = $("#thumbURL .item").get(currThumbUrlItemIndex);
+		    if(!thisNode)
+		    {
+		        return false;
+		    }
+		    
+		    //取内容
+		    var title = $("#ddEditThumbUrl input[name='txtTitle']").val();
+	        var img = $("#ddEditThumbUrl input[name='txtImg']").val().replace(/\s/g,"");
+	        var url = $("#ddEditThumbUrl input[name='txtUrl']").val().replace(/\s/g,"");
+	        var target = $("#ddEditThumbUrl select[name='selTarget']").val().replace(/\s/g,"");
+	        
+	        if(!title || title == "") title = "无标题";
+	        if(!img || img == "") img = "style/images/thumburl/nopic.jpg";
+	        if(!url || url == "")
+	        {
+	            alert("网址不能为空！");
+	            return false;
+	        }
+		    
+		    //判断是否时添加
+		    if(isAdd && isAdd == true)
+		    {
+		        var newNode = $(thisNode).clone();
+	            //保存
+	            $(newNode).find(".title").html(title);
+	            $(newNode).find(".img img").attr("src", img);
+	            $(newNode).find("a").attr("href", url);
+	            $(newNode).find("a").attr("target", target);
+	            $(newNode).find(".url a").html(url);
+	            $(thisNode).before(newNode);
+	            
+			    //提示保存成功
+		        $.messager.show({title:"温馨提示",msg:"恭喜您，您添加成功！"});
+		        initThumbUrlJs();
+		    }
+		    else
+		    {
+	            //保存
+	            $(thisNode).find(".title").html(title);
+	            $(thisNode).find(".img img").attr("src", img);
+	            $(thisNode).find("a").attr("href", url);
+	            $(thisNode).find("a").attr("target", target);
+	            $(thisNode).find(".url a").html(url);
+	            
+			    //提示保存成功
+		        $.messager.show({title:"温馨提示",msg:"恭喜您，您编辑成功！"});
+	        }
+	        
+	        
+		    //取消锁定
+			isLockThumbUrlItemIndex = false;
+			//提示保存
+			$("#saveThumbUrl").show();
+			
+			return true;
+			
+		};
+		
+		//编辑网址取消
+		function  mmEditThumbUrl_Cancel(){
+		    //取消锁定
+			isLockThumbUrlItemIndex = false;
+		}
+		
+		//删除
+		function mmDeleteThumbUrl(){
+		
+		    if(currThumbUrlItemIndex == -1)
+		    {
+		        return false;
+		    }
+		    //找当前节点
+		    var thisNode = $("#thumbURL .item").get(currThumbUrlItemIndex);
+		    if(!thisNode)
+		    {
+		        return false;
+		    }
+		    if(confirm('确定删除？'))
+		    {
+		        $(thisNode).remove();
+		    }
+		    
+		    //提示保存成功
+		    $.messager.show({title:"温馨提示",msg:"恭喜您，删除成功！"});
+		    //提示保存
+			$("#saveThumbUrl").show();
+		    
+		};
+		
+		/********************* ThumbUrl编辑功能 Code End ***********************/
+		
     </script>
+    
+    
     
 </head>
 
@@ -226,8 +452,8 @@
                     <!--<li class="txt"><a href="#" onclick="delCookie('ThumbUrl'); alert('清除成功！'); /*enableEditThumbURL();*/">配置首页</a></li>
                     <li class="txt"><a href="#" onclick="getThumbUrl();/*disableEditThumbURL();*/">保存配置</a></li>-->
                     <li class="txt" id="saveThumbUrl" style="display:none;"><a href="#" onclick="saveThumbUrl();">保存</a></li>
-                    <!--<li class="txt"><a href="#" onclick="initThumbUrl();">重置</a></li>
-                    <li class="txt"><a href="#" onclick="delCookie('ThumbUrl'); alert('清除成功！');">清除</a></li>-->
+                    <li class="txt"><a href="#" onclick="initThumbUrl();">重置</a></li>
+                    <li class="txt"><a href="#" onclick="delCookie('ThumbUrl'); alert('清除成功！');">清除</a></li>
                   </ul> 
                 </div>
                 <div class="clear"></div>
@@ -238,15 +464,84 @@
         <div id="mainPanel">
         
 	        <div class="thumbURL" id="thumbURL">
-    	        <dl>
-        	        <dt class="title">启动网</dt>
-                    <dd class="img">
-                        <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
-                    </dd>
-                </dl>
+	            <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网1</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png" /></a>
+                        </dd>
+                        <dd class="url"><a href="http://www.baidu.com" target="_blank">http://www.baidu.com</a></dd>
+                    </dl>
+                </div>
+                
+                 <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网2</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url">http://www.baidu.com</dd>
+                    </dl>
+                </div>
+                
+                 <div class="item">
+    	            <dl class="on">
+        	            <dt class="title">启动网3</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url"><a href="#编辑">编辑</a> <a href="#删除">删除</a> </dd>
+                        <!--<dd class="url">http://www.baidu.com</dd>-->
+                    </dl>
+                </div>
+                
+                
+                 <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网4</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url">http://www.baidu.com</dd>
+                    </dl>
+                </div>
+                
+                
+                 <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url">http://www.baidu.com</dd>
+                    </dl>
+                </div>
+                
+                 <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网5</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url">http://www.baidu.com</dd>
+                    </dl>
+                </div>
+                
+                 <div class="item">
+    	            <dl>
+        	            <dt class="title">启动网6</dt>
+                        <dd class="img">
+                            <a href="http://www.7dong.net" target="_blank"><img src="style/images/img1.png"  alt="http://www.7dong.net" /></a>
+                        </dd>
+                        <dd class="url">http://www.baidu.com</dd>
+                    </dl>
+                </div>
+                
+                
+                
                 <div class="clear"></div>
             </div>
-        
+            
         </div>
         
 
@@ -260,12 +555,45 @@
 
     
     
-    <div id="window" >
+    <div id="window">
     </div>
     
     <div class="messager" id="messager">
     </div>
 
+    <div id="mmThumbUrl" class="easyui-menu" style="width:120px;">
+		<div onclick="mmEditThumbUrl(true);">新增</div>
+		<div onclick="mmEditThumbUrl();">编辑</div>
+		<div onclick="mmDeleteThumbUrl();">删除</div>
+    </div>
+    
+    <div id="ddEditThumbUrl" icon="icon-save" style="padding:5px;width:420px;height:200px;"> 
+	    <table>
+	        <tr>
+	            <td>标题：</td>
+	            <td>
+                    <input name="txtTitle" value="" type="text" /> </td>
+	        </tr>
+	        <tr>
+	            <td>网址：</td>
+	            <td> <input name="txtUrl" value="" style="width:280px" type="text" /> <span style="color:#666">*必填</span> </td>
+	        </tr>
+	        <tr>
+	            <td>图片路径：</td>
+	            <td> <input name="txtImg" value="" style="width:280px" type="text" /> </td>
+	        </tr>
+	        <tr>
+	            <td>打开方式：</td>
+	            <td>  
+                    <select name="selTarget">
+                        <option value="_self">默认窗口</option>
+                        <option value="_blank">新窗口</option>
+                        <option value="_top">当前窗口</option>
+                    </select> 
+                </td>
+	        </tr>
+	    </table>
+	</div> 
     
 </body>
 </html>

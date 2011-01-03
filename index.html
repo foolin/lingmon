@@ -172,12 +172,16 @@
 		    
 		    
 		    //提示保存成功
-		    $.messager.show({title:"温馨提示—启动网",msg:"恭喜您，您编辑并保存成功！"});
-		    $("#saveThumbUrl").hide();  //隐藏保存
+		    $.messager.show({title:"温馨提示—启动网",msg:"恭喜您，您保存数据成功！"});
 		}
 		
 		
-		
+		//自动保存ThumbUrl数据
+		function autoSaveThumbUrl(){
+		    //$("#saveThumbUrl").show();
+		    saveThumbUrl();
+		}
+	    
     
         /********************* ThumbUrl编辑功能 Code Begin ***********************/
 		
@@ -218,8 +222,8 @@
 						handle:'.title'
 					});
 					
-					//提示保存
-					$("#saveThumbUrl").show();
+					//保存
+					autoSaveThumbUrl();
 				}
 			});
 	        
@@ -258,7 +262,7 @@
 		    if(isAdd && isAdd == true)
 		    {
 		        $("#ddEditThumbUrl input[name='txtTitle']").val('');
-	            $("#ddEditThumbUrl input[name='txtUrl']").val('');
+	            $("#ddEditThumbUrl input[name='txtUrl']").val('http://');
 	            $("#ddEditThumbUrl input[name='txtImg']").val('');
 	            $("#ddEditThumbUrl select[name='selTarget']").val('');
 		    }
@@ -381,8 +385,9 @@
 	        
 		    //取消锁定
 			isLockThumbUrlItemIndex = false;
-			//提示保存
-			$("#saveThumbUrl").show();
+			//保存
+			autoSaveThumbUrl();
+			
 			
 			return true;
 			
@@ -414,8 +419,8 @@
 		    
 		    //提示保存成功
 		    $.messager.show({title:"温馨提示",msg:"恭喜您，删除成功！"});
-		    //提示保存
-			$("#saveThumbUrl").show();
+		    //保存
+		    autoSaveThumbUrl();
 		    
 		};
 		
@@ -576,7 +581,7 @@
 	        </tr>
 	        <tr>
 	            <td>网址：</td>
-	            <td> <input name="txtUrl" value="" style="width:280px" type="text" /> <span style="color:#666">*必填</span> </td>
+	            <td> <input name="txtUrl" value="http://" style="width:280px" type="text" /> <span style="color:#666">*必填</span> </td>
 	        </tr>
 	        <tr>
 	            <td>图片路径：</td>

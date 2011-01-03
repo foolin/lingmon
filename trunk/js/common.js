@@ -94,3 +94,14 @@ function delCookie(key)
     if(cval!=null) document.cookie= key + "="+cval+";expires="+exp.toGMTString();
 }
 
+
+/********* Domain **************/
+//取主机：http://www.7dong.net
+var $Domain = __getDomain__();
+function __getDomain__()
+{
+    var _domain =  window.location.href;
+    _domain = _domain.substring( 0, _domain.lastIndexOf('/'));
+    if(!_domain || _domain == "") _domain = window.location.href;
+    return _domain;
+}

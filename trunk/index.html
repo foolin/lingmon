@@ -25,6 +25,29 @@
 		
 		$(document).ready(function(){
             initThumbUrl();
+            
+            $('#ddEditThumbUrl').dialog({
+                closed: true,
+                draggable: false,
+		        title: "编辑URL",
+				buttons:[{
+					text:'保存',
+					iconCls:'icon-ok',
+					handler:function(){
+					    if(mmEditThumbUrl_Save(isAdd))
+					    {
+					        $('#ddEditThumbUrl').dialog('close');
+					    }
+					}
+				},{
+					text:'取消',
+					handler:function(){
+					    mmEditThumbUrl_Cancel();
+						$('#ddEditThumbUrl').dialog('close');
+					}
+				}]
+			});
+			
 		});
 		
 		/*
@@ -264,7 +287,7 @@
 		        $("#ddEditThumbUrl input[name='txtTitle']").val('');
 	            $("#ddEditThumbUrl input[name='txtUrl']").val('http://');
 	            $("#ddEditThumbUrl input[name='txtImg']").val('');
-	            $("#ddEditThumbUrl select[name='selTarget']").val('');
+	            //$("#ddEditThumbUrl select[name='selTarget']").val('');
 		    }
 		    else
 		    {
@@ -298,6 +321,10 @@
 		    {
 		        dlgTitle = "添加URL—启动网";
 		    }
+		    
+		    $('#ddEditThumbUrl').dialog('setTitle', dlgTitle);
+		    $('#ddEditThumbUrl').dialog('open');
+		    /*
 	        //打开Dailog
 		    $('#ddEditThumbUrl').dialog({
 		        title: dlgTitle,
@@ -318,6 +345,7 @@
 					}
 				}]
 			});
+			*/
 			
 			//锁定
 			isLockThumbUrlItemIndex = true;

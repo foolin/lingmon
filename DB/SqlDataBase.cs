@@ -255,7 +255,28 @@ namespace Sxmobi.Utility.DB
         {
             #region
             Open();
-            sda = new SqlDataAdapter(strSql, cn);
+            cmd = new SqlCommand(strSql, cn);
+            sda = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            sda.Fill(ds);
+            Close();
+            return ds;
+            #endregion
+        }
+
+        /// <summary>
+        /// 返回DataSet数据集
+        /// </summary>
+        /// <param name="strSql">SQL语句</param>
+        /// <param name="timeout">超时时间</param>
+        /// <returns></returns>
+        public DataSet GetDs(string strSql, int timeout)
+        {
+            #region
+            Open();
+            cmd = new SqlCommand(strSql, cn);
+            cmd.CommandTimeout = timeout;
+            sda = new SqlDataAdapter(cmd);
             ds = new DataSet();
             sda.Fill(ds);
             Close();
@@ -291,6 +312,13 @@ namespace Sxmobi.Utility.DB
             #endregion
         }
 
+        public DataTable GetTable(string strSql, int timeout)
+        {
+            #region
+            return GetDs(strSql, timeout).Tables[0];
+            #endregion
+        }
+
         /// <summary>
         /// 返回DataView数据视图
         /// </summary>
@@ -299,6 +327,18 @@ namespace Sxmobi.Utility.DB
         {
             #region
             dv = GetDs(strSql).Tables[0].DefaultView;
+            return dv;
+            #endregion
+        }
+
+        /// <summary>
+        /// 返回DataView数据视图
+        /// </summary>
+        /// <param name="strSql">Sql语句</param>
+        public DataView GetDv(string strSql, int timeout)
+        {
+            #region
+            dv = GetDs(strSql, timeout).Tables[0].DefaultView;
             return dv;
             #endregion
         }

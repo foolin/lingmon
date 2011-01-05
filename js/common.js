@@ -4,7 +4,7 @@
     @Email      :  Foolin@126.com
     @Created on :  2010-12-8
     @Updated on :  2010-12-8
-    Copyright 2010 7dong.net All Rights Reserved.
+    Copyright 2010 灵梦工作室 All Rights Reserved.
 ********************************************************/
 
 /*获取url的#后参数

@@ -63,19 +63,9 @@ namespace Sxmobi.Utility.DB
         /// <param name="strSql"></param>
         public void RunSql(string strSql)
         {
-            #region
-            Open();
-            cmd = new SqlCommand(strSql, cn);
-            try
-            {
-            	cmd.ExecuteNonQuery();
-          	}
-          	finally
-          	{
-            	Close();
-            }
-            #endregion
+            RunSql(strSql, null, 30);
         }
+
         /// <summary>
         /// 执行SQL语句，并传超时时间
         /// </summary>
@@ -83,12 +73,38 @@ namespace Sxmobi.Utility.DB
         /// <param name="timeout">超时时间</param>
         public void RunSql(string strSql, int timeout)
         {
+            RunSql(strSql, null, timeout);
+        }
+
+
+        /// <summary>
+        /// 执行SQL，带SqlParameter参数
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        public void RunSql(string strSql, SqlParameter[] sqlParams)
+        {
+            RunSql(strSql, sqlParams, 30);
+        }
+
+        /// <summary>
+        /// 执行Sql，带SqlParameter参数
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="timeout"></param>
+        public void RunSql(string strSql, SqlParameter[] sqlParams, int timeout)
+        {
             #region
             Open();
             cmd = new SqlCommand(strSql, cn);
             try
             {
                 cmd.CommandTimeout = timeout;
+                if (sqlParams != null)
+                {
+                    cmd.Parameters.AddRange(sqlParams);
+                }
                 cmd.ExecuteNonQuery();
             }
             finally
@@ -98,6 +114,7 @@ namespace Sxmobi.Utility.DB
             #endregion
         }
 
+
         /// <summary>
         /// 执行SQL语句，并返回第一行第一列结果
         /// </summary>
@@ -105,22 +122,9 @@ namespace Sxmobi.Utility.DB
         /// <returns></returns>
         public string RunSqlReturn(string strSql)
         {
-            #region
-            string strReturn = "";
-            Open();
-            try
-            {
-                cmd = new SqlCommand(strSql, cn);
-                strReturn = cmd.ExecuteScalar().ToString();
-            }
-            catch
-            {
-                throw;
-            }
-            Close();
-            return strReturn;
-            #endregion
+            return RunSqlReturn(strSql, null, "", 30);
         }
+
         /// <summary>
         /// 执行SQL语句，并返回第一行第一列结果
         /// </summary>
@@ -129,23 +133,105 @@ namespace Sxmobi.Utility.DB
         /// <returns>返回第一行第一列结果</returns>
         public string RunSqlReturn(string strSql, int timeout)
         {
+            return RunSqlReturn(strSql, null, "", timeout);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public string RunSqlReturn(string strSql, SqlParameter[] sqlParams)
+        {
+            return RunSqlReturn(strSql, sqlParams, "", 30);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public string RunSqlReturn(string strSql, SqlParameter[] sqlParams, int timeout)
+        {
+            return RunSqlReturn(strSql, sqlParams, "", timeout);
+        }
+
+        /// <summary>
+        /// 执行SQL语句，并返回第一行第一列结果
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public string RunSqlReturn(string strSql, SqlParameter[] sqlParams, string defaultValue, int timeout)
+        {
             #region
-            string strReturn = "";
+            string strReturn = defaultValue;
             Open();
             try
             {
                 cmd = new SqlCommand(strSql, cn);
+                if (sqlParams != null)
+                {
+                    cmd.Parameters.AddRange(sqlParams);
+                }
                 cmd.CommandTimeout = timeout;
                 strReturn = cmd.ExecuteScalar().ToString();
             }
             catch
             {
+                strReturn = defaultValue;
                 throw;
             }
-            Close();
+            finally
+            {
+                Close();
+            }
             return strReturn;
             #endregion
         }
+
+        /// <summary>
+        /// 执行SQL语句，并返回第一行第一列结果
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public object RunSqlReturnObj(string strSql, SqlParameter[] sqlParams, object defaultValue, int timeout)
+        {
+            #region
+            object objReturn = defaultValue;
+            Open();
+            try
+            {
+                cmd = new SqlCommand(strSql, cn);
+                if (sqlParams != null)
+                {
+                    cmd.Parameters.AddRange(sqlParams);
+                }
+                cmd.CommandTimeout = timeout;
+                objReturn = cmd.ExecuteScalar();
+            }
+            catch
+            {
+                objReturn = defaultValue;
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
+            return objReturn;
+            #endregion
+        }
+
 
         /// <summary>
         /// 执行SQL语句，并返回第一行第一列Int结果
@@ -154,31 +240,12 @@ namespace Sxmobi.Utility.DB
         /// <returns>如果返回数据不是整型，则返回-1</returns>
         public int RunSqlReturnInt(string strSql)
         {
-            #region
-            string strReturn = "";
-            int intReturn = -1;
-            Open();
-            try
-            {
-                cmd = new SqlCommand(strSql, cn);
-                strReturn = cmd.ExecuteScalar().ToString();
-            }
-            catch
-            {
-                throw;
-            }
-            Close();
-            try
-            {
-                intReturn = int.Parse(strReturn);
-            }
-            catch
-            {
-                intReturn = -1;
-            }
-            return intReturn;
-            #endregion
+            return RunSqlReturnInt(strSql, null, -1, 30);
         }
+
+
+
+
         /// <summary>
         /// 执行SQL语句，并返回第一行第一列Int结果
         /// </summary>
@@ -187,13 +254,54 @@ namespace Sxmobi.Utility.DB
         /// <returns>如果返回数据不是整型，则返回-1</returns>
         public int RunSqlReturnInt(string strSql, int timeout)
         {
+            return RunSqlReturnInt(strSql, null, -1, timeout);
+        }
+
+        /// <summary>
+        /// SQL，默认返回-1
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <returns></returns>
+        public int RunSqlReturnInt(string strSql, SqlParameter[] sqlParams)
+        {
+            return RunSqlReturnInt(strSql, sqlParams, -1, 30);
+        }
+
+
+        /// <summary>
+        /// SQL返回，默认返回-1
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public int RunSqlReturnInt(string strSql, SqlParameter[] sqlParams, int timeout)
+        {
+            return RunSqlReturnInt(strSql, sqlParams, -1, timeout);
+        }
+
+        /// <summary>
+        /// 执行SQL返回整型
+        /// </summary>
+        /// <param name="strSql">SQL</param>
+        /// <param name="sqlParams">Params参数</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <param name="timeout">超时时间</param>
+        /// <returns></returns>
+        public int RunSqlReturnInt(string strSql, SqlParameter[] sqlParams, int defaultValue, int timeout)
+        {
             #region
             string strReturn = "";
-            int intReturn = 0;
+            int intReturn = defaultValue;
             Open();
             try
             {
                 cmd = new SqlCommand(strSql, cn);
+                if (sqlParams != null)
+                {
+                    cmd.Parameters.AddRange(sqlParams);
+                }
                 cmd.CommandTimeout = timeout;
                 strReturn = cmd.ExecuteScalar().ToString();
             }
@@ -201,14 +309,17 @@ namespace Sxmobi.Utility.DB
             {
                 throw;
             }
-            Close();
+            finally
+            {
+                Close();
+            }
             try
             {
                 intReturn = int.Parse(strReturn);
             }
             catch
             {
-                intReturn = -1;
+                intReturn = defaultValue;
             }
             return intReturn;
             #endregion
@@ -255,11 +366,21 @@ namespace Sxmobi.Utility.DB
         {
             #region
             Open();
-            cmd = new SqlCommand(strSql, cn);
-            sda = new SqlDataAdapter(cmd);
-            ds = new DataSet();
-            sda.Fill(ds);
-            Close();
+            try
+            {
+                cmd = new SqlCommand(strSql, cn);
+                sda = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                sda.Fill(ds);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
             return ds;
             #endregion
         }
@@ -274,15 +395,72 @@ namespace Sxmobi.Utility.DB
         {
             #region
             Open();
-            cmd = new SqlCommand(strSql, cn);
-            cmd.CommandTimeout = timeout;
-            sda = new SqlDataAdapter(cmd);
-            ds = new DataSet();
-            sda.Fill(ds);
-            Close();
+            try
+            {
+                cmd = new SqlCommand(strSql, cn);
+                cmd.CommandTimeout = timeout;
+                sda = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                sda.Fill(ds);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
             return ds;
             #endregion
         }
+
+        /// <summary>
+        /// 执行带参数SQL，并返回DataSet数据
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <returns></returns>
+        public DataSet GetDs(string strSql, SqlParameter[] sqlParams)
+        {
+            return GetDs(strSql, sqlParams, 30);
+        }
+
+        /// <summary>
+        /// 执行带参数SQL，并返回DataSet数据
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlParams"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public DataSet GetDs(string strSql, SqlParameter[] sqlParams, int timeout)
+        {
+            #region
+            Open();
+            try
+            {
+                cmd = new SqlCommand(strSql, cn);
+                cmd.CommandTimeout = timeout;
+                if (sqlParams != null)
+                {
+                    cmd.Parameters.AddRange(sqlParams);
+                }
+                sda = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                sda.Fill(ds);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
+            return ds;
+            #endregion
+        }
+
 
         /// <summary>
         /// 添加DataSet表
@@ -294,9 +472,18 @@ namespace Sxmobi.Utility.DB
         {
             #region
             Open();
-            sda = new SqlDataAdapter(strSql, cn);
-            sda.Fill(ds, strTableName);
-            Close();
+            try
+            {
+                sda = new SqlDataAdapter(strSql, cn);
+                sda.Fill(ds, strTableName);
+            }
+            catch
+            {
+            }
+            finally
+            {
+                Close();
+            }
             #endregion
         }
 

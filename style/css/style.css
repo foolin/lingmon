@@ -79,6 +79,7 @@ a:hover{ color:#F00; text-decoration:none;}
 	line-height:60px;
 	height:60px;
 }
+
 #logo{
 	float:left;
 	margin:0;
@@ -129,9 +130,6 @@ a:hover{ color:#F00; text-decoration:none;}
 }
 #nav ul li.txt{
 	width:auto;
-	padding:0;
-	padding-top:11px;
-	*padding-top:0px;	/* IE7 */
 }
 #nav ul li.txt a{
 	padding-left:5px;
@@ -149,6 +147,17 @@ a:hover{ color:#F00; text-decoration:none;}
 	border:solid 3px #999;
 	background:#666;
 }
+#nav ul li.search{
+	width:auto;
+	line-height:50px;
+}
+
+#nav ul li.search input{
+	border:dashed 1px #CCC;
+	height:25px;
+	line-height:25px;
+}
+
 
 
 /*body{

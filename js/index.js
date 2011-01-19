@@ -231,7 +231,9 @@ function closeUrlWin(){
 	            thumHtml += "  <dt class=\"title\">"+ data[i].title +"</dt>";
 	            thumHtml += "  <dd class=\"img\">";
 	            thumHtml += "  <a href=\""+ data[i].url +"\" target=\""+ data[i].target +"\">";
-	            thumHtml += "    <img src=\""+ data[i].img +"\" />";
+	            //thumHtml += "    <img src=\""+ data[i].img +"\" />";
+				thumHtml += "    <img src=\"http://mozshot.nemui.org/shot/large?"+ data[i].url +"\" />";
+				//thumHtml += "    <img src=\"http://images.websnapr.com/?size=s&key=kmin3K7mS7CO&url="+ data[i].url +"\" />";
 	            thumHtml += "  </a>";
 	            thumHtml += "  </dd>"
 	            thumHtml += "  <dd class=\"url\">";

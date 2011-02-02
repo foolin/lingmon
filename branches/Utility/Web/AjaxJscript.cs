@@ -4,7 +4,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
     public class AjaxJscript
     {

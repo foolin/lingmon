@@ -4,7 +4,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
     /// <summary>
     /// 一些常用的Js调用

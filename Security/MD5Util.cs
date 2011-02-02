@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sxmobi.Utility.Security
+namespace Utility.Security
 {
     /// <summary>
     /// MD5相关函数

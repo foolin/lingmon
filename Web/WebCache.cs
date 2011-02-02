@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
-using Sxmobi.Utility.IO;
+using Utility.IO;
 
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
     /// <summary>
     /// DataCache 缓存类

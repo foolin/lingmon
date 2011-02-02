@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace Sxmobi.Utility.DB
+namespace Utility.DB
 {
     public class DataHelper
     {

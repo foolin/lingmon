@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Web;
 
-namespace Sxmobi.Utility.IO
+namespace Utility.IO
 {
     public class FileUtil
     {

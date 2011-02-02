@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace Sxmobi.Utility.DB
+namespace Utility.DB
 {
     public class SqlDataBase
     {

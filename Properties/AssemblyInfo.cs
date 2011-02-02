@@ -6,11 +6,11 @@ using System.Web.UI;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Web Utility Tools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("LiuFuLing Utility Library")]
+[assembly: AssemblyDescription("LiuFuLing Utility Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LingLiufu@gmail.com")]
-[assembly: AssemblyProduct("Studio")]
+[assembly: AssemblyProduct("LiuFuLing Utility Library")]
 [assembly: AssemblyCopyright("Copyright © China 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -33,7 +33,7 @@ using System.Web.UI;
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.1")]
-[assembly: AssemblyFileVersion("0.1.0.1")]
+[assembly: AssemblyVersion("0.1.0.2")]
+[assembly: AssemblyFileVersion("0.1.0.2")]
 
-[assembly: WebResource("Sxmobi.Utility.Web.Paging.css", "text/css")]
+[assembly: WebResource("Utility.Web.Paging.css", "text/css")]

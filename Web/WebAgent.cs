@@ -12,7 +12,7 @@ using System.Collections;
 
 using System.Messaging;
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
 	/// <summary>
 	/// Name:Web´úÀí

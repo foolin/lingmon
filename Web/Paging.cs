@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Text.RegularExpressions;
 using System.Collections;
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
     /// <summary>
     /// Name        :  分页控件（Paging Control v1.0.1）
@@ -352,7 +352,7 @@ namespace Sxmobi.Utility.Web
             {
                 //if (!this.Page.ClientScript.IsClientScriptBlockRegistered(key))
                 //{
-                //    string strCssFile = Page.ClientScript.GetWebResourceUrl(this.GetType(), "Sxmobi.Utility.Web.Paging.css");
+                //    string strCssFile = Page.ClientScript.GetWebResourceUrl(this.GetType(), "Utility.Web.Paging.css");
                 //    //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), key, "<link href='" + strCssFile + "' rel='stylesheet' type='text/css' />");
                 //    LiteralControl include = new LiteralControl("<link href='" + strCssFile + "' rel='stylesheet' type='text/css' />");
                 //    this.Page.Header.Controls.Add(include);
@@ -361,7 +361,7 @@ namespace Sxmobi.Utility.Web
                 //判断是否第一次添加CSS，避免重复添加
                 if (Context.Items["IsHasCss"] == null)
                 {
-                    string strCssFile = Page.ClientScript.GetWebResourceUrl(this.GetType(), "Sxmobi.Utility.Web.Paging.css");
+                    string strCssFile = Page.ClientScript.GetWebResourceUrl(this.GetType(), "Utility.Web.Paging.css");
                     LiteralControl include = new LiteralControl("<link href=\"" + strCssFile + "\" rel=\"stylesheet\" type=\"text/css\" />");
                     this.Page.Header.Controls.Add(include);
                     Context.Items["IsHasCss"] = "true";

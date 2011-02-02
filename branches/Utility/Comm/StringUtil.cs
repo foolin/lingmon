@@ -9,7 +9,7 @@ using System.Web.Security;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 
-namespace Sxmobi.Utility.Comm
+namespace Utility.Comm
 {
     /// <summary>
     /// 对一些字符串进行操作的类

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sxmobi.Utility.Array
+namespace Utility.Array
 {
     public class MyCollections<T> where T : INameProvider
     {

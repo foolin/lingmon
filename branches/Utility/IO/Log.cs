@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
-using Sxmobi.Utility.Web;
+using Utility.Web;
 
-namespace Sxmobi.Utility.IO
+namespace Utility.IO
 {
     public class Log
     {

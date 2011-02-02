@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Sxmobi.Utility.Array
+namespace Utility.Array
 {
     /// <summary>
     /// List<T>泛型序列化类

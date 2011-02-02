@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Web;
 using System.Xml;
 
-namespace Sxmobi.Utility.Web
+namespace Utility.Web
 {
     /// <summary>
     /// XmlHelper 的摘要说明

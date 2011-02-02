@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Drawing;
 
-namespace Sxmobi.Utility.Comm
+namespace Utility.Comm
 {
     public class CheckCode
     {

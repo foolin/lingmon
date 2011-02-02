@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Sxmobi.Utility.Security
+namespace Utility.Security
 {
     /// <summary>
     /// RijndaelManagedº”√‹Ω‚√‹

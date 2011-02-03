@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Data.OracleClient;
 
-namespace Studio.Data
+namespace Utility.DB
 {
     /// <summary>
     /// Name:OracleÊý¾Ý´æÈ¡Æ÷

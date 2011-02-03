@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Data.OleDb;
 
-namespace Studio.Data
+namespace Utility.DB
 {
 	/// <summary>
 	/// Name:OleDbÊý¾Ý´æÈ¡Æ÷

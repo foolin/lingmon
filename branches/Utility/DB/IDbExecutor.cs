@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace Studio.Data
+namespace Utility.DB
 {
 	/// <summary>
 	/// Name:数据存取器(执行者)接口

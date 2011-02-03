@@ -7,6 +7,9 @@ using System.Configuration;
 
 namespace Utility.DB
 {
+    /// <summary>
+    /// 简单SQL类，直接使用
+    /// </summary>
     public class SqlDataBase
     {
         //获取数据库连接字符串

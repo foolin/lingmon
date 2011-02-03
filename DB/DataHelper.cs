@@ -5,6 +5,9 @@ using System.Data;
 
 namespace Utility.DB
 {
+    /// <summary>
+    /// 数据辅助类
+    /// </summary>
     public class DataHelper
     {
         public DataHelper()

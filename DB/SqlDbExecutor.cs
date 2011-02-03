@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Studio.Data
+namespace Utility.DB
 {
 	/// <summary>
 	/// Name:Sql ServerÊı¾İ´æÈ¡Æ÷

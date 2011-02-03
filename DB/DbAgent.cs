@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data.OracleClient;
 using System.Data.OleDb;
 
-namespace Studio.Data
+namespace Utility.DB
 {
     /// <summary>
     /// Name:Sql数据代理类，通过继承，可支持MSSql、Access、Oracle数据库

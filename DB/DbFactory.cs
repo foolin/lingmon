@@ -1,7 +1,7 @@
 using System;
 using System.Data.OracleClient;
 
-namespace Studio.Data
+namespace Utility.DB
 {
 	/// <summary>
 	/// Name:数据存取器工厂

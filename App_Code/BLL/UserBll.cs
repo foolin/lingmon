@@ -1,46 +1,46 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-using LFL.Favorite.Model;
-/***********************************************
-  *  BLL业务逻辑层 
-  *  Author       : Foolin 
-  *  Email        : LingLiufu@gmail.com
-  *  Created Date : 2010/12/4 0:31:58
-  *  Copyright(C) 2010 灵梦团队 保留所有权利。
-***********************************************/
-namespace LFL.Favorite.BLL
+using KuaiLe.Us.Model;
+namespace KuaiLe.Us.BLL
 {
 	/// <summary>
-	/// 业务逻辑类UserBll 的摘要说明。
+	/// UserBll
 	/// </summary>
 	public class UserBll
 	{
-		private readonly LFL.Favorite.DAL.UserDal dal=new LFL.Favorite.DAL.UserDal();
+		private readonly KuaiLe.Us.DAL.UserDal dal=new KuaiLe.Us.DAL.UserDal();
 		public UserBll()
 		{}
-		#region  成员方法
-
-		///// <summary>
-		///// 得到最大ID
-		///// </summary>
-		//public int GetMaxId()
-		//{
-			//return dal.GetMaxId();
-		//}
-
+		#region  Method
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-        public bool Exists(string strUsername, string strEmail)
+		public bool Exists(long UserID)
 		{
-            return dal.Exists(strUsername, strEmail);
+			return dal.Exists(UserID);
 		}
+
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string UserName)
+        {
+            return dal.Exists(UserName);
+        }
+
+        /// <summary>
+        /// 是否存在电子邮箱
+        /// </summary>
+        public bool ChkEmail(string Email)
+        {
+            return dal.ChkEmail(Email);
+        }
 
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(LFL.Favorite.Model.User model)
+		public int  Add(KuaiLe.Us.Model.UserModel model)
 		{
 			return dal.Add(model);
 		}
@@ -48,7 +48,7 @@ namespace LFL.Favorite.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public void Update(LFL.Favorite.Model.User model)
+		public void Update(KuaiLe.Us.Model.UserModel model)
 		{
 			dal.Update(model);
 		}
@@ -56,16 +56,23 @@ namespace LFL.Favorite.BLL
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
-		public void Delete(int UserID)
+		public void Delete(long UserID)
 		{
 			
 			dal.Delete(UserID);
+		}
+		/// <summary>
+		/// 删除一条数据
+		/// </summary>
+		public void DeleteList(string UserIDlist )
+		{
+			dal.DeleteList(UserIDlist );
 		}
 
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public LFL.Favorite.Model.User GetModel(int UserID)
+		public KuaiLe.Us.Model.UserModel GetModel(long UserID)
 		{
 			
 			return dal.GetModel(UserID);
@@ -74,23 +81,20 @@ namespace LFL.Favorite.BLL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public LFL.Favorite.Model.User GetModel(string strUsername)
+        public KuaiLe.Us.Model.UserModel GetModel(string strUserName)
         {
 
-            return dal.GetModel(strUsername);
+            return dal.GetModel(strUserName, false);
         }
 
         /// <summary>
-        /// 激活用户：-1=激活失败，原因未知，0=激活失败，不存在用户名或者激活码错误，1=激活成功，2=已经激活
+        /// 得到一个对象实体
         /// </summary>
-        /// <param name="strUsername"></param>
-        /// <param name="?"></param>
-        /// <returns></returns>
-        public int UserAcivate(string strUsername, string strActivateCode)
+        public KuaiLe.Us.Model.UserModel GetModel(string strUserNameOrEmail, bool isEmail )
         {
-            return dal.UserAtivate(strUsername, strActivateCode);
-        }
 
+            return dal.GetModel(strUserNameOrEmail, false);
+        }
 
 		/// <summary>
 		/// 获得数据列表
@@ -109,7 +113,7 @@ namespace LFL.Favorite.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<LFL.Favorite.Model.User> GetModelList(string strWhere)
+		public List<KuaiLe.Us.Model.UserModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -117,25 +121,28 @@ namespace LFL.Favorite.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<LFL.Favorite.Model.User> DataTableToList(DataTable dt)
+		public List<KuaiLe.Us.Model.UserModel> DataTableToList(DataTable dt)
 		{
-			List<LFL.Favorite.Model.User> modelList = new List<LFL.Favorite.Model.User>();
+			List<KuaiLe.Us.Model.UserModel> modelList = new List<KuaiLe.Us.Model.UserModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				LFL.Favorite.Model.User model;
+				KuaiLe.Us.Model.UserModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new LFL.Favorite.Model.User();
-					if(dt.Rows[n]["UserID"].ToString()!="")
-					{
-						model.UserID=int.Parse(dt.Rows[n]["UserID"].ToString());
-					}
-					model.Username=dt.Rows[n]["Username"].ToString();
+					model = new KuaiLe.Us.Model.UserModel();
+                    if (dt.Rows[n]["UserID"].ToString() != "")
+                    {
+                        model.UserID = long.Parse(dt.Rows[n]["UserID"].ToString());
+                    }
+					model.UserName=dt.Rows[n]["UserName"].ToString();
 					model.Nickname=dt.Rows[n]["Nickname"].ToString();
 					model.Password=dt.Rows[n]["Password"].ToString();
 					model.Email=dt.Rows[n]["Email"].ToString();
-					model.Sex=dt.Rows[n]["Sex"].ToString();
+					if(dt.Rows[n]["Sex"].ToString()!="")
+					{
+						model.Sex=int.Parse(dt.Rows[n]["Sex"].ToString());
+					}
 					model.ActivateCode=dt.Rows[n]["ActivateCode"].ToString();
 					if(dt.Rows[n]["RegTime"].ToString()!="")
 					{
@@ -177,34 +184,15 @@ namespace LFL.Favorite.BLL
 			return GetList("");
 		}
 
-        
         /// <summary>
-        /// 分页数据
+        /// 分页获取数据列表
         /// </summary>
-        /// <param name="pageSize">每页记录大小</param>
-        /// <param name="pageIndex">当前索引页</param>
-        /// <param name="totalCount">总记录数</param>
-        /// <returns></returns>
-        public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
+        public DataSet GetList(string strWhere, string strOrder, int pageSize, int pageIndex, out int records)
         {
-            return dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount);
+            return dal.GetList(strWhere, strOrder, pageSize, pageIndex, out records);
         }
-		
-		
-        /// <summary>
-        /// 分页数据
-        /// </summary>
-        /// <param name="pageSize">每页记录大小</param>
-        /// <param name="pageIndex">当前索引页</param>
-        /// <param name="totalCount">总记录数</param>
-        /// <returns></returns>
-        public List<LFL.Favorite.Model.User> GetModelList(string strWhere,string strOrder, int pageSize, int pageIndex, out int totalCount)
-        {
-            return DataTableToList(dal.GetList(strWhere , strOrder, pageSize, pageIndex, out totalCount).Tables[0]);
-        }
-        
 
-		#endregion  成员方法
+		#endregion  Method
 	}
 }
 

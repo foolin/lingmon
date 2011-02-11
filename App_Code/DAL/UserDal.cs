@@ -2,365 +2,304 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-/***********************************************
-  *  DAL数据层 
-  *  Author       : Foolin 
-  *  Email        : LingLiufu@gmail.com
-  *  Created Date : 2010/12/4 0:33:02
-  *  Copyright(C) 2010 灵梦团队 保留所有权利。。
-***********************************************/
-namespace LFL.Favorite.DAL
+namespace KuaiLe.Us.DAL
 {
 	/// <summary>
-	/// 数据访问类UserDal。
+	/// 数据访问类:UserDal
 	/// </summary>
 	public class UserDal
 	{
-
-		DbBase db = new DbBase();
+        KuaiLe.Us.Common.DbBase db = new KuaiLe.Us.Common.DbBase();
 
 		public UserDal()
 		{}
-
-		#region  成员方法
+		#region  Method
 
 		/// <summary>
-		/// 得到最大ID
+		/// 是否存在该记录
 		/// </summary>
-		//public int GetMaxId()
-		//{
-		//return DbBase.GetMaxID("UserID", "T_User"); 
-		//}
+		public bool Exists(long UserID)
+		{
+			StringBuilder strSql=new StringBuilder();
+			strSql.Append("select count(1) from T_User");
+			strSql.Append(" where UserID=@UserID ");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.BigInt)};
+			parameters[0].Value = UserID;
+
+			return db.RunSqlReturnInt(strSql.ToString(),parameters) > 0 ;
+		}
 
         /// <summary>
-        /// 是否存在该记录，判断用户名或者Email
+        /// 是否存在该记录
         /// </summary>
-        /// <param name="model">用户实体</param>
-        /// <param name="chkType">检查类型：0=用户名和Email都检查，1=用户名，2=Email</param>
-        /// <returns></returns>
-        public bool Exists(string strUsername, string strEmail)
+        public bool Exists(string UserName)
         {
-            if (string.IsNullOrEmpty(strUsername.Trim()) && string.IsNullOrEmpty(strEmail.Trim()))
-            {
-                return true;
-            }
-
             StringBuilder strSql = new StringBuilder();
-            StringBuilder strWhere = new StringBuilder();
             strSql.Append("select count(1) from T_User");
-            strSql.Append(" where ");
-            if (!string.IsNullOrEmpty(strUsername.Trim()))
-            {
-                strWhere.Append(" Username='" + strUsername + "'");
-            }
-            if (!string.IsNullOrEmpty(strEmail.Trim()))
-            {
-                if (strWhere.Length > 0)
-                {
-                    strWhere.Append(" or "); 
-                }
-                strWhere.Append(" Email='" + strEmail + "'");
-            }
-            strSql.Append(strWhere.ToString());
-            return (db.RunSqlReturnInt(strSql.ToString()) > 0);
+            strSql.Append(" where UserName=@UserName ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserName", SqlDbType.NVarChar, 50)};
+            parameters[0].Value = UserName;
+
+            return db.RunSqlReturnInt(strSql.ToString(), parameters) > 0;
         }
 
         /// <summary>
-        /// 激活用户：-1=激活失败，原因未知，0=激活失败，不存在用户名或者激活码错误，1=激活成功，2=已经激活
+        /// 是否存在该记录
         /// </summary>
-        /// <param name="strUsername"></param>
-        /// <param name="strAtivateCode"></param>
-        /// <returns></returns>
-        public int UserAtivate(string strUsername, string strActivateCode)
+        public bool ChkEmail(string Email)
         {
-            if (string.IsNullOrEmpty(strUsername.Trim()) || string.IsNullOrEmpty(strActivateCode.Trim()))
-            {
-                return 0;
-            }
-            
-            LFL.Favorite.Model.User model = GetModel(strUsername);
-            //不存在
-            if(model == null)
-            {
-                return 0;
-            }
-            //已经激活
-            if(model.Status > 0)
-            {
-                return 2;
-            }
-            //激活码错误
-            if(!model.ActivateCode.Equals(strActivateCode))
-            {
-                return 0;
-            }
-            //设置状态为1
-            model.Status = 1;
-            try
-            {
-                Update(model);
-                //激活成功
-                return 1;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-                return -1;
-            }
-            
-            return 0;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from T_User");
+            strSql.Append(" where Email=@Email ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Email", SqlDbType.NVarChar, 50)};
+            parameters[0].Value = Email;
+
+            return db.RunSqlReturnInt(strSql.ToString(), parameters) > 0;
         }
+
 
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(LFL.Favorite.Model.User model)
+		public int Add(KuaiLe.Us.Model.UserModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
-			StringBuilder strSql1=new StringBuilder();
-			StringBuilder strSql2=new StringBuilder();
-			if (model.Username != null)
-			{
-				strSql1.Append("Username,");
-				strSql2.Append("'"+model.Username+"',");
-			}
-			if (model.Nickname != null)
-			{
-				strSql1.Append("Nickname,");
-				strSql2.Append("'"+model.Nickname+"',");
-			}
-			if (model.Password != null)
-			{
-				strSql1.Append("Password,");
-				strSql2.Append("'"+model.Password+"',");
-			}
-			if (model.Email != null)
-			{
-				strSql1.Append("Email,");
-				strSql2.Append("'"+model.Email+"',");
-			}
-			if (model.Sex != null)
-			{
-				strSql1.Append("Sex,");
-				strSql2.Append("'"+model.Sex+"',");
-			}
-			if (model.ActivateCode != null)
-			{
-				strSql1.Append("ActivateCode,");
-				strSql2.Append("'"+model.ActivateCode+"',");
-			}
-			if (model.RegTime != null)
-			{
-				strSql1.Append("RegTime,");
-				strSql2.Append("'"+model.RegTime+"',");
-			}
-			if (model.RegIP != null)
-			{
-				strSql1.Append("RegIP,");
-				strSql2.Append("'"+model.RegIP+"',");
-			}
-			if (model.LastLoginTime != null)
-			{
-				strSql1.Append("LastLoginTime,");
-				strSql2.Append("'"+model.LastLoginTime+"',");
-			}
-			if (model.LastLoginIP != null)
-			{
-				strSql1.Append("LastLoginIP,");
-				strSql2.Append("'"+model.LastLoginIP+"',");
-			}
-			if (model.LoginCount != null)
-			{
-				strSql1.Append("LoginCount,");
-				strSql2.Append(""+model.LoginCount+",");
-			}
-			if (model.Level != null)
-			{
-				strSql1.Append("Level,");
-				strSql2.Append(""+model.Level+",");
-			}
-			if (model.Credit != null)
-			{
-				strSql1.Append("Credit,");
-				strSql2.Append(""+model.Credit+",");
-			}
-			if (model.Status != null)
-			{
-				strSql1.Append("Status,");
-				strSql2.Append(""+model.Status+",");
-			}
 			strSql.Append("insert into T_User(");
-			strSql.Append(strSql1.ToString().Remove(strSql1.Length - 1));
-			strSql.Append(")");
+			strSql.Append("UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status)");
 			strSql.Append(" values (");
-			strSql.Append(strSql2.ToString().Remove(strSql2.Length - 1));
-			strSql.Append(")");
-			strSql.Append(";SELECT SCOPE_IDENTITY() AS [ID]");
-			return db.RunSqlReturnInt(strSql.ToString());
+			strSql.Append("@UserName,@Nickname,@Password,@Email,@Sex,@ActivateCode,@RegTime,@RegIP,@LastLoginTime,@LastLoginIP,@LoginCount,@Level,@Credit,@Status)");
+			strSql.Append(";select @@IDENTITY");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
+					new SqlParameter("@Nickname", SqlDbType.NVarChar,50),
+					new SqlParameter("@Password", SqlDbType.NVarChar,50),
+					new SqlParameter("@Email", SqlDbType.NVarChar,50),
+					new SqlParameter("@Sex", SqlDbType.Int,4),
+					new SqlParameter("@ActivateCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@RegTime", SqlDbType.DateTime),
+					new SqlParameter("@RegIP", SqlDbType.NVarChar,50),
+					new SqlParameter("@LastLoginTime", SqlDbType.DateTime),
+					new SqlParameter("@LastLoginIP", SqlDbType.NVarChar,50),
+					new SqlParameter("@LoginCount", SqlDbType.Int,4),
+					new SqlParameter("@Level", SqlDbType.Int,4),
+					new SqlParameter("@Credit", SqlDbType.Float,8),
+					new SqlParameter("@Status", SqlDbType.Int,4)};
+			parameters[0].Value = model.UserName;
+			parameters[1].Value = model.Nickname;
+			parameters[2].Value = model.Password;
+			parameters[3].Value = model.Email;
+			parameters[4].Value = model.Sex;
+			parameters[5].Value = model.ActivateCode;
+			parameters[6].Value = model.RegTime;
+			parameters[7].Value = model.RegIP;
+			parameters[8].Value = model.LastLoginTime;
+			parameters[9].Value = model.LastLoginIP;
+			parameters[10].Value = model.LoginCount;
+			parameters[11].Value = model.Level;
+			parameters[12].Value = model.Credit;
+			parameters[13].Value = model.Status;
+
+			return db.RunSqlReturnInt(strSql.ToString(),parameters);
 		}
+
+
 
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public void Update(LFL.Favorite.Model.User model)
+		public void Update(KuaiLe.Us.Model.UserModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_User set ");
-			if (model.Username != null)
-			{
-				strSql.Append("Username='"+model.Username+"',");
-			}
-			if (model.Nickname != null)
-			{
-				strSql.Append("Nickname='"+model.Nickname+"',");
-			}
-			if (model.Password != null)
-			{
-				strSql.Append("Password='"+model.Password+"',");
-			}
-			if (model.Email != null)
-			{
-				strSql.Append("Email='"+model.Email+"',");
-			}
-			if (model.Sex != null)
-			{
-				strSql.Append("Sex='"+model.Sex+"',");
-			}
-			if (model.ActivateCode != null)
-			{
-				strSql.Append("ActivateCode='"+model.ActivateCode+"',");
-			}
-			if (model.RegTime != null)
-			{
-				strSql.Append("RegTime='"+model.RegTime+"',");
-			}
-			if (model.RegIP != null)
-			{
-				strSql.Append("RegIP='"+model.RegIP+"',");
-			}
-			if (model.LastLoginTime != null)
-			{
-				strSql.Append("LastLoginTime='"+model.LastLoginTime+"',");
-			}
-			if (model.LastLoginIP != null)
-			{
-				strSql.Append("LastLoginIP='"+model.LastLoginIP+"',");
-			}
-			if (model.LoginCount != null)
-			{
-				strSql.Append("LoginCount="+model.LoginCount+",");
-			}
-			if (model.Level != null)
-			{
-				strSql.Append("Level="+model.Level+",");
-			}
-			if (model.Credit != null)
-			{
-				strSql.Append("Credit="+model.Credit+",");
-			}
-			if (model.Status != null)
-			{
-				strSql.Append("Status="+model.Status+",");
-			}
-			int n = strSql.ToString().LastIndexOf(",");
-			strSql.Remove(n, 1);
-			strSql.Append(" where UserID="+ model.UserID+" ");
-			db.RunSql(strSql.ToString());
+			strSql.Append("UserName=@UserName,");
+			strSql.Append("Nickname=@Nickname,");
+			strSql.Append("Password=@Password,");
+			strSql.Append("Email=@Email,");
+			strSql.Append("Sex=@Sex,");
+			strSql.Append("ActivateCode=@ActivateCode,");
+			strSql.Append("RegTime=@RegTime,");
+			strSql.Append("RegIP=@RegIP,");
+			strSql.Append("LastLoginTime=@LastLoginTime,");
+			strSql.Append("LastLoginIP=@LastLoginIP,");
+			strSql.Append("LoginCount=@LoginCount,");
+			strSql.Append("Level=@Level,");
+			strSql.Append("Credit=@Credit,");
+			strSql.Append("Status=@Status");
+			strSql.Append(" where UserID=@UserID");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.BigInt,8),
+					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
+					new SqlParameter("@Nickname", SqlDbType.NVarChar,50),
+					new SqlParameter("@Password", SqlDbType.NVarChar,50),
+					new SqlParameter("@Email", SqlDbType.NVarChar,50),
+					new SqlParameter("@Sex", SqlDbType.Int,4),
+					new SqlParameter("@ActivateCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@RegTime", SqlDbType.DateTime),
+					new SqlParameter("@RegIP", SqlDbType.NVarChar,50),
+					new SqlParameter("@LastLoginTime", SqlDbType.DateTime),
+					new SqlParameter("@LastLoginIP", SqlDbType.NVarChar,50),
+					new SqlParameter("@LoginCount", SqlDbType.Int,4),
+					new SqlParameter("@Level", SqlDbType.Int,4),
+					new SqlParameter("@Credit", SqlDbType.Float,8),
+					new SqlParameter("@Status", SqlDbType.Int,4)};
+			parameters[0].Value = model.UserID;
+			parameters[1].Value = model.UserName;
+			parameters[2].Value = model.Nickname;
+			parameters[3].Value = model.Password;
+			parameters[4].Value = model.Email;
+			parameters[5].Value = model.Sex;
+			parameters[6].Value = model.ActivateCode;
+			parameters[7].Value = model.RegTime;
+			parameters[8].Value = model.RegIP;
+			parameters[9].Value = model.LastLoginTime;
+			parameters[10].Value = model.LastLoginIP;
+			parameters[11].Value = model.LoginCount;
+			parameters[12].Value = model.Level;
+			parameters[13].Value = model.Credit;
+			parameters[14].Value = model.Status;
+
+			db.RunSql(strSql.ToString(),parameters);
+
 		}
 
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
-		public void Delete(int UserID)
+		public void Delete(long UserID)
+		{
+			
+			StringBuilder strSql=new StringBuilder();
+			strSql.Append("delete from T_User ");
+			strSql.Append(" where UserID=@UserID");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.BigInt)
+};
+			parameters[0].Value = UserID;
+
+			db.RunSql(strSql.ToString(),parameters);
+		}
+		/// <summary>
+		/// 删除一条数据
+		/// </summary>
+		public void DeleteList(string UserIDlist )
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("delete from T_User ");
-			strSql.Append(" where UserID="+UserID+" " );
+			strSql.Append(" where UserID in ("+UserIDlist + ")  ");
 			db.RunSql(strSql.ToString());
-		}
-
-		/// <summary>
-		/// 得到一个对象实体
-		/// </summary>
-		public LFL.Favorite.Model.User GetModel(int UserID)
-		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1  ");
-			strSql.Append(" UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
-			strSql.Append(" from T_User ");
-			strSql.Append(" where UserID="+UserID+" " );
-			LFL.Favorite.Model.User model=new LFL.Favorite.Model.User();
-			DataSet ds = db.GetDs(strSql.ToString());
-			if(ds.Tables[0].Rows.Count>0)
-			{
-				if(ds.Tables[0].Rows[0]["UserID"].ToString()!="")
-				{
-					model.UserID=int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
-				}
-				model.Username=ds.Tables[0].Rows[0]["Username"].ToString();
-				model.Nickname=ds.Tables[0].Rows[0]["Nickname"].ToString();
-				model.Password=ds.Tables[0].Rows[0]["Password"].ToString();
-				model.Email=ds.Tables[0].Rows[0]["Email"].ToString();
-				model.Sex=ds.Tables[0].Rows[0]["Sex"].ToString();
-				model.ActivateCode=ds.Tables[0].Rows[0]["ActivateCode"].ToString();
-				if(ds.Tables[0].Rows[0]["RegTime"].ToString()!="")
-				{
-					model.RegTime=DateTime.Parse(ds.Tables[0].Rows[0]["RegTime"].ToString());
-				}
-				model.RegIP=ds.Tables[0].Rows[0]["RegIP"].ToString();
-				if(ds.Tables[0].Rows[0]["LastLoginTime"].ToString()!="")
-				{
-					model.LastLoginTime=DateTime.Parse(ds.Tables[0].Rows[0]["LastLoginTime"].ToString());
-				}
-				model.LastLoginIP=ds.Tables[0].Rows[0]["LastLoginIP"].ToString();
-				if(ds.Tables[0].Rows[0]["LoginCount"].ToString()!="")
-				{
-					model.LoginCount=int.Parse(ds.Tables[0].Rows[0]["LoginCount"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Level"].ToString()!="")
-				{
-					model.Level=int.Parse(ds.Tables[0].Rows[0]["Level"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Credit"].ToString()!="")
-				{
-					model.Credit=decimal.Parse(ds.Tables[0].Rows[0]["Credit"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Status"].ToString()!="")
-				{
-					model.Status=int.Parse(ds.Tables[0].Rows[0]["Status"].ToString());
-				}
-				return model;
-			}
-			else
-			{
-				return null;
-			}
 		}
 
 
         /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public KuaiLe.Us.Model.UserModel GetModel(string strNameOrEmail, bool isEmail)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status from T_User ");
+            SqlParameter[] parameters = null;
+            if (isEmail)
+            {
+                strSql.Append(" where Email=@Email");
+                parameters = new SqlParameter[] {
+					new SqlParameter("@Email", SqlDbType.NVarChar, 50)
+};   
+            }
+            else
+            {
+                strSql.Append(" where UserName=@UserName");
+                parameters = new SqlParameter[] {
+					new SqlParameter("@UserName", SqlDbType.NVarChar, 50)
+};
+            }
+            parameters[0].Value = strNameOrEmail;
+
+            KuaiLe.Us.Model.UserModel model = new KuaiLe.Us.Model.UserModel();
+            DataSet ds = db.GetDs(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["UserID"].ToString() != "")
+                {
+                    model.UserID = long.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
+                }
+                model.UserName = ds.Tables[0].Rows[0]["UserName"].ToString();
+                model.Nickname = ds.Tables[0].Rows[0]["Nickname"].ToString();
+                model.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                if (ds.Tables[0].Rows[0]["Sex"].ToString() != "")
+                {
+                    model.Sex = int.Parse(ds.Tables[0].Rows[0]["Sex"].ToString());
+                }
+                model.ActivateCode = ds.Tables[0].Rows[0]["ActivateCode"].ToString();
+                if (ds.Tables[0].Rows[0]["RegTime"].ToString() != "")
+                {
+                    model.RegTime = DateTime.Parse(ds.Tables[0].Rows[0]["RegTime"].ToString());
+                }
+                model.RegIP = ds.Tables[0].Rows[0]["RegIP"].ToString();
+                if (ds.Tables[0].Rows[0]["LastLoginTime"].ToString() != "")
+                {
+                    model.LastLoginTime = DateTime.Parse(ds.Tables[0].Rows[0]["LastLoginTime"].ToString());
+                }
+                model.LastLoginIP = ds.Tables[0].Rows[0]["LastLoginIP"].ToString();
+                if (ds.Tables[0].Rows[0]["LoginCount"].ToString() != "")
+                {
+                    model.LoginCount = int.Parse(ds.Tables[0].Rows[0]["LoginCount"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Level"].ToString() != "")
+                {
+                    model.Level = int.Parse(ds.Tables[0].Rows[0]["Level"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Credit"].ToString() != "")
+                {
+                    model.Credit = decimal.Parse(ds.Tables[0].Rows[0]["Credit"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Status"].ToString() != "")
+                {
+                    model.Status = int.Parse(ds.Tables[0].Rows[0]["Status"].ToString());
+                }
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public LFL.Favorite.Model.User GetModel(string strUsername)
+		public KuaiLe.Us.Model.UserModel GetModel(long UserID)
 		{
+			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1  ");
-			strSql.Append(" UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
-			strSql.Append(" from T_User ");
-			strSql.Append(" where Username='"+strUsername+"' " );
-			LFL.Favorite.Model.User model=new LFL.Favorite.Model.User();
-			DataSet ds = db.GetDs(strSql.ToString());
+			strSql.Append("select  top 1 UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status from T_User ");
+			strSql.Append(" where UserID=@UserID");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.BigInt)
+};
+			parameters[0].Value = UserID;
+
+			KuaiLe.Us.Model.UserModel model=new KuaiLe.Us.Model.UserModel();
+			DataSet ds= db.GetDs(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{
 				if(ds.Tables[0].Rows[0]["UserID"].ToString()!="")
 				{
-					model.UserID=int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
+					model.UserID=long.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
 				}
-				model.Username=ds.Tables[0].Rows[0]["Username"].ToString();
+				model.UserName=ds.Tables[0].Rows[0]["UserName"].ToString();
 				model.Nickname=ds.Tables[0].Rows[0]["Nickname"].ToString();
 				model.Password=ds.Tables[0].Rows[0]["Password"].ToString();
 				model.Email=ds.Tables[0].Rows[0]["Email"].ToString();
-				model.Sex=ds.Tables[0].Rows[0]["Sex"].ToString();
+				if(ds.Tables[0].Rows[0]["Sex"].ToString()!="")
+				{
+					model.Sex=int.Parse(ds.Tables[0].Rows[0]["Sex"].ToString());
+				}
 				model.ActivateCode=ds.Tables[0].Rows[0]["ActivateCode"].ToString();
 				if(ds.Tables[0].Rows[0]["RegTime"].ToString()!="")
 				{
@@ -402,7 +341,7 @@ namespace LFL.Favorite.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
+			strSql.Append("select UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
 			strSql.Append(" FROM T_User ");
 			if(strWhere.Trim()!="")
 			{
@@ -422,7 +361,7 @@ namespace LFL.Favorite.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
+			strSql.Append(" UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
 			strSql.Append(" FROM T_User ");
 			if(strWhere.Trim()!="")
 			{
@@ -432,27 +371,28 @@ namespace LFL.Favorite.DAL
 			return db.GetDs(strSql.ToString());
 		}
 
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere, string strOrder, int pageSize, int pageIndex, out int records)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select * from dbo.T_User ");
 
-        
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public DataSet GetList(string strWhere, string strOrder,int pageSize, int pageIndex, out int totalCount)
-		{
-			StringBuilder strSql = new StringBuilder();
-			//Sql语句
-			strSql.Append(" Select ");
-			strSql.Append(" UserID,Username,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status ");
-			strSql.Append(" FROM T_User ");
-			if(strWhere.Trim()!="")
-			{
-				strSql.Append(" where "+strWhere);
-			}
-			return db.GetPageDs(strSql.ToString(), strOrder, pageSize, pageIndex, out totalCount);
-		}
-		
+            if (!string.IsNullOrEmpty(strWhere))
+            {
+                strSql.Append(" Where " + strWhere + " ");
+            }
 
-		#endregion  成员方法
+            if (string.IsNullOrEmpty(strOrder))
+            {
+                strOrder = " UserID ASC ";
+            }
+
+            return db.GetPageDs(strSql.ToString(), strOrder, pageSize, pageIndex, out records);
+        }
+
+		#endregion  Method
 	}
 }
 

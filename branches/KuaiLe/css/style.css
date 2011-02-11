@@ -1,0 +1,311 @@
+@charset "utf-8";
+body{
+	margin:0 auto;
+	padding:0;
+	font-size: 14px;
+	font-family:Arial, Helvetica, sans-serif;
+	/*background: url(../images/body_bg.gif) repeat-x #cbffff;*/
+	background:#09F;
+}
+a{
+	color:#09F;
+	text-decoration:none;
+}
+a:hover{
+	color:#F00;
+	text-decoration:underline;
+}
+a.orange{
+	color:#C30;
+}
+a.orange:hover{
+	color:#F00;
+}
+.left{ float:left;}
+.right{ float:right;}
+.clear{ clear:both;}
+.tips { color:#999; font-size:12px;}
+.bline{
+	border-bottom:dashed 1px #CCC;
+}
+.btn{
+	padding:3px;
+}
+
+
+.wrapper{
+	margin:0 auto;
+	background:#FFF;
+}
+.innerWrapWidth{
+	width:1000px;
+}
+.topbar {
+	background:#F4FAFF ;
+	background:url(../images/topbar_bg.gif) repeat-x;
+	height:26px;
+	line-height:26px;
+	border:solid 1px #E1F0FF;
+	font-size:12px;
+}
+.header{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.header .logo{
+	float:left;
+	30%;
+}
+.header .nav{
+	float:right;
+	width:70%;
+}
+.header .nav .navLink{
+	float:right;
+	position:relative;
+	top:20px;
+	right:20px;
+	padding:0 5px;
+	
+	height:30px;
+	line-height:30px;
+	display:inline-block;
+	color:#CCC;
+	background:#09F;
+}
+.header .nav .navLink a{
+	margin:0 5px;
+	color:#FFF;
+	font-weight:bold;
+	text-decoration:none;
+}
+.header .nav .navLink a:hover{
+	color:#F00;
+	text-decoration:none;
+}
+
+/**************** index ****************/
+/*
+.container{
+	border-top:dashed 1px #CCC;
+}
+.containerMain{
+	width:70%;
+	float:left;
+}
+.containerSider{
+	width:29%;
+	float:right;
+	background:#F7FBFF;
+	border-left:solid 1px #D0E8FF;
+	font-size:12px;
+	
+}
+*/
+.container{
+	border-top:dashed 1px #CCC;
+	width:700px;
+	border-right: #F7FBFF solid 300px;
+}
+.containerMain{
+	width:700px;
+	float:left;
+	margin-right:-700px;
+	position:relative;
+}
+.containerSider{
+	width:300px;
+	float:right;
+	position:relative;
+	margin-right:-300px;
+	border-left:solid 1px #D0E8FF;
+	font-size:12px;
+	
+}
+/*** PostArea ********/
+.postArea{
+	margin:15px;
+	padding:3px;
+	border:solid #aaa 1px;
+	background:#E4E4E4;
+	/*background:url(../images/artpost_bg.gif) repeat-x;*/
+}
+.postArea .areaPadding{
+	background:#FFF;
+	padding:5px;
+	line-height:25px;
+}
+.postArea .title{
+	font-size:14px;
+	font-weight:bold;
+	padding:5px;
+	color:#090;
+}
+.postArea .btnArea{
+	padding:5px;
+}
+
+.textareaBox textarea{
+	font-family:Tahoma,Arial;
+	width:630px;
+	height:22px;
+	resize:none;
+	line-height:21px;
+	margin:4px 0 0 4px;
+	padding:3px 5px;
+	overflow-y:auto;
+	border:1px solid #D0D0D0;
+	word-wrap:break-word;
+	word-break:break-all;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	transition:border linear .2s,box-shadow linear .2s;
+	-moz-transition:border linear .2s,-moz-box-shadow linear .2s;
+	-webkit-transition:border linear .2s,-webkit-box-shadow linear .2s;
+	color:#ccc;
+	font-size:12px;
+}
+.textareaBox textarea.focus{
+	height:66px;
+	border-color:#7BD6F6;
+	-moz-outline:4px solid #E2F5FB;
+	-moz-outline-radius:8px;
+	-webkit-box-shadow:0 0 10px rgba(123,214,246,.6);
+	color:#000;
+}
+
+.button{
+	background:url(../images/button_green_bg.gif) no-repeat;
+	padding-left:5px;
+	padding-right:5px;
+	height:30px;
+	border:0;
+	color:#FFF;
+	font-weight:bold;
+	font-size:16px;
+}
+/****** ListArea ****/
+.listArea{
+	padding:15px;
+}
+.listArea .item{
+	border:1px solid #ccc;
+	/*margin:20px auto;*/
+	border-bottom:solid 1px #bbb;
+	margin-bottom:20px;
+}
+.listArea .item .itemContent{
+	background:#FFF;
+	background:#FCFCFC;
+	padding:30px 20px;
+	line-height:1.7em;
+	font-size:14px;
+}
+.listArea .itemOn{
+	border:1px solid #F00;
+	
+}
+.listArea .itemOn .itemContent{
+	background:#F2F9F9;
+}
+.listArea .item  .itemCtrl{
+	padding:0px 10px;
+	background:#EEE;
+	background:#F9F9F9;
+	color:#999;
+	border-top:solid 1px #CCC;
+	border-bottom:solid 1px #CCC;
+	line-height:25px;
+	font-size:12px;
+}
+.listArea .item  .itemInputComment{
+	background:#F2F9F9;
+	overflow:hidden;
+	padding:5px;
+}
+.listArea .item  .itemInputComment .btnArea{
+	padding:5px;
+}
+.listArea .item  .itemInputComment .inputActive{
+	width:90%;
+	height:50px;
+	padding:3px;
+	color:#000;
+}
+.listArea .item  .itemInputComment .input{
+	width:90%;
+	height:20px;
+	padding:3px;
+	color:#999;
+}
+
+/*** ∆¿¬€¡–±Ì **********/
+.commentList
+{
+	background:#fff;
+	padding:5px;
+	font-size:12px;
+	line-height:22px;
+}
+.commentList dl
+{
+	margin:0;
+	padding:0;
+}
+.commentList dl dt
+{
+}
+
+.commentList dl dd
+{
+	color:#999;
+	border-bottom:dashed 1px #ccc;
+}
+
+
+/*** Conatiner Sider ******/
+.search{
+	padding:5px;
+}
+.column .title{
+	height:30px;
+	line-height:30px;
+	color:#FFF;
+	background:url(../images/title_bg.gif) repeat-x;
+	text-indent:1em;
+}
+.column .content{
+	line-height:1.6em;
+}
+.column .text{
+	padding:5px;
+}
+
+.loginForm {
+}
+
+.loginForm dl{
+	margin:0;
+	padding:0;
+}
+.loginForm dl dt{
+	margin:0;
+	padding:3px 5px;
+}
+.loginForm dl dd{
+	padding:3px 5px;
+	margin:0;
+}
+
+
+
+/************* Footer *********/
+.footer{
+	padding-top:10px;
+	padding-bottom:10px;
+	border-top:1px dashed #CCC;
+	line-height:1.5em;
+	text-align:center;
+	font-size:12px;
+}

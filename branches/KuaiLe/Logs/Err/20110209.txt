@@ -1,0 +1,2 @@
+2011-2-9 14:33:29 Msg:操作顶/踩/举报异常：参数化查询 '(@ArtID bigint,@UserID bigint,@Title nvarchar(50),@Content text,' 需要参数 @IsAnonym，但未提供该参数。, URL:http://www.kuaile.us/Handle/Dig.ashx?t=1297233209561&SrcID=1&DigType=0&SrcType=Article
+2011-2-9 14:33:32 Msg:操作顶/踩/举报异常：参数化查询 '(@ArtID bigint,@UserID bigint,@Title nvarchar(50),@Content text,' 需要参数 @IsAnonym，但未提供该参数。, URL:http://www.kuaile.us/Handle/Dig.ashx?t=1297233211968&SrcID=2&DigType=0&SrcType=Article

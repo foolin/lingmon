@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>快乐网—我们一起分享| www.kuaile.us</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function alignHeight(eleA,eleB){
+  if(!document.getElementById(eleA)){return false;}
+  if(!document.getElementById(eleB)){return false;}
+  var heightA = document.getElementById(eleA).clientHeight + 30;
+  var heightB = document.getElementById(eleB).clientHeight + 30;
+  if(heightA > heightB){
+    document.getElementById(eleB).style.height = heightA + "px";
+    document.getElementById(eleA).style.height = heightA + "px";
+  }else{
+    document.getElementById(eleA).style.height = heightB + "px";
+    document.getElementById(eleB).style.height = heightB + "px";
+  }
+}
+window.onload =
+function z_align(){
+  alignHeight("containerMain","containerSider"); //只需将需要对齐的两个模块的id写在此处即可。
+//alignHeight("AAA","BBB") 可依此连续多组。
+}
+</script>
+
+</head>
+
+<body>
+<div class="topbar">
+	<div class="innerWrapWidth" style="margin:0 auto;">
+    	<a href="">首页</a> <a href="">注册</a> <a href="">登录</a> <a href="">设为首页</a>  <a href="">收藏</a>  <a href="">RSS</a>
+    </div>
+</div>
+<div class="wrapper innerWrapWidth">
+    <div class="header">
+    	<div class="logo">
+        	<img src="images/KuaiLeLogo.png" border="0" height="60" />
+        </div>
+        <div class="nav">
+        	<span class="navLink">
+          	<a href="#">首页</a> |
+            <a href="#">最热</a> | 
+            <a href="#">最新</a> | 
+            <a href="#">热评</a> | 
+            <a href="#">24小时</a> | 
+            <a href="#">1周内</a> | 
+            <a href="#">1月内</a> | 
+            <a href="#">一年内</a> | 
+            <a href="#">历史之最</a> 
+            </span>
+            <span class="search">
+            	
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="container">
+    	<div class="containerMain" id="containerMain">
+        	<div class="postArea">
+            <div class="areaPadding">
+            		<div class="title">来，与我们分享您的快乐：</div>
+                    <div class="textareaBox">
+                        <textarea name="share" style="height:80px;" tip="请在这里输入你要分享的内容..."></textarea>
+                    </div>
+                	<div class="btnArea">
+                      	验证码：<input type="text" name="chkCode" style="width:50px;" value="" /> 5214
+                      	<input type="button" class="button" value="发表"  />
+                    </div>
+                    <div class="tips">您发表的内容我们会进行审核，正文中包含链接地址，广告，垃圾信息，政治相关或色情描写的内容将会被删除。</div>
+			</div>
+          	</div>
+            
+            <div class="listArea">
+            
+            	
+            	<div class="item">
+                	<div class="itemContent">
+                    今天的雅虎china头条中，有两条新闻摆在一块。<br />
+标题分别是。<br />
+“河北少年砸撬ATM分文未得 公诉方要求判无期”（判无期）<br />
+“河大撞人案肇事者被从轻处罚 积极赔偿获谅解”（判六年）<br />
+河北是个奇怪的地方，一条半的人命居然抵不上一个没来得及破坏成功的ATM机。
+                    </div>
+                    <div class="itemCtrl">
+                    	<span class="left"><a href="">Foolin</a> 2011-02-01 00:38:56 发布 </span>
+                     	<span class="right">
+                        	<a href="#digUp"><img src="images/digUp.gif" border="0" height="15" />顶</a>(296236) &nbsp;&nbsp; 
+                        	<a href="#digDown"><img src="images/digDown.gif" border="0" height="15" />踩</a>(300) &nbsp;&nbsp; 
+                            <a href="#commentList">评论</a>(30)  &nbsp;&nbsp; 
+                            <a href="#commentList">举报</a>
+                            </span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="itemInputComment">
+                        <div class="textareaBox">
+                        	<textarea name="comment"  maxlen="200" tip="我也说一句..." class="focus"></textarea>
+                       	</div>
+                        <div class="btnArea">
+                            <input type="button" name="btnPostComment" value="确定" />
+                            <span class="tips">您可输入<span class="chkWordCountTip">个字。</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- item -->
+                
+                <div class="item">
+                	<div class="itemContent">
+                    今天的雅虎china头条中，有两条新闻摆在一块。<br />
+标题分别是。<br />
+“河北少年砸撬ATM分文未得 公诉方要求判无期”（判无期）<br />
+“河大撞人案肇事者被从轻处罚 积极赔偿获谅解”（判六年）<br />
+河北是个奇怪的地方，一条半的人命居然抵不上一个没来得及破坏成功的ATM机。
+                    </div>
+                    <div class="itemCtrl">
+                    	<span class="left"><a href="">Foolin</a> 2011-02-01 00:38:56 发布 </span>
+                     	<span class="right">
+                        	<a href="#digUp"><img src="images/digUp.gif" border="0" height="14" />顶</a>(296236) &nbsp;&nbsp; 
+                        	<a href="#digDown"><img src="images/digDown.gif" border="0" height="14" />顶</a>(300) &nbsp;&nbsp; 
+                            <a href="#commentList">评论</a>(30) &nbsp;&nbsp; 
+                            <a href="#commentList">举报</a>
+                            </span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="itemInputComment">
+                    	<div class="textareaBox">
+                        	<textarea name="comment" tip="我也说一句..."></textarea>
+                       	</div>
+                        <div class="btnArea" style="display:none">
+                            <input type="button" name="btnPostComment" value="确定" />
+                            <span class="tips">您可输入0/200个字。</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- item -->
+                
+                <div class="page">
+                	首页 下一页 1 2 3 ... 5 上一页 尾页
+                </div>
+            </div>
+            <!-- listArea -->
+        </div>
+        <!-- containerMain -->
+        
+        <div class="containerSider" id="containerSider">
+        	<div class="search">
+            	<input type="text" name="keyword" tip="请输入关键词..." value="" /> <input type="button" name="Search" value="搜索" />
+            </div>
+            
+            <div class="loginForm column">
+            	<div class="title">公告区</div>
+                <div class="content">
+                	<div class="text">
+                	欢迎光临快乐网，我们的口号是“快乐.我们一起分享！”。<br />或许你生活在忙碌之中，在学习、工作、生活业余之余，利用短短的5分钟时间，来与我们分享一下快乐。
+                    <br /><br />
+                    快乐网：www.kuaile.us
+                    </div>
+                </div>
+            </div>
+            
+        	<div class="loginForm column">
+            	<div class="title">用户登录</div>
+                <div class="content">
+                	<dl>
+                    <dt>用户名：</dt>
+                    <dd><input type="text" name="UserName" value="" /></dt>
+                    <dt>密 码：</dt>
+                    <dd><input type="password" name="Password" value="" /></dd>
+                    <dd><input type="button" name="Login" value="登录" /> <a href="#">注册</a></dd>
+                    </dl>
+                </div>
+            </div>
+        	
+            <div class="loginForm column">
+            	<div class="title">快速注册</div>
+                <div class="content">
+                	<dl>
+                    <dt>用户名：</dt>
+                    <dd><input type="text" name="UserName" tip="请输入用户名..." value="" /></dt>
+                    <dt>密 码：</dt>
+                    <dd><input type="password" name="Password" value="" /></dd>
+                    <dt>重复密码：</dt>
+                    <dd><input type="password" name="Password" value="" /></dd>
+                    <dt>邮 箱：</dt>
+                    <dd><input type="text" name="Email" value="" /></dd>
+                    <dt>验证码：</dt>
+                    <dd><input type="text" name="regChkCode" style="width:50px;" value="" /> 2322</dd>
+                    <dd><input type="button" name="Login" value="注册" /></dd>
+                    </dl>
+                </div>
+            </div>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="footer">
+    	Email：contact#kuaile.us (#换成@) &nbsp; <b>快乐网(kuaile.us)</b> 版权所有
+    	<br />&copy; 2011 <a class="orange" href="http://www.kuaile.us">www.KuaiLe.us</a> All Rights Reserved. &nbsp; &nbsp;<A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备xxxxx</A>号
+        
+    </div>
+</div>
+</body>
+</html>

@@ -49,7 +49,7 @@ public class Dig : IHttpHandler {
         {
             string strUserIP = Utility.Web.WebAgent.GetIP();
             KuaiLe.Us.BLL.DigBll digBll = new KuaiLe.Us.BLL.DigBll();
-            System.Data.DataSet dsDigList = digBll.GetList("SrcID=" + iSrcID + " And SrcType='" + strSrcType + "' And UserIP='" + strUserIP +"'");
+            System.Data.DataSet dsDigList = digBll.GetList("SrcID=" + iSrcID + " And SrcType='" + strSrcType + "' And UserIP='" + strUserIP +"' And DigTime>='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
             if (dsDigList != null && dsDigList.Tables[0].Rows.Count > 0)
             {
                 context.Response.StatusCode = 400;
@@ -121,6 +121,7 @@ public class Dig : IHttpHandler {
             digModel.SrcType = strSrcType;
             digModel.UserID = 0;
             digModel.UserIP = strUserIP;
+            digModel.DigTime = DateTime.Now;
             digBll.Add(digModel);
 
             //KuaiLe.Us.Common.WebLog.WriteInfoLog("插入踩、顶、举报成功！");

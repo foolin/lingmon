@@ -38,21 +38,24 @@ namespace KuaiLe.Us.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_Dig(");
-			strSql.Append("SrcID,SrcType,UserID,UserIP,DigType)");
+			strSql.Append("SrcID,SrcType,UserID,UserIP,DigType,DigTime)");
 			strSql.Append(" values (");
-			strSql.Append("@SrcID,@SrcType,@UserID,@UserIP,@DigType)");
+			strSql.Append("@SrcID,@SrcType,@UserID,@UserIP,@DigType,@DigTime)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@SrcID", SqlDbType.BigInt,8),
 					new SqlParameter("@SrcType", SqlDbType.NVarChar,50),
 					new SqlParameter("@UserID", SqlDbType.Int,4),
 					new SqlParameter("@UserIP", SqlDbType.NVarChar,50),
-					new SqlParameter("@DigType", SqlDbType.Int,4)};
+					new SqlParameter("@DigType", SqlDbType.Int,4),
+                    new SqlParameter("@DigTime", SqlDbType.DateTime)
+                                        };
 			parameters[0].Value = model.SrcID;
 			parameters[1].Value = model.SrcType;
 			parameters[2].Value = model.UserID;
 			parameters[3].Value = model.UserIP;
 			parameters[4].Value = model.DigType;
+            parameters[5].Value = model.DigTime;
 
 			return db.RunSqlReturnInt(strSql.ToString(),parameters);
 		}
@@ -68,6 +71,7 @@ namespace KuaiLe.Us.DAL
 			strSql.Append("UserID=@UserID,");
 			strSql.Append("UserIP=@UserIP,");
 			strSql.Append("DigType=@DigType");
+            strSql.Append("DigTime=@DigTime");
 			strSql.Append(" where DigID=@DigID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@DigID", SqlDbType.BigInt,8),
@@ -75,13 +79,16 @@ namespace KuaiLe.Us.DAL
 					new SqlParameter("@SrcType", SqlDbType.NVarChar,50),
 					new SqlParameter("@UserID", SqlDbType.Int,4),
 					new SqlParameter("@UserIP", SqlDbType.NVarChar,50),
-					new SqlParameter("@DigType", SqlDbType.Int,4)};
+					new SqlParameter("@DigType", SqlDbType.Int,4),
+                    new SqlParameter("@DigTime", SqlDbType.DateTime)
+                                        };
 			parameters[0].Value = model.DigID;
 			parameters[1].Value = model.SrcID;
 			parameters[2].Value = model.SrcType;
 			parameters[3].Value = model.UserID;
 			parameters[4].Value = model.UserIP;
 			parameters[5].Value = model.DigType;
+            parameters[6].Value = model.DigTime;
 
 			db.RunSql(strSql.ToString(),parameters);
 		}
@@ -122,7 +129,7 @@ namespace KuaiLe.Us.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 DigID,SrcID,SrcType,UserID,UserIP,DigType from T_Dig ");
+			strSql.Append("select  top 1 DigID,SrcID,SrcType,UserID,UserIP,DigType,DigTime from T_Dig ");
 			strSql.Append(" where DigID=@DigID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@DigID", SqlDbType.BigInt)
@@ -151,6 +158,10 @@ namespace KuaiLe.Us.DAL
 				{
 					model.DigType=int.Parse(ds.Tables[0].Rows[0]["DigType"].ToString());
 				}
+                if (ds.Tables[0].Rows[0]["DigTime"].ToString() != "")
+                {
+                    model.DigTime = DateTime.Parse(ds.Tables[0].Rows[0]["DigTime"].ToString());
+                }
 				return model;
 			}
 			else
@@ -165,7 +176,7 @@ namespace KuaiLe.Us.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select DigID,SrcID,SrcType,UserID,UserIP,DigType ");
+			strSql.Append("select DigID,SrcID,SrcType,UserID,UserIP,DigType,DigTime ");
 			strSql.Append(" FROM T_Dig ");
 			if(strWhere.Trim()!="")
 			{
@@ -185,7 +196,7 @@ namespace KuaiLe.Us.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" DigID,SrcID,SrcType,UserID,UserIP,DigType ");
+            strSql.Append(" DigID,SrcID,SrcType,UserID,UserIP,DigType,DigTime ");
 			strSql.Append(" FROM T_Dig ");
 			if(strWhere.Trim()!="")
 			{

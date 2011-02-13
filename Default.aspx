@@ -135,7 +135,7 @@
                                         &nbsp;&nbsp; 
                         	                <a href="javascript:dig(<%#Eval("ArtID") %>, 1);"><img src="images/digDown.gif" border="0" height="14" />踩</a>(<%#Eval("DigDown") %>) 
                                         &nbsp;&nbsp; 
-                                            <a href="#comment" onclick="inputComment(<%#Eval("ArtID") %>); return false;">
+                                            <a href="#comment" onclick="toggleComment(<%#Eval("ArtID") %>); return false;">
                                         评论</a>(<%#Eval("Comments") %>) &nbsp;&nbsp; 
                                             <a href="javascript:dig(<%#Eval("ArtID") %>, 2);">举报</a>
                                     </div>
@@ -146,15 +146,15 @@
                             
                             <div class="itemInputComment" id="itemInputComment-<%#Eval("ArtID") %>" style="display:none;">
                     	        <div class="textareaBox">
-                        	        <textarea name="comment" style="height:40px;" maxlen="200" tip="我也说一句..."></textarea>
+                        	        <textarea name="comment-<%#Eval("ArtID") %>" id="comment-<%#Eval("ArtID") %>"  style="height:40px;" maxlen="200" tip="我也说一句..."></textarea>
                        	        </div>
                                 <div class="btnArea">
-                                    <input type="button" name="btnPostComment" value="确定" />
+                                    <input type="button" name="btnPostComment" value="确定" onclick="postComment(<%#Eval("ArtID") %>, this);" />
                                     <span class="tips">您可输入<span class="indicator">0/200</span>个字。</span>
                                 </div>
-                                <div class="commentList">
-                                        <%--评论列表加载中...--%>
-                                    <dl>
+                                <div class="commentList" id="commentList-<%#Eval("ArtID") %>">
+                                        评论列表加载中...
+<%--                                    <dl>
                                         <dt>第1楼：foolin 发布于2011-02-05 13:21:05</dt>
                                         <dd>楼主真搞！</dd>
                                         <dt>第2楼：foolin 发布于2011-02-05 13:21:05</dt>
@@ -164,7 +164,7 @@
                                     </dl>
                                     <div class="page" style="font-size:12px;">
                                         首页 上一页 下一页 尾页
-                                    </div>
+                                    </div>--%>
                                 </div>
                             </div>
                             

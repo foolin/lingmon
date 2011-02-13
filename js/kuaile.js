@@ -122,7 +122,7 @@ function _KL_ListCommentWordCountTip(){
 }
 
 /******* 显示隐藏评论 *****/
-function inputComment(artid){
+function toggleComment(artid) {
 	var el = $("#itemInputComment-" + artid);
 	if(!el) return;
 	$(".itemInputComment").each(function(i){
@@ -132,9 +132,69 @@ function inputComment(artid){
 	});
 
 	el.slideToggle();
+
+	$("#commentList-" + artid).html("评论加载中。。。");
+	$.get("Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
+      function(data) {
+          $("#commentList-" + artid).html(data);
+      });
+	
 	//alignHeight("containerMain","containerSider"); 
 }
 
+
+function postComment(artid, _thisbtn) {
+    var comment = $("#comment-" + artid).val() + "";
+    if (comment.replace(/\s/ig, "") == "") {
+        $.messager.show({ title: "温馨提示 — 快乐网(kuaile.us)",
+            msg: "<font color='red'>评论内容不能为空！</font>"
+        });
+    }
+
+    //禁用
+    $(_thisbtn).attr("disabled", "disabled");
+    $(_thisbtn).val("评论正在提交...");
+
+    $.ajax({
+        type: "POST",
+        url: "Handle/CommentAdd.ashx?t=" + new Date().getTime(),
+        data: { "ArtID": artid,
+            "Comment": comment
+        },
+        success: function(msg) {
+            if (!msg || msg == "") {
+                msg = "你提交的评论成功，请耐心等候我们的审核，谢谢！";
+            }
+            $.messager.show({ title: "温馨提示 — 快乐网(kuaile.us)",
+                msg: "<font color='blue'>√ " + msg + "</font>"
+            });
+
+            //清空评论
+            $("#comment-" + artid).val("");
+
+            //刷新评论
+            $("#commentList-" + artid).html("评论刷新中。。。");
+            $.get("Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
+              function(data) {
+                  $("#commentList-" + artid).html(data);
+              });
+        },
+        error: function(xhr) {
+            var errmsg = xhr.responseText + "";
+            if (errmsg == "") {
+                errmsg = "操作错误，请稍后重试！";
+            }
+            $.messager.show({ title: "温馨提示 — 快乐网(kuaile.us)",
+                msg: "<font color='red'> ×" + errmsg + "]</font>"
+            });
+
+        }
+    });
+    
+    //启动
+    $(_thisbtn).attr("disabled", "");
+    $(_thisbtn).val("发表");
+}
 
 
 /******** 表单提示 *********/

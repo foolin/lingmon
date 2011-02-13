@@ -110,6 +110,10 @@ namespace KuaiLe.Us.BLL
 					{
 						model.DigType=int.Parse(dt.Rows[n]["DigType"].ToString());
 					}
+                    if (dt.Rows[n]["DigTime"].ToString() != "")
+                    {
+                        model.DigTime = DateTime.Parse(dt.Rows[n]["DigTime"].ToString());
+                    }
 					modelList.Add(model);
 				}
 			}

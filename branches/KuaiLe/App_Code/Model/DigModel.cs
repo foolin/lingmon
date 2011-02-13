@@ -16,6 +16,7 @@ namespace KuaiLe.Us.Model
 		private int? _userid;
 		private string _userip;
 		private int? _digtype;
+        private DateTime? _digtime;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -64,6 +65,13 @@ namespace KuaiLe.Us.Model
 			set{ _digtype=value;}
 			get{return _digtype;}
 		}
+
+        public DateTime? DigTime
+        {
+            set { _digtime = value; }
+            get { return _digtime; }
+        }
+
 		#endregion Model
 
 	}

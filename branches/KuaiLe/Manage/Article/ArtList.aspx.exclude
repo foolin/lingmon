@@ -1,0 +1,35 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ArtList.aspx.cs" Inherits="Admin_Article_ArtList" %>
+
+<%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div class="list">
+        <asp:Repeater ID="repDataList" runat="server">
+            <ItemTemplate>
+                <dl>
+                    <dt><%#Eval("Title") %></dt>
+                    <dd><%#Eval("Content") %></dd>
+                    <dd><%#Eval("UserName") %></dd>
+                    <dd> <a href="#">通过审核</a> | 删除 </dd>
+                </dl>
+            </ItemTemplate>
+        </asp:Repeater>
+        </div>
+        
+        <div class="page">
+            <cc1:Paging ID="Paging1" runat="server" ShowPageGo="True" PageSplitNum="10" PageSize="20">
+            </cc1:Paging>
+        </div>
+    
+    </div>
+    </form>
+</body>
+</html>

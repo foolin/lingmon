@@ -128,7 +128,7 @@
                             </div>
                             
                             <div class="itemCtrl">
-                    	        <span class="left"><a href="">Foolin</a> 2011-02-01 00:38:56 发布 </span>
+                    	        <span class="left"><a href="?UserName=<%#Eval("NickName") %>"><%#Eval("NickName") %></a> 2011-02-01 00:38:56 发布 </span>
                      	        <span class="right">
                      	            <div id="digArt-<%#Eval("ArtID") %>">
                         	                <a href="javascript:dig(<%#Eval("ArtID") %>, 0);"><img src="images/digUp.gif" border="0" height="14" />顶</a>(<%#Eval("DigUp") %>) 

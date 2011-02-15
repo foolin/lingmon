@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using KuaiLe.Us.BLL;
+
+public partial class Admin_Article_ArtList : AdminBase
+{
+    string type = "";
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        type = QS("type");
+        if (!IsPostBack)
+        {
+            BindDataList();
+        }
+
+    }
+
+
+    protected void BindDataList()
+    {
+        string sqlWhere = "";
+        switch (type.ToLower().Trim())
+        {
+            case "uncheck":
+                sqlWhere += " Status = 0 ";
+                break;
+            case "checked":
+                sqlWhere += " Status = 1 ";
+                break;
+            case "trash":
+                sqlWhere += " Status = -1 ";
+                break;
+            default:
+                break;
+
+        }
+
+        int records = 0;
+        DataSet dsList = new ArticleBll().GetList(sqlWhere, "CreateTime DESC", Paging1.PageSize, Paging1.PageIndex-1 , out records);
+        if (dsList != null && dsList.Tables.Count > 0)
+        {
+            repDataList.DataSource = dsList.Tables[0];
+            repDataList.DataBind();
+        }
+        Paging1.InitPage(records);
+
+    }
+
+}

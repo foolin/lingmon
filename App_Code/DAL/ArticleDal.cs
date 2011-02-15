@@ -233,11 +233,17 @@ namespace KuaiLe.Us.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select ArtID,UserID,Title,Content,Tags,IsAnonym,CreateTime,Hits,DigUp,DigDown,Comments,Reports,Status,UserIP ");
-			strSql.Append(" FROM T_Article ");
+            //strSql.Append("select ArtID,UserID,Title,Content,Tags,IsAnonym,CreateTime,Hits,DigUp,DigDown,Comments,Reports,Status,UserIP ");
+            strSql.Append(" select A.* ");
+            strSql.Append(" ,U.UserName,U.NickName,U.Email ");
+            strSql.Append(" FROM T_Article A ");
+            strSql.Append(" Left join  dbo.T_User  U ");
+            strSql.Append(" on A.UserID=U.UserID ");
 			if(strWhere.Trim()!="")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where ArtID in ( ");
+                strSql.Append("   Select ArtID from T_Article Where " + strWhere);
+                strSql.Append(" ) ");
 			}
 			return db.GetDs(strSql.ToString());
 		}
@@ -253,11 +259,17 @@ namespace KuaiLe.Us.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" ArtID,UserID,Title,Content,Tags,IsAnonym,CreateTime,Hits,DigUp,DigDown,Comments,Reports,Status,UserIP ");
-			strSql.Append(" FROM T_Article ");
+            //strSql.Append(" ArtID,UserID,Title,Content,Tags,IsAnonym,CreateTime,Hits,DigUp,DigDown,Comments,Reports,Status,UserIP ");
+            strSql.Append(" select A.* ");
+            strSql.Append(" ,U.UserName,U.NickName,U.Email ");
+            strSql.Append(" FROM T_Article A ");
+            strSql.Append(" Left join  dbo.T_User  U ");
+            strSql.Append(" on A.UserID=U.UserID ");
 			if(strWhere.Trim()!="")
 			{
-				strSql.Append(" where "+strWhere);
+                strSql.Append(" where ArtID in ( ");
+                strSql.Append("   Select ArtID from T_Article Where " + strWhere);
+                strSql.Append(" ) ");
 			}
 			strSql.Append(" order by " + filedOrder);
 			return db.GetDs(strSql.ToString());
@@ -270,11 +282,17 @@ namespace KuaiLe.Us.DAL
 		public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int records)
 		{
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select * from dbo.T_Article ");
+            strSql.Append(" select A.* ");
+            strSql.Append(" ,U.UserName,U.NickName,U.Email ");
+            strSql.Append(" FROM T_Article A ");
+            strSql.Append(" Left join  dbo.T_User  U ");
+            strSql.Append(" on A.UserID=U.UserID ");
             
             if (!string.IsNullOrEmpty(strWhere))
             {
-                strSql.Append(" Where " + strWhere + " ");
+                strSql.Append(" where ArtID in ( ");
+                strSql.Append("   Select ArtID from T_Article Where " + strWhere);
+                strSql.Append(" ) ");
             }
 
             if (string.IsNullOrEmpty(strOrder))

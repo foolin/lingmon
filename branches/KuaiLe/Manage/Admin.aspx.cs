@@ -9,7 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 
-public partial class _Default : AdminBase
+public partial class _Admin : AdminBase
 {
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin.aspx.cs" Inherits="_Admin" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -207,16 +207,19 @@
 			    <span>评论管理</span>
 			    <ul>
 				    <li> 
-					    <span><a href="Comment/CommentList.aspx"  tab="true">待审核评论</a></span>
+					    <span><a href="Comment/CommentList.aspx?type=uncheck"  tab="true">待审核评论</a></span>
 				    </li> 
+				    <li> 
+					    <span><a href="Comment/CommentList.aspx?type=check"  tab="true">全部评论</a></span>
+				    </li> 
+				    <li> 
+					    <span><a href="Comment/CommentList.aspx?type=report"  tab="true">被举报评论</a></span>
+				    </li>
 				    <li> 
 					    <span><a href="Comment/CommentList.aspx"  tab="true">全部评论</a></span>
-				    </li> 
+				    </li>  
 				    <li> 
-					    <span><a href="Comment/CommentReport.aspx"  tab="true">被举报评论</a></span>
-				    </li> 
-				    <li> 
-					    <span><a href="Comment/CommentTrash.aspx">评论回收站</a></span>
+					    <span><a href="Comment/CommentList.aspx?type=trash">评论回收站</a></span>
 				    </li>
 			    </ul> 
 		    </li> 
@@ -228,7 +231,7 @@
 	<div region="center" >
 	    <div class="easyui-tabs" id="ttWinTabs"  fit="true"  border="false" >
 	        <div  title="欢迎使用本系统！"  fit="true"  style="padding:0px;">
-	            <iframe name="mainFrame" id="mainFrame" src="Welcome.aspx" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe>
+	            <iframe name="mainFrame" id="mainFrame" src="about:blank" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe>
 	        </div>
 	    </div>
 	</div>

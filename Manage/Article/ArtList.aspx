@@ -12,7 +12,7 @@
                     <dt><%#Eval("Title") %></dt>
                     <dd class="content"><%#Eval("Content") %></dd>
                     <dd> <%#Eval("UserName") %> 发布于 <%#Eval("CreateTime")%> </dd>
-                    <dd> <%#GetStatusDesc(Eval("Status"), Eval("ArtID"))%> </dd>
+                    <dd> <%#GetStatusDesc(Eval("Status"), Eval("ArtID"))%> | <a href="../Comment/CommentList.aspx?ArtID=<%#Eval("ArtID") %>">管理评论</a> </dd>
                 </dl>
             </ItemTemplate>
         </asp:Repeater>

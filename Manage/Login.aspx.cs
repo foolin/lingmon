@@ -33,7 +33,7 @@ public partial class Manage_Login : System.Web.UI.Page
             Session["LoginOK"] = "OK";
             WebLog.WriteInfoLog("登录成功！");
 
-            Response.Redirect("~/Manage/Default.aspx");
+            Response.Redirect("Index.aspx");
         }
         else
         {

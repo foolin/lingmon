@@ -123,9 +123,10 @@
                     
                         <div class="item">
                         
-                	        <div class="itemContent">
+                	        <div class="itemContent" style="height:auto;">
                                 <%#Eval("Content") %>
                             </div>
+                            <div  class="moreDetail" style="display:none"> <a href="#" onclick="moreDetail(this); return false;">展开全部>></a>  </div>
                             
                             <div class="itemCtrl">
                     	        <span class="left"><a href="?UserName=<%#Eval("NickName") %>"><%#Eval("NickName") %></a> 2011-02-01 00:38:56 发布 </span>
@@ -154,17 +155,6 @@
                                 </div>
                                 <div class="commentList" id="commentList-<%#Eval("ArtID") %>">
                                         评论列表加载中...
-<%--                                    <dl>
-                                        <dt>第1楼：foolin 发布于2011-02-05 13:21:05</dt>
-                                        <dd>楼主真搞！</dd>
-                                        <dt>第2楼：foolin 发布于2011-02-05 13:21:05</dt>
-                                        <dd>2010年，一美国人到中国旅游，用10万美元兑换到68万人民币。在中国吃喝玩乐了一年，花了18万人民币。2011年，他要回去了，到银行去，因为人 民币兑美元升值到1：5，这位美国人用剩下的50万人民币换到了10万美元。白玩了中国人一回，高高兴兴地回家了... </dd>
-                                        <dt>第3楼：foolin 发布于2011-02-05 13:21:05</dt>
-                                        <dd>楼主真搞！</dd>
-                                    </dl>
-                                    <div class="page" style="font-size:12px;">
-                                        首页 上一页 下一页 尾页
-                                    </div>--%>
                                 </div>
                             </div>
                             

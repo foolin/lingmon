@@ -219,6 +219,12 @@ a.orange:hover{
 	line-height:25px;
 	font-size:12px;
 }
+.listArea .item .moreDetail
+{
+	padding:10px;
+	padding-right:50px;
+	text-align:right;
+}
 .listArea .item  .itemInputComment{
 	background:#F2F9F9;
 	overflow:hidden;
@@ -240,7 +246,7 @@ a.orange:hover{
 	color:#999;
 }
 
-/*** ∆¿¬€¡–±Ì **********/
+/*** –± **********/
 .commentList
 {
 	background:#fff;

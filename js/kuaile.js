@@ -7,7 +7,8 @@
 
 $(function(){
 	_KL_FormInputTip();	//输入框提示
-	_KL_ListItemFocus();	//列表项激活
+	_KL_ListItemMaxHeight();
+	//_KL_ListItemFocus();	//列表项激活
 	//_KL_ListCommentFocus();	//评论框详细版
 	_KL_ListCommentWordCountTip();	//检查字符数
 	//alignHeight("containerMain","containerSider"); //只需将需要对齐的两个模块的id写在此处即可。
@@ -74,6 +75,34 @@ function _KL_ListItemFocus(){
 	}).mouseout(function(){
 		$(this).removeClass("itemOn");
 	});
+}
+function _KL_ListItemMaxHeight(){
+	$(".itemContent").each(function(){
+		var height = $(this).height();
+		if(height > 200)
+		{
+			$(this).height("200");
+			$(this).css("overflow","hidden");
+			$(this).parent().find(".moreDetail").show();
+		}
+		
+	});
+}
+
+function moreDetail(_this){
+	var height = $(_this).parent().parent().find(".itemContent").height();
+	if(height > 200)
+	{
+		$(_this).parent().parent().find(".itemContent").height("200");
+		$(_this).parent().parent().find(".itemContent").css("overflow","hidden");
+		$(_this).html("展开全部>>");
+	}
+	else
+	{
+		$(_this).parent().parent().find(".itemContent").css("height","auto");
+		$(_this).html("<<收起隐藏");
+		
+	}
 }
 
 /****** 列表评论框 ******/

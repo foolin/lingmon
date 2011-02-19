@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网—我们一起分享|www.kuaile.us" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网-我们一起分享|www.kuaile.us" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>
@@ -186,7 +186,7 @@
             	<div class="title">公告区</div>
                 <div class="content">
                 	<div class="text">
-                	    &nbsp;&nbsp;&nbsp;&nbsp;欢迎光临快乐网，我们的口号是“快乐.我们一起分享！”。<br />
+                	    &nbsp;&nbsp;&nbsp;&nbsp;欢迎光临快乐网，我们的口号是“快乐，我们一起分享！”。<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;或许你生活在忙碌之中，在学习、工作、生活业余之余，利用短短的5分钟时间，来与我们分享一下快乐。
                     <br /><br />
                         快乐网：www.kuaile.us

@@ -1,0 +1,3 @@
+2011-2-19 19:03:30 Msg:用户foolin登录成功！, URL:http://kuaile.us/Handle/Login.ashx?t=1298113409812
+2011-2-19 19:52:59 Msg:用户foolin登录成功！, URL:http://kuaile.us/Handle/Login.ashx?t=1298116379111
+2011-2-19 19:53:43 Msg:用户[5:foolin]发表文章成功！, URL:http://kuaile.us/Handle/ArticleAdd.ashx?t=1298116423159

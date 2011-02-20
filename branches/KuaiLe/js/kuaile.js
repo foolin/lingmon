@@ -7,13 +7,14 @@
 
 var KL_ROOT = $_Domain("");    //虚拟目录
 
-$(function(){
-	_KL_FormInputTip();	//输入框提示
-	_KL_ListItemMaxHeight();
-	//_KL_ListItemFocus();	//列表项激活
-	//_KL_ListCommentFocus();	//评论框详细版
-	_KL_ListCommentWordCountTip();	//检查字符数
-	//alignHeight("containerMain","containerSider"); //只需将需要对齐的两个模块的id写在此处即可。
+$(function() {
+    _KL_FormInputTip(); //输入框提示
+    _KL_ListItemMaxHeight();
+    //_KL_ListItemFocus();	//列表项激活
+    //_KL_ListCommentFocus();	//评论框详细版
+    _KL_ListCommentWordCountTip(); //检查评论字符数
+    _KL_ListArticleWordCountTip(); //检查文章字符数
+    //alignHeight("containerMain","containerSider"); //只需将需要对齐的两个模块的id写在此处即可。
 });
 
 /******** 两栏自动适应高度 *****/
@@ -207,13 +208,17 @@ function postComment(artid, _thisbtn) {
 
             //清空评论
             $("#comment-" + artid).val("");
+            $("#commentUserName-" + artid).val("");
+            $("#commentChkCode-" + artid).val("");
+            refreshCode('#imgCommentChkCode-' + artid); //刷新验证码
 
             //刷新评论
             $("#commentList-" + artid).html("评论刷新中。。。");
-            $.get( KL_ROOT + "/Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
+            $.get(KL_ROOT + "/Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
               function(data) {
                   $("#commentList-" + artid).html(data);
               });
+
         },
         error: function(xhr) {
             var errmsg = xhr.responseText + "";
@@ -230,9 +235,8 @@ function postComment(artid, _thisbtn) {
     //启动
     $(_thisbtn).attr("disabled", "");
     $(_thisbtn).val("发表");
-    $("#commentUserName-" + artid).val("")
-    $("#commentChkCode-" + artid).val("")
-    refreshCode('#imgCommentChkCode-' + artid);
+    
+    
 }
 
 
@@ -319,6 +323,39 @@ function checkIsLogin(){
 
 /**************** 提交文章  *****************/
 
+function _KL_ListArticleWordCountTip() {
+    $("#artContent").keyup(function() {
+        var maxLength = $(this).attr("maxlen");
+        if (!maxLength || maxLength <= 0) {
+            maxLength = 0;
+        }
+
+        var textVal = $(this).val() + "";
+        var currLength = textVal.length;
+        if (!currLength || currLength < 0) {
+            currLength = 0;
+        }
+
+        if (maxLength > 0 && currLength > maxLength) {
+            $(this).val(textVal.substring(0, maxLength));
+            currLength = maxLength;
+        }
+
+        var tip = "";
+        if (maxLength > 0) {
+            tip = (maxLength - currLength) + "/" + maxLength;
+        }
+        else {
+            tip = (maxLength - currLength) + "";
+        }
+
+        //alert(tip);
+        $("#indicatorArticleWordCount").html("您可输入" + tip + "个字符");
+
+    });
+}
+
+
 //提交文章
 function postArticle() {
     //var artContent = HTMLEncode($("#artContent").val() + "");
@@ -327,6 +364,11 @@ function postArticle() {
 
     if (artContent.length < 5 || artContent == ($("#artContent").attr("tip") + "")) {
         $.messager.alert('无法提交！', "您提交的内容不能少于5个字符", "error");
+        return;
+    }
+
+    if (artContent.length > 2000) {
+        $.messager.alert('无法提交！', "您提交的内容大于2000个字符", "error");
         return;
     }
 
@@ -349,12 +391,12 @@ function postArticle() {
                 msg = "你提交的帖子成功，请耐心等候我们的审核，谢谢！";
             }
             $.messager.alert('恭喜，发表成功！',
-                                             msg,
-                                             "info",
-                                             function() {
-                                                 top.location.href = "Default.aspx";
-                                             }
-                                         );
+                 msg,
+                 "info",
+                 function() {
+                     top.location.href = "Default.aspx";
+                 }
+             );
         },
         error: function(xhr) {
             $("#btnPostArticle").val("发表");

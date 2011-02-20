@@ -66,7 +66,7 @@ namespace KuaiLe.Us.Model
 			get{return _email;}
 		}
 		/// <summary>
-		/// 性别
+		/// 性别:0=保密，1=男，2=女
 		/// </summary>
 		public int? Sex
 		{
@@ -138,7 +138,7 @@ namespace KuaiLe.Us.Model
 			get{return _credit;}
 		}
 		/// <summary>
-		/// 状态：-1=冻结，0=未激活，1=正常
+		/// 状态：-2=封号(旧文章、评论也禁),-1=冻结用户，0=未激活，1=正常，2=会员
 		/// </summary>
 		public int? Status
 		{
@@ -146,6 +146,101 @@ namespace KuaiLe.Us.Model
 			get{return _status;}
 		}
 		#endregion Model
+
+
+
+        /// <summary>
+        /// 取性别
+        /// </summary>
+        /// <param name="sex"></param>
+        /// <returns></returns>
+        public static string GetSexName(object sex)
+        {
+            if (sex == null)
+            {
+                return "";
+            }
+
+            int iSex = -1;
+            try
+            {
+                iSex = Convert.ToInt32(sex);
+            }
+            catch
+            {
+
+            }
+
+            string strSex = "";
+            if (iSex == 1)
+            {
+                strSex = "男";
+            }
+            else if (iSex == 2)
+            {
+                strSex = "女";
+            }
+            else if (iSex == 0)
+            {
+                strSex = "保密";
+            }
+            else
+            {
+                strSex = sex + "";
+            }
+
+            return strSex;
+
+        }
+
+        /// <summary>
+        /// 取状态
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public static string GetStatusName(object status)
+        {
+            if (status == null)
+            {
+                return "";
+            }
+
+            int iStatus = -999;
+            try
+            {
+                iStatus = Convert.ToInt32(status);
+            }
+            catch { }
+
+            string strStatus = "";
+            if (iStatus == -2)
+            {
+                strStatus = "封号";
+            }
+            else if (iStatus == -1)
+            {
+                strStatus = "冻结";
+            }
+            else if (iStatus == 0)
+            {
+                strStatus = "未激活";
+            }
+            else if (iStatus == 1)
+            {
+                strStatus = "已激活";
+            }
+            else if (iStatus == 2)
+            {
+                strStatus = "VIP会员";
+            }
+            else
+            {
+                strStatus = status + "";
+            }
+
+            return strStatus;
+
+        }
 
 	}
 }

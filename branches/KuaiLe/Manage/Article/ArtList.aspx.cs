@@ -44,7 +44,7 @@ public partial class Manage_Article_ArtList : AdminBase
         }
 
         int records = 0;
-        DataSet dsList = new ArticleBll().GetList(sqlWhere, "CreateTime DESC", Paging1.PageSize, Paging1.PageIndex - 1, out records);
+        DataSet dsList = new ArticleBll().GetList(sqlWhere, "CreateTime DESC", Paging1.PageSize, Paging1.PageIndex - 1, out records, false);
         if (dsList != null && dsList.Tables.Count > 0)
         {
             repDataList.DataSource = dsList.Tables[0];

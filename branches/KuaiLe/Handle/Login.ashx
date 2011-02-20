@@ -42,7 +42,7 @@ public class Login : IHttpHandler, System.Web.SessionState.IRequiresSessionState
             }
             
             //判断是否需要激活
-            if (user.Status == -1)
+            if (user.Status < 0)
             {
                 KuaiLe.Us.Common.WebLog.WriteErrLog("用户" + strUserName + "已经被冻结，无法登录！");
                 context.Response.StatusCode = 400;

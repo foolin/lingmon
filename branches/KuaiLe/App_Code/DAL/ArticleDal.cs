@@ -276,10 +276,18 @@ namespace KuaiLe.Us.DAL
 		}
 
 
+        /// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+        public DataSet GetList(string strWhere, string strOrder, int pageSize, int pageIndex, out int records)
+        {
+            return GetList( strWhere, strOrder,  pageSize,  pageIndex, out  records, true);
+        }
+
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
-		public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int records)
+		public DataSet GetList(string strWhere,string strOrder, int pageSize, int pageIndex, out int records, bool isPublic)
 		{
             StringBuilder strSql = new StringBuilder();
             strSql.Append(" select A.* ");
@@ -287,12 +295,23 @@ namespace KuaiLe.Us.DAL
             strSql.Append(" FROM T_Article A ");
             strSql.Append(" Left join  dbo.T_User  U ");
             strSql.Append(" on A.UserID=U.UserID ");
-            
+
+            bool isHasWhere = false;
             if (!string.IsNullOrEmpty(strWhere))
             {
                 strSql.Append(" where ArtID in ( ");
                 strSql.Append("   Select ArtID from T_Article Where " + strWhere);
                 strSql.Append(" ) ");
+                isHasWhere = true;
+            }
+
+            if (isPublic)
+            {
+                if (isHasWhere)
+                {
+                    strSql.Append(" And ");
+                }
+                strSql.Append(" A.Status>=0 And U.Status>=-1  ");
             }
 
             if (string.IsNullOrEmpty(strOrder))
@@ -300,8 +319,11 @@ namespace KuaiLe.Us.DAL
                 strOrder = " ArtID DESC ";
             }
 
+            
+
             return db.GetPageDs(strSql.ToString(), strOrder, pageSize, pageIndex, out records);
 		}
+
 
 		#endregion  Method
 	}

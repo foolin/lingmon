@@ -155,6 +155,15 @@ namespace KuaiLe.Us.BLL
 			return GetList("");
 		}
 
+
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere, string strOrder, int pageSize, int pageIndex, out int records, bool isPublic)
+        {
+            return dal.GetList(strWhere, strOrder, pageSize, pageIndex, out records, isPublic);
+        }
+
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>

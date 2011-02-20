@@ -35,7 +35,8 @@ public class ArticleAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             if (strChkCode != strReChkCode)
             {
                 context.Response.StatusCode = 400;
-                context.Response.Write("验证码错误！输入验证码：" + strChkCode + "，正确：" + strReChkCode);
+                context.Response.Write("验证码错误！输入验证码：" + strChkCode);
+                //context.Response.Write("验证码错误！输入验证码：" + strChkCode + "，正确：" + strReChkCode);
                 return;
             }
 
@@ -49,10 +50,10 @@ public class ArticleAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             }
 
 
-            if (strContent.Trim().Length > 2000)
+            if (strContent.Trim().Length > 1000)
             {
                 context.Response.StatusCode = 400;
-                context.Response.Write("内容长度不能超过2000个字符！");
+                context.Response.Write("内容长度不能超过1000个字符！");
                 return;
             }
 

@@ -367,8 +367,8 @@ function postArticle() {
         return;
     }
 
-    if (artContent.length > 2000) {
-        $.messager.alert('无法提交！', "您提交的内容大于2000个字符", "error");
+    if (artContent.length > 1000) {
+        $.messager.alert('无法提交！', "您提交的内容大于1000个字符", "error");
         return;
     }
 

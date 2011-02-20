@@ -10,72 +10,84 @@
 
 
 <script type="text/javascript">
-    $("#LoginUserName").blur(function(){
-	    var loginUsername = $("#LoginUserName").val() + "";
-        if(loginUsername.length < 5 || loginUsername.length > 20)
-        {
-            formTip("tipLoginUserName","用户名长度必须为5~20个字符",-1);
-            return;
-        }
-        else
-        {
-            formTip("tipLoginUserName","验证通过",1);
-            return;
-        }
+    $(function() {
+        $("#LoginUserName,#LoginPassword").each(function(i) {
+            $(this).keyup(function(e) {
+                if (e.which == 13) {
+                    userLogin();
+                }
+            });
+        });
+
+        $("#LoginUserName").blur(function() {
+            var loginUsername = $("#LoginUserName").val() + "";
+            if (loginUsername.length < 5 || loginUsername.length > 20) {
+                formTip("tipLoginUserName", "用户名长度必须为5~20个字符", -1);
+                return;
+            }
+            else {
+                formTip("tipLoginUserName", "验证通过", 1);
+                return;
+            }
+        });
+
+        $("#LoginPassword").blur(function() {
+            var loginPassword = $("#LoginPassword").val() + "";
+            if (loginPassword.length < 6 || loginPassword.length > 20) {
+                formTip("tipLoginPassword", "密码长度必须为6~20个字符", -1);
+                return;
+            }
+            else {
+                formTip("tipLoginPassword", "验证通过", 1);
+                return;
+            }
+        });
+
+        $("#btnUserLogin").click(function() {
+            userLogin();
+        });
+
+
+
+
     });
-    
-    $("#LoginPassword").blur(function(){
-        var loginPassword = $("#LoginPassword").val() + "";
-	    if(loginPassword.length < 6 || loginPassword.length > 20)
-        {
-            formTip("tipLoginPassword","密码长度必须为6~20个字符",-1);
-            return;
-        }
-        else
-        {
-            formTip("tipLoginPassword","验证通过",1);
-            return;
-        }
-    });
-    
-    $("#btnUserLogin").click(function(){
+
+
+
+    function userLogin() {
         var loginUsername = $("#LoginUserName").val() + "";
         var loginPassword = $("#LoginPassword").val() + "";
-        if(loginUsername.length < 5 || loginUsername.length > 20)
-        {
-            formTip("tipLoginUserName","用户名长度必须为5~20个字符",-1);
+        if (loginUsername.length < 5 || loginUsername.length > 20) {
+            formTip("tipLoginUserName", "用户名长度必须为5~20个字符", -1);
             return;
         }
-        
-        
-        if(loginPassword.length < 6 || loginPassword.length > 20)
-        {
-            formTip("tipLoginPassword","密码长度必须为6~20个字符",-1);
+
+
+        if (loginPassword.length < 6 || loginPassword.length > 20) {
+            formTip("tipLoginPassword", "密码长度必须为6~20个字符", -1);
             return;
         }
-        
+
         $("#btnUserLogin").val("正在登录...");
-        $("#btnUserLogin").attr("disabled","disabled");
-        
+        $("#btnUserLogin").attr("disabled", "disabled");
+
         //登录
         $.ajax({
-           type: "POST",
-           url: "<%=GB_SitePath %>/Handle/Login.ashx?t=" + new Date().getTime(),
-           data: "UserName=" + loginUsername + "&Password=" + loginPassword,
-           success: function(msg){
-                  top.location.href="<%=GB_SitePath %>/Default.aspx";
-           },
-           error: function(xhr, textStatus, errorThrown) {
-             $.messager.alert("Sorry，登录" + loginUsername + "失败！",
-                 "<font color='red'>" + xhr.responseText  +" 请更正后重试！</font>",
+            type: "POST",
+            url: "<%=GB_SitePath %>/Handle/Login.ashx?t=" + new Date().getTime(),
+            data: "UserName=" + loginUsername + "&Password=" + loginPassword,
+            success: function(msg) {
+                top.location.href = "<%=GB_SitePath %>/Default.aspx";
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $.messager.alert("Sorry，登录" + loginUsername + "失败！",
+                 "<font color='red'>" + xhr.responseText + " 请更正后重试！</font>",
                 "error");
-             $("#btnUserLogin").val("登录");
-             $("#btnUserLogin").attr("disabled","");
-           }
+                $("#btnUserLogin").val("登录");
+                $("#btnUserLogin").attr("disabled", "");
+            }
         });
-        
-    });
-    
+    }
     
 
 </script>

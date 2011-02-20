@@ -22,7 +22,7 @@
         
         <br />
         <br />
-        温馨提示：如果您已经注册，请<a href="Login.aspx">点击这里登录</a>，如果您尚未注册，请<a href="Register.aspx">点击这里进行注册</a>。
+        温馨提示：请<a href="Login.aspx">点击这里登录</a>，如果您尚未注册，请<a href="Register.aspx">点击这里进行注册</a>。
         <div style="text-align:right; padding:20px 5px; font-size:14px; font-weight:bold; color:#090;"> 
         快乐网(www.kuaile.us)
         </div>

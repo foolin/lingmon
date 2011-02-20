@@ -4,7 +4,8 @@ using System;
 using System.Web;
 using System.Data;
 
-public class CommentList : IHttpHandler {
+public class CommentList : IHttpHandler
+{
     
     public void ProcessRequest (HttpContext context) {
         context.Response.ContentType = "text/plain";
@@ -40,7 +41,8 @@ public class CommentList : IHttpHandler {
         }
 
         System.Text.StringBuilder contentList = new System.Text.StringBuilder();
-        DataSet dsList = new KuaiLe.Us.BLL.CommentBll().GetList(15, " ArtID=" + artid + " And Status >= 0", " CreateTime Desc");
+        int listCount = 5;
+        DataSet dsList = new KuaiLe.Us.BLL.CommentBll().GetList(listCount, " ArtID=" + artid + " And Status >= 0", " CreateTime Desc");
         if (dsList != null && dsList.Tables.Count > 0 && dsList.Tables[0].Rows.Count > 0)
         {
             contentList.Append("<dl>");
@@ -56,6 +58,10 @@ public class CommentList : IHttpHandler {
                 contentList.Append("<dd>" + row["Comment"] + "</dd>");
             }
             contentList.Append("</dl>");
+            if (dsList.Tables[0].Rows.Count >= listCount)
+            {
+                contentList.Append("<div> <a href=\"#\" onclick=\"window.top.location.href=KL_ROOT + '/Article/Article.aspx?ArtID=" + artid + "'\">更多评论>></a> </div>");
+            }
         }
         else
         {

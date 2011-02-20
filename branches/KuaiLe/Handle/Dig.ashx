@@ -49,7 +49,14 @@ public class Dig : IHttpHandler {
         {
             string strUserIP = Utility.Web.WebAgent.GetIP();
             KuaiLe.Us.BLL.DigBll digBll = new KuaiLe.Us.BLL.DigBll();
-            System.Data.DataSet dsDigList = digBll.GetList("SrcID=" + iSrcID + " And SrcType='" + strSrcType + "' And UserIP='" + strUserIP +"' And DigTime>='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+            System.Data.DataSet dsDigList = null;
+            string strWhere = "SrcID=" + iSrcID + " And SrcType='" + strSrcType + "' And UserIP='" + strUserIP + "' And DigTime>='" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
+            //如果是举报
+            if (iDigType == 2)
+            {
+                strWhere += " And DigType=2";
+            }
+            dsDigList = digBll.GetList(strWhere);
             if (dsDigList != null && dsDigList.Tables[0].Rows.Count > 0)
             {
                 context.Response.StatusCode = 400;

@@ -8,8 +8,6 @@
 <%@ Register src="WebUserControl/WucUserLogin.ascx" tagname="WucUserLogin" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"> 
-
-    <script src="js/common.js" type="text/javascript"></script>
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CphMain" Runat="Server">

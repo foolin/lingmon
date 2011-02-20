@@ -5,6 +5,8 @@
  @Copyright 灵梦工作室 版权所有
 */
 
+var KL_ROOT = $_Domain("KuaiLe");    //虚拟目录
+
 $(function(){
 	_KL_FormInputTip();	//输入框提示
 	_KL_ListItemMaxHeight();
@@ -163,7 +165,7 @@ function toggleComment(artid) {
 	el.slideToggle();
 
 	$("#commentList-" + artid).html("评论加载中。。。");
-	$.get("Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
+	$.get( KL_ROOT + "/Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
       function(data) {
           $("#commentList-" + artid).html(data);
       });
@@ -189,7 +191,7 @@ function postComment(artid, _thisbtn) {
 
     $.ajax({
         type: "POST",
-        url: "Handle/CommentAdd.ashx?t=" + new Date().getTime(),
+        url: KL_ROOT + "/Handle/CommentAdd.ashx?t=" + new Date().getTime(),
         data: { "ArtID": artid,
             "Comment": comment,
             "CommentUserName": commentUserName,
@@ -208,7 +210,7 @@ function postComment(artid, _thisbtn) {
 
             //刷新评论
             $("#commentList-" + artid).html("评论刷新中。。。");
-            $.get("Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
+            $.get( KL_ROOT + "/Handle/CommentList.ashx?ArtID=" + artid + "&t=" + new Date().getTime(),
               function(data) {
                   $("#commentList-" + artid).html(data);
               });
@@ -262,7 +264,7 @@ function dig(id, digType, srcType){
     
     $.ajax({
        type: "Get",
-       url: "Handle/Dig.ashx?t=" + new Date().getTime(),
+       url: KL_ROOT + "/Handle/Dig.ashx?t=" + new Date().getTime(),
        data: { "SrcID": id,
                "DigType": digType,
                "SrcType":srcType
@@ -295,14 +297,14 @@ function dig(id, digType, srcType){
 
 //刷新
 function refreshCode(id) {
-    $(id).attr("src", "Handle/ChkCodeImage.ashx?t=" + new Date().getTime());
+    $(id).attr("src",KL_ROOT + "/Handle/ChkCodeImage.ashx?t=" + new Date().getTime());
 }
 
 //检查是否登录
 function checkIsLogin(){
     $.ajax({
         type: "GET",
-        url: "Handle/IsAuthPost.ashx?t=" + new Date().getTime(),
+        url: KL_ROOT + "/Handle/IsAuthPost.ashx?t=" + new Date().getTime(),
         success: function(data) {
         },
         error: function(xhr) {
@@ -338,7 +340,7 @@ function postArticle() {
 
     $.ajax({
         type: "POST",
-        url: "Handle/ArticleAdd.ashx?t=" + new Date().getTime(),
+        url: KL_ROOT + "/Handle/ArticleAdd.ashx?t=" + new Date().getTime(),
         data: { "Content": artContent,
             "ChkCode": artChkCode
         },
@@ -368,4 +370,22 @@ function postArticle() {
     
 }
 
+
+
+/**** 搜索 ***********/
+function search(keyword) {
+    soUrl = KL_ROOT + "/Article/Search.aspx?keyword=" + keyword;
+    window.top.location.href = soUrl;
+}
+
+$(function() {
+    $("input[name='keyword']").each(function(i) {
+        $(this).keyup(function(e) {
+            if (e.which == 13) {
+                search($(this).val())
+            }
+        });
+    });
+
+});
 

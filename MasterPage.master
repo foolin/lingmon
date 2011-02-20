@@ -41,8 +41,8 @@
                 <a href="<%= ResolveClientUrl("~/Default.aspx?type=hot")%>">×îHight</a> | 
                 <a href="<%= ResolveClientUrl("~/Default.aspx?type=hot")%>">×îDown</a> | 
                 <a href="<%= ResolveClientUrl("~/Default.aspx?type=comments")%>">ÈÈÆÀ</a> | 
-                <a href="<%= ResolveClientUrl("~/Search.aspx")%>">ËÑË÷</a>
-                <%--<input type="text" name="keyword" tip="ÇëÊäÈë¹Ø¼ü´Ê..." value="" /> <input type="button" name="Search" value="ËÑË÷" />--%>
+                <a href="<%= ResolveClientUrl("~/Article/Search.aspx")%>">ËÑË÷</a>
+                <input type="text" name="keyword" id="txtTopKeyword" tip="ÇëÊäÈë¹Ø¼ü´Ê..." value="" /> <input type="button" onclick="search($('#txtTopKeyword').val())" name="btnSearch" value="ËÑË÷" />
                 </span>
                 <span class="search">
                 	

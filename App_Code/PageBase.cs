@@ -48,7 +48,7 @@ public class PageBase : System.Web.UI.Page
     /// <returns></returns>
     protected string QS(string key)
     {
-        return Request[key] + "";
+        return SqlStringFilter(Request[key] + "");
     }
 
     /// <summary>
@@ -76,6 +76,22 @@ public class PageBase : System.Web.UI.Page
         return SysConfig.Contact;
     }
 
+    #region SQL安全代码过滤
+    /// <summary>
+    /// SQL安全代码过滤
+    /// </summary>
+    /// <param name="s">待过滤代码</param>
+    /// <returns>过滤后的代码</returns>
+    public string SqlStringFilter(string s)
+    {
+        s = s.Replace("\'", "‘");
+        s = s.Replace("\"", "“");
+        s = s.Replace(",", "，");
+        s = s.Replace(";", "；");
+        s = s.Replace("--", "——");
+        return s;
+    }
+    #endregion 
 
     
 

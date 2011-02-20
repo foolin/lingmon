@@ -97,15 +97,20 @@ function delCookie(key)
 
 /********* Domain **************/
 //取主机：http://www.7dong.net
-var $Domain = __getDomain__();
-function __getDomain__()
-{
-    var _domain =  window.location.href;
-    _domain = _domain.substring( 0, _domain.lastIndexOf('/'));
-    if(!_domain || _domain == "") _domain = window.location.href;
+var $_Domain = function __getDomain__(virtual) {
+    var _domain = window.location.href;
+
+    var reg = new RegExp("http:\/\/[^\/]+", "i");
+    var _domain = reg.exec(_domain);
+    if (!_domain || _domain == "") {
+        _domain = window.location.href;
+        _domain = _domain.substring(0, _domain.lastIndexOf('/'));
+    }
+    if (virtual) {
+        _domain += "/" + virtual;
+    }
     return _domain;
 }
-
 
 
 /******** HTML 处理 *******/
@@ -132,5 +137,16 @@ function HTMLDecode(str)
      s    =    s.replace(/&nbsp;/g," ");
      s    =    s.replace(/&#39;/g,"\'");
      s    =    s.replace(/&quot;/g,"\"");
-     return   s;   
-}
+     return   s;
+ }
+
+
+ /**/
+ function LFLGetRootPath() {
+     var strFullPath = window.document.location.href;
+     var strPath = window.document.location.pathname;
+     var pos = strFullPath.indexOf(strPath);
+     var prePath = strFullPath.substring(0, pos);
+     var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+     return (prePath + postPath);
+ }

@@ -41,6 +41,25 @@ public class Login : IHttpHandler, System.Web.SessionState.IRequiresSessionState
                 return;
             }
             
+            //判断是否需要激活
+            if (user.Status == -1)
+            {
+                KuaiLe.Us.Common.WebLog.WriteErrLog("用户" + strUserName + "已经被冻结，无法登录！");
+                context.Response.StatusCode = 400;
+                context.Response.Write("帐号" + strUserName + "已经被封，无法登录！");
+                return;
+            }
+
+
+            //判断是否需要激活
+            if (user.Status == 0 && KuaiLe.Us.Common.SysConfig.IsNeedActivate)
+            {
+                KuaiLe.Us.Common.WebLog.WriteErrLog("用户" + strUserName + "尚未激活，无法登录！");
+                context.Response.StatusCode = 400;
+                context.Response.Write("帐号" + strUserName + "尚未激活！请登录邮箱激活帐号。");
+                return;
+            }
+            
             
             user.LastLoginIP = Utility.Web.WebAgent.GetIP();    
             user.LastLoginTime = DateTime.Now;

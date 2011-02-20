@@ -5,7 +5,7 @@
  @Copyright 灵梦工作室 版权所有
 */
 
-var KL_ROOT = $_Domain("KuaiLe");    //虚拟目录
+var KL_ROOT = $_Domain("");    //虚拟目录
 
 $(function(){
 	_KL_FormInputTip();	//输入框提示

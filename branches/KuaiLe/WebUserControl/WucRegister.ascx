@@ -12,7 +12,9 @@
         <dt>邮 箱：</dt>
         <dd><input type="text" name="RegEmail" id="RegEmail"  value="" /><span id="errRegEmail"></span></dd>
         <dt>验证码：</dt>
-        <dd><input type="text" name="RegChkCode" id="RegChkCode"  style="width:50px;" value="" /> 2322
+        <dd><input type="text" name="RegChkCode" id="RegChkCode"  style="width:50px;" value="" /> 
+          	 <img id="imgRegChkCode" src="<%= ResolveClientUrl("~/Handle/ChkCodeImage.ashx")%>?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgRegChkCode')" />
+          	 <a href="javascript:refreshCode('#imgRegChkCode')">看不清？</a>
             <span id="errRegChkCode"></span>
         </dd>
         <dd>
@@ -66,6 +68,7 @@
 			    var password = $("#RegPassword").val() + "";
 			    var repassword = $("#RegRePassword").val() + "";
 			    var email = $("#RegEmail").val() + "";
+			    var chkCode = $("#RegChkCode").val() + "";
 			    
 			    reg=/^[a-zA-Z0-9_\-]+$/gi;
                 if(username.length < 5){
@@ -93,6 +96,10 @@
                     return false;
                 }
                 
+                if(chkCode.length <= 0){
+                    regTip("errRegChkCode","请输入验证码", -1);
+                    return false;
+                }
                 
 			    
 			    $(this).html("<b>正在注册，请稍后...<b>");
@@ -104,7 +111,7 @@
                    type: "POST",
                    url: "<%=GB_SitePath %>/Handle/Register.ashx?t=" + new Date().getTime(),
                    //cache: false,
-                   data: "UserName=" + username + "&Password=" + password + "&Email=" + email,
+                   data: "UserName=" + username + "&Password=" + password + "&Email=" + email + "&ChkCode=" + chkCode,
                    //dataType: "text",
                    //contentType: "charset=utf-8",
                    success: function(msg){

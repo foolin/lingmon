@@ -4,7 +4,8 @@ using System;
 using System.Web;
 using System.Text.RegularExpressions;
 
-public class Register : IHttpHandler {
+public class Register : IHttpHandler, System.Web.SessionState.IRequiresSessionState
+{
     
     public void ProcessRequest (HttpContext context) {
         //输出页面头
@@ -17,6 +18,17 @@ public class Register : IHttpHandler {
         strUsername = context.Request["UserName"] + "";
         strPassword = context.Request["Password"] + "";
         strEmail = context.Request["Email"] + "";
+
+        string strChkCode = context.Request["ChkCode"] + "";
+        string strReChkCode = context.Session["KL_ChkCode"] + "";
+
+        //检查验证码
+        if (strChkCode != strReChkCode)
+        {
+            context.Response.StatusCode = 400;
+            context.Response.Write("验证码错误！");
+            return;
+        }
         
         try
         {
@@ -100,7 +112,7 @@ public class Register : IHttpHandler {
             
             //提示发送成功
             context.Response.StatusCode = 200;
-            context.Response.Write("尊敬的" + strUsername + "，您已经注册成功！欢迎使用本站服务，我们已经发送一封激活邮件到你们的邮箱，请注意查收！");
+            context.Response.Write("尊敬的" + strUsername + "，您已经注册成功！欢迎使用本站服务，我们已经发送一封激活邮件到您的邮箱，请注意查收！");
         }
         catch (Exception ex)
         {

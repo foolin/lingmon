@@ -53,7 +53,7 @@ namespace KuaiLe.Us.Common
             strContent.Append("尊敬的" + user.UserName + "：");
             strContent.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;");
 
-            strContent.Append("恭喜您在<b>快乐网(www.kuaile.us)</b>注册成功，您的用户名是：" + user.UserName + "，请您妥善保管您的密码，如果忘记密码，请<a href=\"" + WebAgent.GetDomainURL() + "/User/FindPassword.aspx?UserName=" + user.UserName + "\">点击这里找回密码</a>。快乐网（www.kuaile.us），快乐.我们一起分享！");
+            strContent.Append("恭喜您在<b>快乐网(www.kuaile.us)</b>注册成功，您的用户名是：" + user.UserName + "，请您妥善保管您的密码，如果忘记密码，请<a href=\"" + WebAgent.GetDomainURL() + "/User/FindPassword.aspx?UserName=" + user.UserName + "\">点击这里找回密码</a>。快乐网（www.kuaile.us），我们一起分享！");
             strContent.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;");
 
             strContent.Append("您注册的账号需要激活才能正常使用，请尽快激活您的账号。<a href=\"" + strActivateCodeURL + "\"  target=\"_blank\">点击这里</a>进行激活，或者点击下面链接激活：");

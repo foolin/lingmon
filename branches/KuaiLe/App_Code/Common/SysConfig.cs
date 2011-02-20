@@ -186,6 +186,24 @@ namespace KuaiLe.Us.Common
             }
         }
 
+
+        public static bool IsNeedActivate
+        {
+            get
+            {
+                bool isNeedActivate = false;
+                try
+                {
+                    isNeedActivate = Convert.ToBoolean(ConfigurationManager.AppSettings["IsNeedActivate"]);
+                }
+                catch
+                {
+                    isNeedActivate = false;
+                }
+                return isNeedActivate;
+            }
+        }
+
     }
 
 }

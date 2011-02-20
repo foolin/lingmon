@@ -26,7 +26,7 @@
                       	 
                       	<input type="button" id="btnPostArticle"  class="btn" value="发表"  />
                       	
-                      	<span id="indicatorArticleWordCount">您可输入0/2000个字符</span>
+                      	<span id="indicatorArticleWordCount">您可输入1000/1000个字符</span>
                       	
                       	<script type="text/javascript">
 

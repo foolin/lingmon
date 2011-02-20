@@ -64,7 +64,7 @@ public class ArticleAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
                 //判断最大提交数，防止乱发广告或者灌贴
                 System.Data.DataSet dsList = artBll.GetList("UserID=" + user.UserID + " And Convert(varchar(20), CreateTime, 112)=" + DateTime.Now.ToString("yyyyMMdd"));
                 int iTodayArticleCount = 0;
-                int maxArticleCountOneDay = KuaiLe.Us.Common.SysConfig.UserMaxArticleCount;
+                int maxArticleCountOneDay = KuaiLe.Us.Common.SysConfig.PostMaxArticles;
                 if (dsList != null && dsList.Tables[0] != null)
                 {
                     iTodayArticleCount = dsList.Tables[0].Rows.Count;

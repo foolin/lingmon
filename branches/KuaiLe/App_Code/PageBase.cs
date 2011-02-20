@@ -51,6 +51,26 @@ public class PageBase : System.Web.UI.Page
         return Request[key] + "";
     }
 
+    /// <summary>
+    /// 获取Request.QueryString参数
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    protected int QSInt(string key)
+    {
+        int iReturn = -1;
+        try
+        {
+            iReturn = Convert.ToInt32(Request[key] + "");
+        }
+        catch
+        {
+            iReturn = -1;
+        }
+
+        return iReturn;
+    }
+
     public string GetContactMail()
     {
         return SysConfig.Contact;

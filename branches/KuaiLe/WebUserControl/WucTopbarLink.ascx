@@ -16,6 +16,6 @@
          <a href="#">RSS</a>
     </span>
     <span style="float:right">
-        快乐网(www.kuaile.us)——快乐.我们一起分享！
+        快乐网(www.kuaile.us) - 我们一起分享！
     </span>
 </div>

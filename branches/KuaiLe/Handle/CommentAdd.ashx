@@ -2,6 +2,7 @@
 
 using System;
 using System.Web;
+using KuaiLe.Us.Common;
 
 public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSessionState
 {
@@ -14,7 +15,18 @@ public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
         {
             long artid = 0;
             string strComment = context.Request["Comment"] + "";
+            string strCommentUserName = context.Request["CommentUserName"] + "";
+            string strCommentChkCode = context.Request["CommentChkCode"] + "";
 
+            string strReChkCode = context.Session["KL_ChkCode"] + "";
+
+            //检查验证码
+            if (strCommentChkCode != strReChkCode)
+            {
+                context.Response.StatusCode = 400;
+                context.Response.Write("验证码错误！");
+                return;
+            }
 
             try
             {
@@ -33,6 +45,24 @@ public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
                 context.Response.StatusCode = 400;
                 context.Response.Write("评论不能为空！");
                 return;
+            }
+            
+            //判断是否频繁提交时间
+            if (context.Session["PrePostCommentTime"] != null && SysConfig.PostCommentInterval > 0)
+            {
+                try
+                {
+                    DateTime dtmPreTime = Convert.ToDateTime(context.Session["PrePostCommentTime"]);
+                    if (dtmPreTime.AddSeconds(SysConfig.PostCommentInterval) > DateTime.Now)
+                    {
+                        context.Response.StatusCode = 400;
+                        context.Response.Write("对不起，你提交太频繁！请稍后再试...");
+                        return;
+                    }
+                }
+                catch
+                {
+                }
             }
 
             KuaiLe.Us.BLL.ArticleBll artBll = new KuaiLe.Us.BLL.ArticleBll();
@@ -56,12 +86,14 @@ public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             commentModel.Status = 0;
             commentModel.UserID = 0;
             commentModel.UserIP = Utility.Web.WebAgent.GetIP();
-            commentModel.UserName = "";
+            commentModel.UserName = strCommentUserName;
             commBll.Add(commentModel);
 
+            context.Session["PrePostCommentTime"] = DateTime.Now;
             KuaiLe.Us.Common.WebLog.WriteInfoLog("用户发表评论成功！");
             context.Response.StatusCode = 200;
             context.Response.Write("恭喜，发表评论成功！");
+            
             return;
 
         }

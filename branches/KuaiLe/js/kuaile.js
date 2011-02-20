@@ -180,6 +180,9 @@ function postComment(artid, _thisbtn) {
         });
     }
 
+    var commentUserName = $("#commentUserName-" + artid).val() + "";
+    var commentChkCode = $("#commentChkCode-" + artid).val() + "";
+
     //禁用
     $(_thisbtn).attr("disabled", "disabled");
     $(_thisbtn).val("评论正在提交...");
@@ -188,7 +191,9 @@ function postComment(artid, _thisbtn) {
         type: "POST",
         url: "Handle/CommentAdd.ashx?t=" + new Date().getTime(),
         data: { "ArtID": artid,
-            "Comment": comment
+            "Comment": comment,
+            "CommentUserName": commentUserName,
+            "CommentChkCode": commentChkCode
         },
         success: function(msg) {
             if (!msg || msg == "") {
@@ -214,7 +219,7 @@ function postComment(artid, _thisbtn) {
                 errmsg = "操作错误，请稍后重试！";
             }
             $.messager.show({ title: "温馨提示 — 快乐网(kuaile.us)",
-                msg: "<font color='red'> ×" + errmsg + "]</font>"
+                msg: "<font color='red'> ×" + errmsg + "</font>"
             });
 
         }
@@ -223,6 +228,9 @@ function postComment(artid, _thisbtn) {
     //启动
     $(_thisbtn).attr("disabled", "");
     $(_thisbtn).val("发表");
+    $("#commentUserName-" + artid).val("")
+    $("#commentChkCode-" + artid).val("")
+    refreshCode('#imgCommentChkCode-' + artid);
 }
 
 
@@ -279,9 +287,84 @@ function dig(id, digType, srcType){
             });
              
        }
-    });    
-    
-    
+    });
+
+}
+
+
+
+//刷新
+function refreshCode(id) {
+    $(id).attr("src", "Handle/ChkCodeImage.ashx?t=" + new Date().getTime());
+}
+
+//检查是否登录
+function checkIsLogin(){
+    $.ajax({
+        type: "GET",
+        url: "Handle/IsAuthPost.ashx?t=" + new Date().getTime(),
+        success: function(data) {
+        },
+        error: function(xhr) {
+            var errmsg = xhr.responseText + "";
+            if (errmsg == "") {
+                errmsg = "对不起，你暂未有权限发表，请联系本站客服。";
+            }
+            $.messager.alert("对不起，没有权限操作", errmsg, "error");
+        }
+    });
+};
+
+/**************** 提交文章  *****************/
+
+//提交文章
+function postArticle() {
+    //var artContent = HTMLEncode($("#artContent").val() + "");
+    var artContent = $("#artContent").val() + "";
+    var artChkCode = $("#artChkCode").val() + "";
+
+    if (artContent.length < 5 || artContent == ($("#artContent").attr("tip") + "")) {
+        $.messager.alert('无法提交！', "您提交的内容不能少于5个字符", "error");
+        return;
+    }
+
+    if (artChkCode.length < 1) {
+        $.messager.alert('无法提交！', "请输入验证码", "error");
+        return;
+    }
+
+    $("#btnPostArticle").val("正在提交...");
+    $("#btnPostArticle").attr("disabled", "disabled");
+
+    $.ajax({
+        type: "POST",
+        url: "Handle/ArticleAdd.ashx?t=" + new Date().getTime(),
+        data: { "Content": artContent,
+            "ChkCode": artChkCode
+        },
+        success: function(msg) {
+            if (!msg || msg == "") {
+                msg = "你提交的帖子成功，请耐心等候我们的审核，谢谢！";
+            }
+            $.messager.alert('恭喜，发表成功！',
+                                             msg,
+                                             "info",
+                                             function() {
+                                                 top.location.href = "Default.aspx";
+                                             }
+                                         );
+        },
+        error: function(xhr) {
+            $("#btnPostArticle").val("发表");
+            $("#btnPostArticle").attr("disabled", "");
+            var errTips = xhr.responseText + "";
+            if (errTips == "") {
+                errTips = " Sorry，未知错误。请检查输入是否正确，或稍后重试！";
+            }
+            $.messager.alert("发表失败！", "<font color='red'>" + xhr.responseText + "</font>", "error");
+
+        }
+    });
     
 }
 

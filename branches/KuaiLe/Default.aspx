@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网-我们一起分享|www.kuaile.us" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网 - 我们一起分享|www.kuaile.us" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>
@@ -23,92 +23,24 @@
                 	<div class="btnArea">
                 	
                       	验证码：<input type="text" name="artChkCode" id="artChkCode" style="width:50px;" value="" />
-                      	 <img id="imgChkCode" src="Handle/ChkCodeImage.ashx?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode()" />
-                      	 <a href="javascript:refreshCode()">看不清？</a>
+                      	 <img id="imgChkCode" src="Handle/ChkCodeImage.ashx?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgChkCode')" />
+                      	 <a href="javascript:refreshCode('#imgChkCode')">看不清？</a>
                       	 
                       	<input type="button" id="btnPostArticle"  class="btn" value="发表"  />
                       	
                       	<script type="text/javascript">
-                      	    function refreshCode(){
-                      	        $("#imgChkCode").attr("src","Handle/ChkCodeImage.ashx?t=" + new Date().getTime());
-                      	    }
-                      	    
-                      	    //检查是否登录
-                      	    $("#artContent").focus(function(){
-                      	        $.ajax({
-                                   type: "GET",
-                                   url: "Handle/IsAuthPost.ashx?t=" + new Date().getTime(),
-                                   success: function(data){
-                                   },
-                                   error: function(xhr){
-                                        var errmsg = xhr.responseText + "";
-                                        if(errmsg == "")
-                                        {
-                                            errmsg = "对不起，你暂未有权限发表，请联系本站客服。";
-                                        }
-                                        $.messager.alert("对不起，没有权限操作",errmsg,"error");
-                                   }
-                                });
-                      	        
-                      	    });
-                      	    
-                      	    //提交
-                      	    $("#btnPostArticle").click(function(){
-                      	        postArticle()
-                      	    });
-                      	    
-                      	    //提交文章
-                      	    function postArticle(){
-                      	        //var artContent = HTMLEncode($("#artContent").val() + "");
-                      	        var artContent = $("#artContent").val() + "";
-                      	        var artChkCode = $("#artChkCode").val() + "";
 
-                      	        if(artContent.length <　5 || artContent == ($("#artContent").attr("tip") + ""))
-                      	        {
-                      	            $.messager.alert('无法提交！',"您提交的内容不能少于5个字符","error");
-                      	            return;
-                      	        }
-                      	        
-                      	        if(artChkCode.length <　1)
-                      	        {
-                      	            $.messager.alert('无法提交！',"请输入验证码","error");
-                      	            return;
-                      	        }
-                      	        
-                      	        $("#btnPostArticle").val("正在提交...");
-                      	        $("#btnPostArticle").attr("disabled","disabled");
-                      	        
-                      	        $.ajax({
-                                   type: "POST",
-                                   url: "Handle/ArticleAdd.ashx?t=" + new Date().getTime(),
-                                   data: { "Content": artContent,
-                                            "ChkCode": artChkCode
-                                   },
-                                   success: function(msg){
-                                         if(!msg || msg == ""){
-                                            msg = "你提交的帖子成功，请耐心等候我们的审核，谢谢！";
-                                         }
-                                         $.messager.alert('恭喜，发表成功！',
-                                             msg,
-                                             "info", 
-                                             function(){
-                                                top.location.href="Default.aspx";
-                                             }
-                                         );
-                                   },
-                                   error: function(xhr){
-                                        $("#btnPostArticle").val("发表");
-                      	                $("#btnPostArticle").attr("disabled","");
-                      	                var errTips = xhr.responseText + "";
-                      	                if(errTips == "")
-                      	                {
-                      	                    errTips = " Sorry，未知错误。请检查输入是否正确，或稍后重试！";
-                      	                }
-                                        $.messager.alert("发表失败！","<font color='red'>" + xhr.responseText  +"</font>","error");
-                                         
-                                   }
-                                });
-                      	    }
+                      	    //检查是否登录
+                      	    $("#artContent").focus(function() {
+                      	        checkIsLogin();
+                      	    });
+
+                      	    //提交
+                      	    $("#btnPostArticle").click(function() {
+                      	        postArticle();
+                      	        refreshCode('#imgChkCode');
+                      	    });
+
                       	</script>
                       	
                     </div>
@@ -129,7 +61,7 @@
                             <div  class="moreDetail" style="display:none"> <a href="#" onclick="moreDetail(this); return false;">展开全部>></a>  </div>
                             
                             <div class="itemCtrl">
-                    	        <span class="left"><a href="?UserName=<%#Eval("NickName") %>"><%#Eval("NickName") %></a> 2011-02-01 00:38:56 发布 </span>
+                    	        <span class="left"><a href="?UserID=<%#Eval("UserID") %>"><%#Eval("UserName") %></a> 2011-02-01 00:38:56 发布 </span>
                      	        <span class="right">
                      	            <div id="digArt-<%#Eval("ArtID") %>">
                         	                <a href="javascript:dig(<%#Eval("ArtID") %>, 0);"><img src="images/digUp.gif" border="0" height="14" />顶</a>(<%#Eval("DigUp") %>) 
@@ -147,11 +79,18 @@
                             
                             <div class="itemInputComment" id="itemInputComment-<%#Eval("ArtID") %>" style="display:none;">
                     	        <div class="textareaBox">
-                        	        <textarea name="comment-<%#Eval("ArtID") %>" id="comment-<%#Eval("ArtID") %>"  style="height:40px;" maxlen="200" tip="我也说一句..."></textarea>
+                        	        <textarea name="comment" id="comment-<%#Eval("ArtID") %>"  style="height:40px;" maxlen="200" tip="我也说一句..."></textarea>
                        	        </div>
                                 <div class="btnArea">
+                                    用户名：<input type="text" name="commentUserName" id="commentUserName-<%#Eval("ArtID") %>" tip="匿名" value="" style="width:80px;" /> 
+                                    验证码：<input type="text" name="commentChkCode" id="commentChkCode-<%#Eval("ArtID") %>"  style="width:50px;" value="" />
+                      	             <img id="imgCommentChkCode-<%#Eval("ArtID") %>" src="Handle/ChkCodeImage.ashx?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgCommentChkCode-<%#Eval("ArtID") %>')" />
+                      	             <a href="javascript:refreshCode('#imgCommentChkCode-<%#Eval("ArtID") %>')">看不清？</a>
+                      	             
                                     <input type="button" name="btnPostComment" value="确定" onclick="postComment(<%#Eval("ArtID") %>, this);" />
+                                    
                                     <span class="tips">您可输入<span class="indicator">0/200</span>个字。</span>
+                                    
                                 </div>
                                 <div class="commentList" id="commentList-<%#Eval("ArtID") %>">
                                         评论列表加载中...
@@ -177,11 +116,11 @@
       
  <asp:Content ID="Content3" ContentPlaceHolderID="CphSider" Runat="Server">       
         
-        
+<%--        
         	<div class="search">
             	<input type="text" name="keyword" tip="请输入关键词..." value="" /> <input type="button" name="Search" value="搜索" />
             </div>
-            
+            --%>
             <div class="loginForm column">
             	<div class="title">公告区</div>
                 <div class="content">
@@ -204,8 +143,8 @@
             <div class="loginForm column" id="idDefaultSiderRegister" runat="server">
             	<div class="title">快速注册</div>
                 <div class="content">
-                    </div>
                     <uc2:WucRegister ID="WucRegister1" runat="server" />
+                </div>
             </div>
             
             

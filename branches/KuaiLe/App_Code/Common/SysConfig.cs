@@ -145,20 +145,44 @@ namespace KuaiLe.Us.Common
         }
 
 
-        public static int UserMaxArticleCount
+        /// <summary>
+        /// 用户当天能提交最大数
+        /// </summary>
+        public static int PostMaxArticles
         {
             get
             {
                 int count = 5;
                 try
                 {
-                    count = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["UserMaxArticleCount"]);
+                    count = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PostMaxArticles"]);
                 }
                 catch
                 {
                     count = 5;
                 }
                 return count;
+            }
+        }
+
+
+        /// <summary>
+        /// 提交时间间隔
+        /// </summary>
+        public static int PostCommentInterval
+        {
+            get
+            {
+                int reslut = 5;
+                try
+                {
+                    reslut = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PostCommentInterval"]);
+                }
+                catch
+                {
+                    reslut = 5;
+                }
+                return reslut;
             }
         }
 

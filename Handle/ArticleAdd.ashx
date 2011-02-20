@@ -35,7 +35,7 @@ public class ArticleAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             if (strChkCode != strReChkCode)
             {
                 context.Response.StatusCode = 400;
-                context.Response.Write("验证码错误！");
+                context.Response.Write("验证码错误！输入验证码：" + strChkCode + "，正确：" + strReChkCode);
                 return;
             }
 

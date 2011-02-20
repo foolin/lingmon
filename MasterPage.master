@@ -70,8 +70,10 @@
         </div>
     
         <div class="footer">
-    	    Email：contact#kuaile.us (#换成@) &nbsp; <b>快乐网(kuaile.us)</b> 版权所有
-    	    <br />&copy; <%=DateTime.Now.Year %> <b><a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a></b> All Rights Reserved. &nbsp; &nbsp;<A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备xxxxx</A>号
+    	    Email：contact#kuaile.us (#换成@) 
+    	    <br />&copy; <%=DateTime.Now.Year %> <b><a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a></b> All Rights Reserved.
+    	     &nbsp; &nbsp;<A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备xxxxx</A>号
+    	    <br />&nbsp; <b>快乐网(kuaile.us)</b>&nbsp; 版权所有
             
         </div>
     </div>

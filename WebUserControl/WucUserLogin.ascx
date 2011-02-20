@@ -81,7 +81,7 @@
             },
             error: function(xhr, textStatus, errorThrown) {
                 $.messager.alert("Sorry，登录" + loginUsername + "失败！",
-                 "<font color='red'>" + xhr.responseText + " 请更正后重试！</font>",
+                 "<font color='red'>" + xhr.responseText + "</font>",
                 "error");
                 $("#btnUserLogin").val("登录");
                 $("#btnUserLogin").attr("disabled", "");

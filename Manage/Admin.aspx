@@ -224,6 +224,26 @@
 			    </ul> 
 		    </li> 
 		    
+		    <li> 
+			    <span>用户管理</span>
+			    <ul>
+				    <li> 
+					    <span><a href="User/UserList.aspx?type=notrash"  tab="true">用户列表</a></span>
+					    <ul stated="closed">
+					        <li><span><a href="User/UserList.aspx?type=vip"  tab="true">VIP用户</a></span></li>
+					        <li><span><a href="User/UserList.aspx?type=activate"  tab="true">已激活用户</a></span></li>
+					        <li><span><a href="User/UserList.aspx?type=noactivate"  tab="true">未激活用户</a></span></li>
+					    </ul>
+				    </li> 
+				    <li> 
+					    <span><a href="User/UserList.aspx?type=trash" tab="true">冻结用户</a></span>
+				    </li>
+				    <li> 
+					    <span><a href="User/UserList.aspx"  tab="true">全部用户</a></span>
+				    </li>
+			    </ul> 
+		    </li> 
+		    
 	    </ul> 
 	    </div>
 

@@ -31,7 +31,9 @@
         </div>
         <div class="header">
     	    <div class="logo">
+    	        <a href="<%= ResolveClientUrl("~/Default.aspx")%>" title="快乐网(www.kuaile.us)，我们一起分享！">
         	    <img src="<%= ResolveClientUrl("~/images/KuaiLeLogo3.png")%>" border="0" height="65" />
+        	    </a>
             </div>
             <div class="nav">
         	    <span class="navLink">
@@ -70,10 +72,9 @@
         </div>
     
         <div class="footer">
-    	    Email：contact#kuaile.us (#换成@) 
-    	    <br />&copy; <%=DateTime.Now.Year %> <b><a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a></b> All Rights Reserved.
-    	     &nbsp; &nbsp;<A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备xxxxx</A>号
-    	    <br />&nbsp; <b>快乐网(kuaile.us)</b>&nbsp; 版权所有
+            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">关于我们</a>  | <a href="<%= ResolveClientUrl("~/Help")%>">使用帮助</a> | <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">联系方式</a> &nbsp;
+    	    <br />&copy; <%=DateTime.Now.Year %> <b><font color="green">快乐网</font>(<a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a>)</b> All Rights Reserved.
+    	     &nbsp; <A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备07000266号-5</A>
             
         </div>
     </div>

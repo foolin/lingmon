@@ -12,8 +12,10 @@
         <%=GetUserLoginInfo() %>
         
         <a href="#">设为首页</a> &nbsp;&nbsp; | &nbsp;
-        <a href="#">收藏</a> &nbsp; | &nbsp;
-         <a href="#">RSS</a>
+        <a href="#">收藏本站</a> &nbsp; | &nbsp;
+        <a href="#">订阅本站</a> &nbsp; | &nbsp;
+        <a href="<%=GB_SitePath %>/About/AboutUs.aspx">关于我们</a> &nbsp; | &nbsp;
+        <a href="#" style="cursor:help;">使用帮助</a> &nbsp;
     </span>
     <span style="float:right">
         快乐网(www.kuaile.us) - 我们一起分享！

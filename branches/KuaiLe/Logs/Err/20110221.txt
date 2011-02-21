@@ -1,0 +1,4 @@
+2011-2-21 0:01:09 Msg:用户foolin登录密码86082-不正确！, URL:http://www.kuaile.us/Handle/Login.ashx?t=1298217669250
+2011-2-21 0:01:15 Msg:用户foolin已经被冻结，无法登录！, URL:http://www.kuaile.us/Handle/Login.ashx?t=1298217675687
+2011-2-21 0:17:37 Msg:用户foolin已经被冻结，无法登录！, URL:http://www.kuaile.us/Handle/Login.ashx?t=1298218657859
+2011-2-21 0:41:49 Msg:用户52ivy登录密码fu860820不正确！, URL:http://www.kuaile.us/Handle/Login.ashx?t=1298220109687

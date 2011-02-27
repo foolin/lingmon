@@ -20,7 +20,7 @@
         <dd>
             <button id="btnRegister" class="btn" type="button"><b style="font-size:14px; padding:5px 0px;">注册</b> 并同意注册协议</button>
         </dd>
-        <dd><a href="Agreement.aspx" target="_blank">《快乐网注册协议》</a></dd>
+        <dd><a href="<%= ResolveClientUrl("~/About/Agreement.aspx")%>" target="_blank">《快乐网服务协议》</a></dd>
     </dl>
 
 

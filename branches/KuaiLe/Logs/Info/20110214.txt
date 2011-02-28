@@ -1,2 +1,0 @@
-2011-2-14 0:02:07 Msg:用户foolin登录成功！, URL:http://www.7dong.net/Handle/Login.ashx?t=1297612927157
-2011-2-14 0:02:25 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612945141

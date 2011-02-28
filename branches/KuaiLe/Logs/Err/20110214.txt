@@ -1,4 +1,0 @@
-2011-2-14 0:02:00 Msg:用户foolin登录密码fu860820不正确！, URL:http://www.7dong.net/Handle/Login.ashx?t=1297612919949
-2011-2-14 20:42:36 Msg:操作顶/踩/举报异常：参数化查询 '(@ArtID bigint,@UserID bigint,@Title nvarchar(50),@Content text,' 需要参数 @IsAnonym，但未提供该参数。, URL:http://www.7dong.net/Handle/Dig.ashx?t=1297687356327&SrcID=4&DigType=0&SrcType=Article
-2011-2-14 20:42:39 Msg:操作顶/踩/举报异常：参数化查询 '(@ArtID bigint,@UserID bigint,@Title nvarchar(50),@Content text,' 需要参数 @IsAnonym，但未提供该参数。, URL:http://www.7dong.net/Handle/Dig.ashx?t=1297687359405&SrcID=3&DigType=0&SrcType=Article
-2011-2-14 20:42:41 Msg:操作顶/踩/举报异常：参数化查询 '(@ArtID bigint,@UserID bigint,@Title nvarchar(50),@Content text,' 需要参数 @IsAnonym，但未提供该参数。, URL:http://www.7dong.net/Handle/Dig.ashx?t=1297687361515&SrcID=2&DigType=0&SrcType=Article

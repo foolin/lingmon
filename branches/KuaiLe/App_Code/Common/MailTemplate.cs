@@ -73,6 +73,43 @@ namespace KuaiLe.Us.Common
             return strContent.ToString();
         }
 
+
+        /// <summary>
+        /// 取找回密码信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public string GetFindPasswordInfo(UserModel user, string code)
+        {
+            StringBuilder strContent = new StringBuilder();
+            string strActivateCodeURL = WebAgent.GetDomainURL() + "/User/ResetPassword.aspx?Email=" + user.Email + "&Code=" + code;
+
+            strContent.Append("<div style=\"font-size:14px; line-height:25px;\">");
+            strContent.Append("尊敬的" + user.UserName + "：");
+            strContent.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;");
+
+            strContent.Append("欢迎您使用<b>快乐网(www.kuaile.us)</b>找回密码功能，请在48小时内连重置您的密码。<a href=\"" + strActivateCodeURL + "\"  target=\"_blank\">点击这里</a>进行重置密码，或者点击下面链接重置密码：");
+            strContent.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;");
+
+            strContent.Append("<a href=\"" + strActivateCodeURL + "\"  target=\"_blank\">" + strActivateCodeURL + "</a>");
+            strContent.Append("<br />");
+            strContent.Append("<br />");
+
+            strContent.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;");
+            strContent.Append("如果您没有申请密码找回，请忽略此邮件。");
+            strContent.Append("<br />");
+            strContent.Append("<br />");
+
+            strContent.Append("<a href=\"" + WebAgent.GetDomainURL() + "\"  target=\"_blank\"><span style=\"font-weight:bold; color:#F00; text-decoration:none;\">快乐网（www.kuaile.us)</span></a>");
+            strContent.Append("<br />");
+            strContent.Append(DateTime.Now.ToString("yyyy年MM月dd日"));
+            strContent.Append("<hr />");
+            strContent.Append("此邮件为自动发送，切勿回复。");
+            strContent.Append("</div>");
+
+            return strContent.ToString();
+        }
+
     }
 
 }

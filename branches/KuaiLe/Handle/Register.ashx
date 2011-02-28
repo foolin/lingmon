@@ -89,6 +89,7 @@ public class Register : IHttpHandler, System.Web.SessionState.IRequiresSessionSt
             model.LoginCount = 0;
             model.LastLoginIP = "";
             model.LastLoginTime = DateTime.Now;
+            model.FindPwdTime = DateTime.Now;
             
             //注册到数据库
             bll.Add(model);

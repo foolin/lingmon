@@ -25,6 +25,7 @@ namespace KuaiLe.Us.Model
 		private int? _level;
 		private decimal? _credit;
 		private int? _status;
+        private DateTime? _findpwdtime;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -145,6 +146,16 @@ namespace KuaiLe.Us.Model
 			set{ _status=value;}
 			get{return _status;}
 		}
+        
+        /// <summary>
+        /// ’“ªÿ√‹¬Î ±º‰
+        /// </summary>
+        public DateTime? FindPwdTime
+        {
+            set { _findpwdtime = value; }
+            get { return _findpwdtime; }
+        }
+
 		#endregion Model
 
 

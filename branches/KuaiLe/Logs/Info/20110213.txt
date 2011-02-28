@@ -1,6 +1,0 @@
-2011-2-13 23:47:43 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612062452
-2011-2-13 23:47:43 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612063907
-2011-2-13 23:52:25 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612345259
-2011-2-13 23:52:38 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612358041
-2011-2-13 23:55:49 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612549125
-2011-2-13 23:57:25 Msg:用户发表评论成功！, URL:http://www.7dong.net/Handle/CommentAdd.ashx?t=1297612645887

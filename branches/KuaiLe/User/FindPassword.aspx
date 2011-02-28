@@ -18,38 +18,42 @@
         	padding:3px;
         }
     </style>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CphMain" Runat="Server">
 
 
-
-    <div style="padding:20px;" class="findPasswordArea" id="Div1" runat="server">
+    <div style="padding:20px;" class="findPasswordArea">
     
-        <div style="font-size:16px; font-weight:bold;text-indent:0em; border-bottom:solid  1px #ccc; padding-bottom:10px;">
-            找回用户密码</div>
-        <dl>
-            <dt>用户名：</dt>
-            <dd><input type="text" name="emailUserName" id="emailUserName" value="" /><span id="Span1"></span></dd>
-            <dd><input type="button" name="btnSubmit" id="Button1" class="btn" value="发送邮件" />  <a href="Login.aspx">返回登录</a></dd>
-        </dl>
+
+        
+            <div style="font-size:16px; font-weight:bold;text-indent:0em; border-bottom:solid  1px #ccc; padding-bottom:10px;">
+                找回用户密码</div>
+            <dl>
+                <dt>用户名/邮箱：</dt>
+                <dd>  
+                    <asp:TextBox ID="tbFpFindValue" runat="server"></asp:TextBox>  <span id="errFpFindValueTips">请输入用户名或邮箱</span></dd>
+                <dt>验证码：</dt>
+                <dd>
+                    <asp:TextBox ID="tbFpChkCode" runat="server"></asp:TextBox>
+                    <img id="imgFpChkCode" src="<%= ResolveClientUrl("~/Handle/ChkCodeImage.ashx")%>?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgFpChkCode')" />
+          	         <a href="javascript:refreshCode('#imgRegChkCode')">看不清？</a>
+                    <span id="errFpChkCode"></span>
+                </dd>
+                <dd>
+                    <asp:Button ID="btnSubmit" CssClass="btn"  runat="server" 
+                         Text="提交" 
+                        onclick="btnSubmit_Click" />
+                    <a href="Login.aspx">返回登录</a></dd>
+            </dl>
+
+        
    
     </div>
 
-    <div style="padding:20px;" class="findPasswordArea" id="findPasswordArea" runat="server">
-    
-        <div style="font-size:16px; font-weight:bold;text-indent:0em; border-bottom:solid  1px #ccc; padding-bottom:10px;">
-            用户重设用户密码</div>
-        <dl>
-            <dt>用户名：</dt>
-            <dd><input type="text" name="findUserName" id="findUserName" value="" /><span id="tipFindUserName"></span></dd>
-            <dt>新密码：</dt>
-            <dd><input type="password" name="findPassword" id="findPassword" value="" /> <span id="tipFindPassword"></span></dd>
-            <dt>重复密码：</dt>
-            <dd><input type="password" name="findRePassword" id="findRePassword" value="" /> <span id="tipFindRePassword"></span></dd>
-            <dd><input type="button" name="btnSubmit" id="btnSubmit" class="btn" value="确定" />  <a href="Login.aspx">返回登录</a></dd>
-        </dl>
-   
-    </div>
+
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CphSider" Runat="Server">
 </asp:Content>

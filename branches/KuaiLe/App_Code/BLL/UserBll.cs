@@ -93,7 +93,7 @@ namespace KuaiLe.Us.BLL
         public KuaiLe.Us.Model.UserModel GetModel(string strUserNameOrEmail, bool isEmail )
         {
 
-            return dal.GetModel(strUserNameOrEmail, false);
+            return dal.GetModel(strUserNameOrEmail, isEmail);
         }
 
 		/// <summary>
@@ -170,6 +170,10 @@ namespace KuaiLe.Us.BLL
 					{
 						model.Status=int.Parse(dt.Rows[n]["Status"].ToString());
 					}
+                    if (dt.Rows[n]["FindPwdTime"].ToString() != "")
+                    {
+                        model.FindPwdTime = DateTime.Parse(dt.Rows[n]["FindPwdTime"].ToString());
+                    }
 					modelList.Add(model);
 				}
 			}

@@ -61,7 +61,7 @@
                             <div  class="moreDetail" style="display:none"> <a href="#" onclick="moreDetail(this); return false;">展开全部>></a>  </div>
                             
                             <div class="itemCtrl">
-                    	        <span class="left"><a href="?UserID=<%#Eval("UserID") %>"><%#Eval("UserName") %></a> 2011-02-01 00:38:56 发布 </span>
+                    	        <span class="left"> <span style="color:#090; font-weight:bold;">#<%#Eval("ArtID") %>乐#</span> &nbsp;  <a href="?UserID=<%#Eval("UserID") %>"><%#Eval("UserName") %></a> 2011-02-01 00:38:56 发布 </span>
                      	        <span class="right">
                      	            <div id="digArt-<%#Eval("ArtID") %>">
                         	                <a href="javascript:dig(<%#Eval("ArtID") %>, 0);"><img src="images/digUp.gif" border="0" height="14" />顶</a>(<%#Eval("DigUp") %>) 

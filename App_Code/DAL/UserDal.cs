@@ -87,7 +87,7 @@ namespace KuaiLe.Us.DAL
 					new SqlParameter("@Level", SqlDbType.Int,4),
 					new SqlParameter("@Credit", SqlDbType.Float,8),
 					new SqlParameter("@Status", SqlDbType.Int,4),
-                    new SqlParameter("@LastLoginTime", SqlDbType.DateTime)};
+                    new SqlParameter("@FindPwdTime", SqlDbType.DateTime)};
 			parameters[0].Value = model.UserName;
 			parameters[1].Value = model.Nickname;
 			parameters[2].Value = model.Password;

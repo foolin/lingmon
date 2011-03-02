@@ -66,13 +66,13 @@ namespace KuaiLe.Us.DAL
 		/// </summary>
 		public int Add(KuaiLe.Us.Model.UserModel model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into T_User(");
-            strSql.Append("UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime)");
-			strSql.Append(" values (");
-            strSql.Append("@UserName,@Nickname,@Password,@Email,@Sex,@ActivateCode,@RegTime,@RegIP,@LastLoginTime,@LastLoginIP,@LoginCount,@Level,@Credit,@Status,@FindPwdTime)");
-			strSql.Append(";select @@IDENTITY");
-			SqlParameter[] parameters = {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into T_User(");
+            strSql.Append("UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime,Birth,HomePage,ImagePath,Phone,Mobile,Address,Motto,Intro)");
+            strSql.Append(" values (");
+            strSql.Append("@UserName,@Nickname,@Password,@Email,@Sex,@ActivateCode,@RegTime,@RegIP,@LastLoginTime,@LastLoginIP,@LoginCount,@Level,@Credit,@Status,@FindPwdTime,@Birth,@HomePage,@ImagePath,@Phone,@Mobile,@Address,@Motto,@Intro)");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
 					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
 					new SqlParameter("@Nickname", SqlDbType.NVarChar,50),
 					new SqlParameter("@Password", SqlDbType.NVarChar,50),
@@ -87,22 +87,38 @@ namespace KuaiLe.Us.DAL
 					new SqlParameter("@Level", SqlDbType.Int,4),
 					new SqlParameter("@Credit", SqlDbType.Float,8),
 					new SqlParameter("@Status", SqlDbType.Int,4),
-                    new SqlParameter("@FindPwdTime", SqlDbType.DateTime)};
-			parameters[0].Value = model.UserName;
-			parameters[1].Value = model.Nickname;
-			parameters[2].Value = model.Password;
-			parameters[3].Value = model.Email;
-			parameters[4].Value = model.Sex;
-			parameters[5].Value = model.ActivateCode;
-			parameters[6].Value = model.RegTime;
-			parameters[7].Value = model.RegIP;
-			parameters[8].Value = model.LastLoginTime;
-			parameters[9].Value = model.LastLoginIP;
-			parameters[10].Value = model.LoginCount;
-			parameters[11].Value = model.Level;
-			parameters[12].Value = model.Credit;
-			parameters[13].Value = model.Status;
+					new SqlParameter("@FindPwdTime", SqlDbType.DateTime),
+					new SqlParameter("@Birth", SqlDbType.DateTime),
+					new SqlParameter("@HomePage", SqlDbType.NVarChar,200),
+					new SqlParameter("@ImagePath", SqlDbType.NVarChar,200),
+					new SqlParameter("@Phone", SqlDbType.NVarChar,50),
+					new SqlParameter("@Mobile", SqlDbType.NVarChar,50),
+					new SqlParameter("@Address", SqlDbType.NVarChar,200),
+					new SqlParameter("@Motto", SqlDbType.NVarChar,50),
+					new SqlParameter("@Intro", SqlDbType.NVarChar,500)};
+            parameters[0].Value = model.UserName;
+            parameters[1].Value = model.Nickname;
+            parameters[2].Value = model.Password;
+            parameters[3].Value = model.Email;
+            parameters[4].Value = model.Sex;
+            parameters[5].Value = model.ActivateCode;
+            parameters[6].Value = model.RegTime;
+            parameters[7].Value = model.RegIP;
+            parameters[8].Value = model.LastLoginTime;
+            parameters[9].Value = model.LastLoginIP;
+            parameters[10].Value = model.LoginCount;
+            parameters[11].Value = model.Level;
+            parameters[12].Value = model.Credit;
+            parameters[13].Value = model.Status;
             parameters[14].Value = model.FindPwdTime;
+            parameters[15].Value = model.Birth;
+            parameters[16].Value = model.HomePage;
+            parameters[17].Value = model.ImagePath;
+            parameters[18].Value = model.Phone;
+            parameters[19].Value = model.Mobile;
+            parameters[20].Value = model.Address;
+            parameters[21].Value = model.Motto;
+            parameters[22].Value = model.Intro;
 
 			return db.RunSqlReturnInt(strSql.ToString(),parameters);
 		}
@@ -114,25 +130,33 @@ namespace KuaiLe.Us.DAL
 		/// </summary>
 		public void Update(KuaiLe.Us.Model.UserModel model)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update T_User set ");
-			strSql.Append("UserName=@UserName,");
-			strSql.Append("Nickname=@Nickname,");
-			strSql.Append("Password=@Password,");
-			strSql.Append("Email=@Email,");
-			strSql.Append("Sex=@Sex,");
-			strSql.Append("ActivateCode=@ActivateCode,");
-			strSql.Append("RegTime=@RegTime,");
-			strSql.Append("RegIP=@RegIP,");
-			strSql.Append("LastLoginTime=@LastLoginTime,");
-			strSql.Append("LastLoginIP=@LastLoginIP,");
-			strSql.Append("LoginCount=@LoginCount,");
-			strSql.Append("Level=@Level,");
-			strSql.Append("Credit=@Credit,");
-			strSql.Append("Status=@Status,");
-            strSql.Append("FindPwdTime=@FindPwdTime");
-			strSql.Append(" where UserID=@UserID");
-			SqlParameter[] parameters = {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update T_User set ");
+            strSql.Append("UserName=@UserName,");
+            strSql.Append("Nickname=@Nickname,");
+            strSql.Append("Password=@Password,");
+            strSql.Append("Email=@Email,");
+            strSql.Append("Sex=@Sex,");
+            strSql.Append("ActivateCode=@ActivateCode,");
+            strSql.Append("RegTime=@RegTime,");
+            strSql.Append("RegIP=@RegIP,");
+            strSql.Append("LastLoginTime=@LastLoginTime,");
+            strSql.Append("LastLoginIP=@LastLoginIP,");
+            strSql.Append("LoginCount=@LoginCount,");
+            strSql.Append("Level=@Level,");
+            strSql.Append("Credit=@Credit,");
+            strSql.Append("Status=@Status,");
+            strSql.Append("FindPwdTime=@FindPwdTime,");
+            strSql.Append("Birth=@Birth,");
+            strSql.Append("HomePage=@HomePage,");
+            strSql.Append("ImagePath=@ImagePath,");
+            strSql.Append("Phone=@Phone,");
+            strSql.Append("Mobile=@Mobile,");
+            strSql.Append("Address=@Address,");
+            strSql.Append("Motto=@Motto,");
+            strSql.Append("Intro=@Intro");
+            strSql.Append(" where UserID=@UserID");
+            SqlParameter[] parameters = {
 					new SqlParameter("@UserID", SqlDbType.BigInt,8),
 					new SqlParameter("@UserName", SqlDbType.NVarChar,50),
 					new SqlParameter("@Nickname", SqlDbType.NVarChar,50),
@@ -148,23 +172,39 @@ namespace KuaiLe.Us.DAL
 					new SqlParameter("@Level", SqlDbType.Int,4),
 					new SqlParameter("@Credit", SqlDbType.Float,8),
 					new SqlParameter("@Status", SqlDbType.Int,4),
-                    new SqlParameter("@FindPwdTime", SqlDbType.DateTime)};
-			parameters[0].Value = model.UserID;
-			parameters[1].Value = model.UserName;
-			parameters[2].Value = model.Nickname;
-			parameters[3].Value = model.Password;
-			parameters[4].Value = model.Email;
-			parameters[5].Value = model.Sex;
-			parameters[6].Value = model.ActivateCode;
-			parameters[7].Value = model.RegTime;
-			parameters[8].Value = model.RegIP;
-			parameters[9].Value = model.LastLoginTime;
-			parameters[10].Value = model.LastLoginIP;
-			parameters[11].Value = model.LoginCount;
-			parameters[12].Value = model.Level;
-			parameters[13].Value = model.Credit;
-			parameters[14].Value = model.Status;
+					new SqlParameter("@FindPwdTime", SqlDbType.DateTime),
+					new SqlParameter("@Birth", SqlDbType.DateTime),
+					new SqlParameter("@HomePage", SqlDbType.NVarChar,200),
+					new SqlParameter("@ImagePath", SqlDbType.NVarChar,200),
+					new SqlParameter("@Phone", SqlDbType.NVarChar,50),
+					new SqlParameter("@Mobile", SqlDbType.NVarChar,50),
+					new SqlParameter("@Address", SqlDbType.NVarChar,200),
+					new SqlParameter("@Motto", SqlDbType.NVarChar,50),
+					new SqlParameter("@Intro", SqlDbType.NVarChar,500)};
+            parameters[0].Value = model.UserID;
+            parameters[1].Value = model.UserName;
+            parameters[2].Value = model.Nickname;
+            parameters[3].Value = model.Password;
+            parameters[4].Value = model.Email;
+            parameters[5].Value = model.Sex;
+            parameters[6].Value = model.ActivateCode;
+            parameters[7].Value = model.RegTime;
+            parameters[8].Value = model.RegIP;
+            parameters[9].Value = model.LastLoginTime;
+            parameters[10].Value = model.LastLoginIP;
+            parameters[11].Value = model.LoginCount;
+            parameters[12].Value = model.Level;
+            parameters[13].Value = model.Credit;
+            parameters[14].Value = model.Status;
             parameters[15].Value = model.FindPwdTime;
+            parameters[16].Value = model.Birth;
+            parameters[17].Value = model.HomePage;
+            parameters[18].Value = model.ImagePath;
+            parameters[19].Value = model.Phone;
+            parameters[20].Value = model.Mobile;
+            parameters[21].Value = model.Address;
+            parameters[22].Value = model.Motto;
+            parameters[23].Value = model.Intro;
 
 			db.RunSql(strSql.ToString(),parameters);
 
@@ -205,7 +245,7 @@ namespace KuaiLe.Us.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime from T_User ");
+            strSql.Append("select  top 1 * from T_User ");
             SqlParameter[] parameters = null;
             if (isEmail)
             {
@@ -270,6 +310,17 @@ namespace KuaiLe.Us.DAL
                 {
                     model.FindPwdTime = DateTime.Parse(ds.Tables[0].Rows[0]["FindPwdTime"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["Birth"].ToString() != "")
+                {
+                    model.Birth = DateTime.Parse(ds.Tables[0].Rows[0]["Birth"].ToString());
+                }
+                model.HomePage = ds.Tables[0].Rows[0]["HomePage"].ToString();
+                model.ImagePath = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+                model.Phone = ds.Tables[0].Rows[0]["Phone"].ToString();
+                model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                model.Motto = ds.Tables[0].Rows[0]["Motto"].ToString();
+                model.Intro = ds.Tables[0].Rows[0]["Intro"].ToString();
                 return model;
             }
             else
@@ -286,7 +337,7 @@ namespace KuaiLe.Us.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime from T_User ");
+            strSql.Append("select  top 1 * from T_User ");
 			strSql.Append(" where UserID=@UserID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@UserID", SqlDbType.BigInt)
@@ -340,6 +391,17 @@ namespace KuaiLe.Us.DAL
                 {
                     model.FindPwdTime = DateTime.Parse(ds.Tables[0].Rows[0]["FindPwdTime"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["Birth"].ToString() != "")
+                {
+                    model.Birth = DateTime.Parse(ds.Tables[0].Rows[0]["Birth"].ToString());
+                }
+                model.HomePage = ds.Tables[0].Rows[0]["HomePage"].ToString();
+                model.ImagePath = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+                model.Phone = ds.Tables[0].Rows[0]["Phone"].ToString();
+                model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                model.Motto = ds.Tables[0].Rows[0]["Motto"].ToString();
+                model.Intro = ds.Tables[0].Rows[0]["Intro"].ToString();
 				return model;
 			}
 			else
@@ -354,7 +416,7 @@ namespace KuaiLe.Us.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime ");
+            strSql.Append("select *");
 			strSql.Append(" FROM T_User ");
 			if(strWhere.Trim()!="")
 			{
@@ -374,7 +436,7 @@ namespace KuaiLe.Us.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" UserID,UserName,Nickname,Password,Email,Sex,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime ");
+            strSql.Append(" * ");
 			strSql.Append(" FROM T_User ");
 			if(strWhere.Trim()!="")
 			{

@@ -28,4 +28,19 @@ public partial class User_My : PageBase
         return UserModel.GetStatusName(status);
     }
 
+
+    public string GetShortDate(object date)
+    {
+        DateTime dtmDate = new DateTime();
+        try
+        {
+            dtmDate = Convert.ToDateTime(date);
+        }
+        catch
+        {
+            return date + "";
+        }
+        return dtmDate.ToString("yyyy-MM-dd");
+    }
+
 }

@@ -431,3 +431,19 @@ $(function() {
 
 });
 
+
+//提示，ID,信息，类型：0=无，1=成功，-1=失败
+function tip(id, msg, type) {
+    if (type == 1) {
+        msg = "√ " + msg;
+        $(id).css("color", "#090");
+    }
+    else if (type == -1) {
+        msg = "× " + msg;
+        $(id).css("color", "#f00");
+    }
+    else {
+        $(id).css("color", "#000");
+    }
+    $(id).html(msg);
+};

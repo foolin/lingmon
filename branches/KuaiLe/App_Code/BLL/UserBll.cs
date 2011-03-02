@@ -174,6 +174,17 @@ namespace KuaiLe.Us.BLL
                     {
                         model.FindPwdTime = DateTime.Parse(dt.Rows[n]["FindPwdTime"].ToString());
                     }
+                    if (dt.Rows[n]["Birth"].ToString() != "")
+                    {
+                        model.Birth = DateTime.Parse(dt.Rows[n]["Birth"].ToString());
+                    }
+                    model.HomePage = dt.Rows[n]["HomePage"].ToString();
+                    model.ImagePath = dt.Rows[n]["ImagePath"].ToString();
+                    model.Phone = dt.Rows[n]["Phone"].ToString();
+                    model.Mobile = dt.Rows[n]["Mobile"].ToString();
+                    model.Address = dt.Rows[n]["Address"].ToString();
+                    model.Motto = dt.Rows[n]["Motto"].ToString();
+                    model.Intro = dt.Rows[n]["Intro"].ToString();
 					modelList.Add(model);
 				}
 			}

@@ -90,6 +90,14 @@ public class Register : IHttpHandler, System.Web.SessionState.IRequiresSessionSt
             model.LastLoginIP = "";
             model.LastLoginTime = DateTime.Now;
             model.FindPwdTime = DateTime.Now;
+            model.Birth = DateTime.Now;
+            model.HomePage = "";
+            model.ImagePath = "";
+            model.Phone = "";
+            model.Mobile = "";
+            model.Address = "";
+            model.Motto = "";
+            model.Intro = "";
             
             //注册到数据库
             bll.Add(model);

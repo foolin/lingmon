@@ -26,6 +26,14 @@ namespace KuaiLe.Us.Model
 		private decimal? _credit;
 		private int? _status;
         private DateTime? _findpwdtime;
+        private DateTime? _birth;
+        private string _homepage;
+        private string _imagepath;
+        private string _phone;
+        private string _mobile;
+        private string _address;
+        private string _motto;
+        private string _intro;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -154,6 +162,71 @@ namespace KuaiLe.Us.Model
         {
             set { _findpwdtime = value; }
             get { return _findpwdtime; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? Birth
+        {
+            set { _birth = value; }
+            get { return _birth; }
+        }
+        /// <summary>
+        /// 个人主页
+        /// </summary>
+        public string HomePage
+        {
+            set { _homepage = value; }
+            get { return _homepage; }
+        }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string ImagePath
+        {
+            set { _imagepath = value; }
+            get { return _imagepath; }
+        }
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string Phone
+        {
+            set { _phone = value; }
+            get { return _phone; }
+        }
+        /// <summary>
+        /// 手机
+        /// </summary>
+        public string Mobile
+        {
+            set { _mobile = value; }
+            get { return _mobile; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Address
+        {
+            set { _address = value; }
+            get { return _address; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Motto
+        {
+            set { _motto = value; }
+            get { return _motto; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Intro
+        {
+            set { _intro = value; }
+            get { return _intro; }
         }
 
 		#endregion Model

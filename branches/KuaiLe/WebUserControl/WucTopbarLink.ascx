@@ -11,8 +11,8 @@
         
         <%=GetUserLoginInfo() %>
         
-        <a href="#">设为首页</a> &nbsp;&nbsp; | &nbsp;
-        <a href="#">收藏本站</a> &nbsp; | &nbsp;
+        <a href="#" onclick="javascript:this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.kuaile.us/');return(false);">设为首页</a> &nbsp;&nbsp; | &nbsp;
+        <a href="#" onclick="javascript:try{ window.external.AddFavorite('http://www.kuaile.us/','快乐网—我们一起分享'); } catch(e){ (window.sidebar)?window.sidebar.addPanel('快乐网—我们一起分享','http://www.kuaile.us/',''):alert('请使用按键 Ctrl+d，收藏快乐网'); }">收藏本站</a> &nbsp; | &nbsp;
         <a href="#">订阅本站</a> &nbsp; | &nbsp;
         <a href="#" style="cursor:help;">使用帮助</a> &nbsp;
     </span>

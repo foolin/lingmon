@@ -184,7 +184,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>验证密码：</td>
+                    <td>密码：</td>
                     <td> <input type="password" name="txtPassword" id="txtPassword" value="" />  <span id="tipPassword"> 为了安全，需要验证密码，否则无法修改 </span> </td>
                 </tr>
                 <tr>
@@ -233,19 +233,19 @@
                 <tbody>
                 <tr>
                     <td>旧密码：</td>
-                    <td> <input type="password" name="txtOldPassword" value="" /> </td>
+                    <td> <input type="password" name="txtOldPassword" id="txtOldPassword" value="" /> <span id="tipOldPassword">请输入旧密码</span> </td>
                 </tr>
                 <tr>
                     <td>新密码：</td>
-                    <td> <input type="password" name="txtNewPassword" value="" />  </td>
+                    <td> <input type="password" name="txtNewPassword" id="txtNewPassword" value="" /> <span id="tipNewPassword">请输入要新修改的密码</span>  </td>
                 </tr>
                 <tr>
                     <td>重复新密码：</td>
-                    <td> <input type="password" name="txtNewRePassword" value="" /> </td>
+                    <td> <input type="password" name="txtNewRePassword" id="txtNewRePassword" value="" /> <span id="tipNewRePassword">请重复输入新密码</span> </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td> <input type="button" class="btn"  name="btnSavePassword" value="保存" /> </td>
+                    <td> <input type="button" class="btn"  name="btnSavePassword" onclick="savePassword()" value="保存" /> </td>
                 </tr>
                 </tbody>
             </table>
@@ -256,7 +256,8 @@
     </div>
     
     <script type="text/javascript">
-
+        
+        //保存信息
         function saveInfo() {
             var nickName = $("#txtNickName").val() + "";
             var sex = 0;
@@ -304,7 +305,7 @@
             $("#btnSaveInfo").val("请在保存...");
             $("#btnSaveInfo").attr("disabled", "disabled");
 
-            //注册
+            //保存
             $.ajax({
                 type: "POST",
                 url: "../Handle/SaveUserInfo.ashx?t=" + new Date().getTime(),
@@ -332,6 +333,83 @@
                 }
             });
         }
+
+
+        //修改密码
+        function savePassword() {
+        
+            var oldPassword = $("#txtOldPassword").val() + "";
+            var newPassword = $("#txtNewPassword").val() + "";
+            var newRePassword = $("#txtNewRePassword").val() + "";
+
+            if (oldPassword.length < 6) {
+                tip("#tipOldPassword", "旧密码长度不对", -1);
+                return;
+            }
+
+            if (newPassword.length < 6 || newPassword.length > 20) {
+                tip("#tipNewPassword", "新密码长度不对，必须6-20个字符之间", -1);
+                return;
+            }
+
+            if (newRePassword != newPassword) {
+                tip("#tipNewRePassword", "两者密码不相同", -1);
+                return;
+            }
+
+
+            $("#btnSavePassword").val("正在保存...");
+            $("#btnSavePassword").attr("disabled", "disabled");
+            
+            //保存
+            $.ajax({
+                type: "POST",
+                url: "../Handle/SavePassword.ashx?t=" + new Date().getTime(),
+                //cache: false,
+                data: "oldpwd=" + oldPassword + "&newpwd=" + newPassword + "&newrepwd=" + newRePassword,
+                //dataType: "text",
+                //contentType: "charset=utf-8",
+                success: function(msg) {
+                    $.messager.alert('恭喜，保存成功！',
+                         msg,
+                         "info",
+                         function() {
+                             top.location.href = "My.aspx";
+                         }
+                     );
+
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    $.messager.alert("Sorry，保存失败！",
+                         "<font color='red'>" + xhr.responseText + " 请检查输入是否正确或稍后重试！</font>",
+                        "error");
+                    $("#btnSavePassword").val("保存");
+                    $("#btnSavePassword").attr("disabled", "");
+                }
+            });
+            
+        }
+
+        $(function() {
+            $("input[type='text']").blur(function() {
+                var thisName = $(this).attr("name") + "";
+                if (thisName.length > 3) {
+                    var tipName = "tip" + thisName.substring(3, thisName.length);
+                    if ($("#" + tipName).css("color") == "#ff0000" || $("#" + tipName).css("color") == "#f00") {
+                        tip("#" + tipName, "", 0);
+                    }
+                }
+            });
+            $("input[type='password']").blur(function() {
+                var thisName = $(this).attr("name") + "";
+                if (thisName.length > 3) {
+                    var tipName = "tip" + thisName.substring(3, thisName.length);
+                    if ($("#" + tipName).css("color") == "#ff0000" || $("#" + tipName).css("color") == "#f00") {
+                        tip("#" + tipName, "", 0);
+                    }
+                }
+            });
+        });
     
     </script>
    

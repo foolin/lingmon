@@ -29,7 +29,6 @@ public class SaveUserInfo : IHttpHandler, System.Web.SessionState.IRequiresSessi
         }
 
 
-        #region  ___取值并验证___
         /***  提交内容取值并验证 ******/
         
         //昵称
@@ -99,7 +98,20 @@ public class SaveUserInfo : IHttpHandler, System.Web.SessionState.IRequiresSessi
             context.Response.Write("简介不能超过300个字符！");
             return;
         }
-        //密码
+
+        
+        UserBll bll = new UserBll();
+        
+        //取最新的信息
+        user = bll.GetModel(user.UserID);
+        if (user == null)
+        {
+            context.Response.StatusCode = 400;
+            context.Response.Write("你尚未<a href='Login.aspx'>登录</a>！请先<a href='Login.aspx'>登录</a>或者<a href='Register.aspx'>注册</a>！");
+            return;
+        }
+
+        //验证密码
         string rqPassword = Utility.Security.MD5Util.ToMD5(context.Request["password"] + "", 32);
         if (rqPassword != user.Password)
         {
@@ -107,8 +119,6 @@ public class SaveUserInfo : IHttpHandler, System.Web.SessionState.IRequiresSessi
             context.Response.Write("密码不正确，无法修改资料！");
             return;
         }
-
-        #endregion
 
         /**** 赋值 *****/
         //昵称
@@ -138,7 +148,6 @@ public class SaveUserInfo : IHttpHandler, System.Web.SessionState.IRequiresSessi
         
         try
         {
-            UserBll bll = new UserBll();
             bll.Update(user);
             WebLog.WriteInfoLog("用户" + user.UserName + "更新资料成功！");
         }

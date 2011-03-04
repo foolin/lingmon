@@ -72,10 +72,11 @@
         </div>
     
         <div class="footer">
-            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">关于我们</a>  | 
-            <a href="<%= ResolveClientUrl("~/About/Agreement.aspx")%>">服务协议</a> | 
-            <a href="<%= ResolveClientUrl("~/Help")%>">使用帮助</a> | 
-            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">联系方式</a> &nbsp;
+            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">关于我们</a>&nbsp;|&nbsp;
+            <a href="<%= ResolveClientUrl("~/About/Agreement.aspx")%>">服务协议</a>&nbsp;|&nbsp;
+            <a href="<%= ResolveClientUrl("~/Help")%>">使用帮助</a>&nbsp;|&nbsp;
+            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">联系方式</a>&nbsp;|&nbsp
+            <a href="http://www.7dong.net" target="_blank">团队博客</a> &nbsp;
     	    <br />&copy; <%=DateTime.Now.Year %> <b><font color="green">快乐网</font>(<a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a>)</b> All Rights Reserved.
     	     &nbsp; <A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备07000266号-5</A>
             

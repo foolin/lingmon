@@ -260,7 +260,7 @@ namespace KuaiLe.Us.DAL
 				strSql.Append(" top "+Top.ToString());
 			}
             //strSql.Append(" ArtID,UserID,Title,Content,Tags,IsAnonym,CreateTime,Hits,DigUp,DigDown,Comments,Reports,Status,UserIP ");
-            strSql.Append(" select A.* ");
+            strSql.Append(" A.* ");
             strSql.Append(" ,U.UserName,U.NickName,U.Email ");
             strSql.Append(" FROM T_Article A ");
             strSql.Append(" Left join  dbo.T_User  U ");

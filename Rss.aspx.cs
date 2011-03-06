@@ -27,7 +27,7 @@ public partial class Rss : System.Web.UI.Page
         try
         {
             ArticleBll bll = new ArticleBll();
-            DataSet dsArtList = bll.GetList(50, "Status>0", "CreateTime Desc");
+            DataSet dsArtList = bll.GetList(50, "Status>0", "ArtID DESC, CreateTime Desc");
             if (dsArtList != null && dsArtList.Tables.Count > 0 && dsArtList.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in dsArtList.Tables[0].Rows)
@@ -43,7 +43,7 @@ public partial class Rss : System.Web.UI.Page
                     }
                     try
                     {
-                        dtmPubDate = Convert.ToDateTime(dr["CreateDate"]);
+                        dtmPubDate = Convert.ToDateTime(dr["CreateTime"]);
                     }
                     catch
                     {

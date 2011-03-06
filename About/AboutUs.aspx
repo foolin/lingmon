@@ -27,7 +27,7 @@
         </div>
         <div class="title"> 联系我们 </div>
         <div class="content">
-            &nbsp;&nbsp;&nbsp;&nbsp;  我们是一支有抱负有梦想的团队，一支富有活力、年轻的80后军队。卓越是我们的追求，创新是我们使命，年轻是我们的财富，技术是我们革命的本钱！如果有意加入我们或商业合作，请发送邮件到：Contact#kuaile.us  (#换成@) 
+            &nbsp;&nbsp;&nbsp;&nbsp;  我们是一支有抱负有梦想的团队，一支富有活力、年轻的80后军队。卓越是我们的追求，创新是我们使命，年轻是我们的财富，技术是我们革命的本钱！快乐网(www.kuaile.us)致力打造中国最大的互动分享平台！如果有意加入我们或商业合作，请发送邮件到：Contact#kuaile.us  (#换成@) 
         </div>
       </div>
 </asp:Content>

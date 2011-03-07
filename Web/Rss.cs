@@ -5,9 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Web;
 
-using Studio.Web;
-
-namespace Studio.Xml
+namespace Utility.Web
 {
 	/// <summary>
 	/// Rss2.0 XML标准类，用于生成Rss2.0

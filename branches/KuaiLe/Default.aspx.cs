@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using KuaiLe.Us.BLL;
+using Utility.Web;
 
 public partial class _Default : PageBase
 {
@@ -16,8 +17,24 @@ public partial class _Default : PageBase
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        #region 解析是否手机版或者kuaileus.com版，然后进行跳转
+        //取主机头
+        string httpHost = (Request.ServerVariables["HTTP_HOST"] + "").ToLower();
+        //如果手机头
+        if (httpHost.Contains("m.kuaile.us")
+            || httpHost.Contains("m.kuaileus.com"))
+        {
+            Response.Redirect("http://m.kuaile.us/wap");
+            return;
+        }
+        else if (httpHost == "www.kuaileus.com" || httpHost == "kuaileus.com")  //如果输入是www.kuaileus.com或kuaileus.com，则跳www.kuaile.us
+        {
+            Response.Redirect("http://www.kuaile.us");
+            return;
+        }
+        #endregion
 
+        //第一次提交
         if (!IsPostBack)
         {
             InitDataBind();

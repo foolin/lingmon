@@ -186,7 +186,9 @@ namespace KuaiLe.Us.Common
             }
         }
 
-
+        /// <summary>
+        /// 是否需要激活
+        /// </summary>
         public static bool IsNeedActivate
         {
             get
@@ -201,6 +203,47 @@ namespace KuaiLe.Us.Common
                     isNeedActivate = false;
                 }
                 return isNeedActivate;
+            }
+        }
+
+
+        /// <summary>
+        /// 是否需要审核文章
+        /// </summary>
+        public static bool VerifyArticle
+        {
+            get
+            {
+                bool isVerfifyArticle = false;
+                try
+                {
+                    isVerfifyArticle = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyArticle"]);
+                }
+                catch
+                {
+                    isVerfifyArticle = false;
+                }
+                return isVerfifyArticle;
+            }
+        }
+
+        /// <summary>
+        /// 是否需要审核评论
+        /// </summary>
+        public static bool VerifyComment
+        {
+            get
+            {
+                bool isVerifyComment = false;
+                try
+                {
+                    isVerifyComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyComment"]);
+                }
+                catch
+                {
+                    isVerifyComment = false;
+                }
+                return isVerifyComment;
             }
         }
 

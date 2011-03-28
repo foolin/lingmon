@@ -60,9 +60,7 @@ public class Login : IHttpHandler, System.Web.SessionState.IRequiresSessionState
                 return;
             }
             
-            
-            user.LastLoginIP = Utility.Web.WebAgent.GetIP();    
-            user.LastLoginTime = DateTime.Now;
+
             //登录次数
             if (user.LoginCount != null)
             {
@@ -72,15 +70,22 @@ public class Login : IHttpHandler, System.Web.SessionState.IRequiresSessionState
             {
                 user.LoginCount = 1;
             }
-            //每登录一次，积分+1
-            if (user.Credit != null)
+            
+            //每天登录一次，积分+1
+            if (user.Credit != null && user.LastLoginTime != null)
             {
-                user.Credit = user.Credit + 1;
+                DateTime dtmLastLoginTime = Convert.ToDateTime(user.LastLoginTime);
+                if (dtmLastLoginTime.AddDays(1) < DateTime.Now)
+                {
+                    user.Credit = user.Credit + 1;
+                }
             }
             else
             {
                 user.Credit = user.Credit + 1;
             }
+            user.LastLoginIP = Utility.Web.WebAgent.GetIP();
+            user.LastLoginTime = DateTime.Now;
             
             //更新登录信息
             try

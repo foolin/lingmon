@@ -207,6 +207,23 @@ namespace KuaiLe.Us.BLL
             return dal.GetList(strWhere, strOrder, pageSize, pageIndex, out records);
         }
 
+
+        /// <summary>
+        /// 取用户名
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public string GetUserName(long userid)
+        {
+            UserModel model = GetModel(userid);
+            if (model == null)
+            {
+                return "";
+            }
+
+            return model.UserName;
+        }
+
 		#endregion  Method
 	}
 }

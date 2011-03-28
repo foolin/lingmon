@@ -11,6 +11,10 @@ a{
 	color:#09F;
 	text-decoration:none;
 }
+a.green
+{
+	color:#090;
+}
 a:hover{
 	color:#F00;
 	text-decoration:underline;

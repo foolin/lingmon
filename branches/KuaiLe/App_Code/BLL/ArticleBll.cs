@@ -173,38 +173,7 @@ namespace KuaiLe.Us.BLL
         }
 
 
-        /// <summary>
-        /// 根据内容作为标题
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="content"></param>
-        public static string GetTitle(string content)
-        {
-            string title = "";
-            string strFirstLine = "";
-            if (content.IndexOf("<br") > 0)
-            {
-                strFirstLine =  content.Substring(0, content.IndexOf("<br"));
-            }
-            if (strFirstLine.Length > 20)
-            {
-                title = strFirstLine.Substring(0, 20);
-            }
-            else if(strFirstLine.Length > 0)
-            {
-                title = strFirstLine;
-            }
-            else if (content.Length > 20)
-            {
-                title = content.Substring(0, 20);
-            }
-            else
-            {
-                title = content;
-            }
 
-            return title;
-        }
 
 		#endregion  Method
 	}

@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using KuaiLe.Us.BLL;
 using Utility.Web;
+using KuaiLe.Us.Common;
 
 public partial class _Default : PageBase
 {
@@ -56,8 +57,16 @@ public partial class _Default : PageBase
         type = QS("type").ToLower().Trim();
         userID = QSInt("userid");
 
-        
-        string strWhere = " (Status> 0 Or  (Status = 0 And CreateTime<='" + DateTime.Now.AddMinutes(-10) + "') )";
+
+        string strWhere = "";
+        if (SysConfig.VerifyArticle)
+        {
+            strWhere += " Status> 0 ";
+        }
+        else
+        {
+            strWhere += " (Status> 0 Or  (Status = 0 And CreateTime<='" + DateTime.Now.AddMinutes(-10) + "') )";
+        }
         string strOrder = "ArtID DESC";
         if (userID > 0)
         {

@@ -39,7 +39,7 @@ public partial class Rss : System.Web.UI.Page
                     DateTime dtmPubDate = DateTime.Now;
                     if (strTitle == "")
                     {
-                        strTitle = ArticleBll.GetTitle(strContent);
+                        strTitle = Helper.GetFirstLine(strContent, 20);
                     }
                     try
                     {

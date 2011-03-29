@@ -1,0 +1,195 @@
+﻿body {
+	font-size:12px;
+	line-height:1.5em;
+}
+.clear{ clear:both;}
+
+a{ color:#06F; }
+a:hover{ color:#F00;}
+
+.northTop { background:#E3EFFD; color:#FFF; font-size:13px; font-weight:bold; overflow:hidden;}
+ul.nav{ list-style:none;margin:0; padding:0 10px;}
+ul.nav li{ float:left; margin:0; padding:0 10px; line-height:30px;}
+ul.nav a{ color:#06F; text-decoration:none;}
+ul.nav a:hover{ color:#F00; text-decoration:none;}
+
+
+.siderMenu { margin:0; padding:5px 0;}
+.siderMenu ul li{ padding-top:2px; padding-bottom:2px;}
+.siderMenu a{ text-decoration:none;} 
+.siderMenu a:hover{ text-decoration:underline;} 
+/*
+.siderMenu { margin:0; padding:0; border:0; width:100%; overflow:hidden;}
+.siderMenu ul{ margin:0; padding:0; list-style:none;}
+.siderMenu ul li{ height:26px; line-height:26px; border-bottom:dashed 1px #CCC;}
+.siderMenu ul li a{margin:0; padding:0 0 0 15px; display:inline-block; width:100%; text-decoration:none;}
+.siderMenu ul li a:hover{ background:#09C; color:#FFF; text-decoration:none;}
+*/
+
+.tipDiv
+{
+    width:500px;
+    border:0;
+    background:#ffffff;
+    z-index:10;/*z-index很重要，它决定了Div框在页面上的叠加顺序*/
+    position:absolute;/*绝对定位，它决定了该元素可以根据top 和 left 叠在其他元素上*/
+}
+
+
+.location{
+	line-height:30px;
+	height:30px;
+	border:1px dashed #CCC;
+	text-indent:5px;
+	margin-top:5px;
+	margin-bottom:10px;
+	background:#F7F7F7;
+}
+.location a{
+}
+.btnArea{
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+.formArea {
+	width:100%;
+}
+.formArea .input, .formArea .ddlList,.formArea select, .formArea textarea{
+	height:22px;
+	line-height:22px;
+	background:#faffbd;
+	border:solid 1px #CCC;
+	font-size:12px;
+	padding-left:3px;
+	padding-right:3px;
+	color:#F60;
+	font-weight:bold;
+	font-family:Tahoma, Geneva, sans-serif;
+	padding:2px;
+}
+.formArea .btn{
+	padding:5px 6px;
+	font-weight:bold;
+	font-size:14px;
+	color:#F60;
+	background:#faffbd url(../Images/btn_bg.gif) repeat-x;
+	border:solid 1px #FC6;
+}
+.formArea .textArea{
+}
+.formArea .input, .formArea .ddlList{
+	height:22px;
+	line-height:28px;
+	width:160px;
+	background:#faffbd;
+	border:solid 1px #CCC;
+	font-size:14px;
+	padding-left:3px;
+	padding-right:3px;
+	color:#F60;
+	font-weight:bold;
+	font-family:Tahoma, Geneva, sans-serif;
+	padding:2px;
+}
+.formArea .ddlList{
+	height:28px;
+	line-height:25px;
+	width:166px;
+}
+.hidden
+{
+	display:none;
+}
+.pointer
+{
+	cursor:pointer;
+	text-decoration:underline;
+}
+.inputTips
+{
+	color:Gray;
+}
+.gray
+{
+	color:Gray;
+}
+.green
+{
+	color:Green;
+}
+.red
+{
+	color:Red;
+}
+.blue
+{
+	color:Blue;
+}
+
+.emailArea{
+	width:504px;
+	height:60px;
+	overflow:auto;
+	border:1px solid #CCC;
+	background:#F6F6F6;
+}
+.tipsArea
+{
+	background:#faffbd;
+	border:1px solid #ccc;
+	/*border-bottom:#FFB366 solid 3px;*/
+	padding:10px;
+	font-size:14px;
+	color:#090;
+	font-family:"Courier New", Courier, monospace;
+}
+.tipsArea span{
+	margin:0;
+	padding:5px;
+	
+	background:#dafab7;
+	border:#92d050 solid 1px;
+	border-bottom:#92d050 solid 3px;
+	color:#090;
+}
+.tipsArea span.ing{
+	background:#FFD1A4;
+	background:#FDB;
+	color:#F60;
+	border:#FF9224 solid 1px;
+	border-bottom: #FFAC59 solid 3px;
+}
+
+
+.txtR{ text-align:right;}
+.txtL{ text-align:left;}
+
+
+
+/**************** KuaiLe.Us Author:Foolin **************/
+.list 
+{
+	padding:5px;
+	margin:0;
+	font-size:14px;
+	line-height:1.5em;
+}
+
+.list dl
+{
+	border:solid 1px #ccc;
+	background:#FAFAFA;
+	padding:5px;
+}
+
+.list dl dt,.list dl dd{
+	margin:0;
+	padding:5px 10px;
+	background:#FFF;
+	border-bottom:dashed 1px #EBEBEB;
+}
+.list dl dd.content{
+	padding:10px;
+	
+}

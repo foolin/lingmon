@@ -1,0 +1,46 @@
+﻿body 
+{
+	margin:5px;
+}
+a img
+{
+	border:0;
+}
+a
+{
+	color:Blue;
+}
+a:hover
+{
+	background:blue;
+	color:#fff;
+}
+dl.artlist{
+	line-height:1.8em;
+}
+dl.artlist dt{
+	color:#090;
+	background:#F5F5F5;
+}
+dl.artlist dd{
+	margin:0;
+}
+.artlist .info{
+	border-bottom:1px #CCC solid;
+	font-size:12px;
+	color:#999;
+}
+.article
+{
+	padding:8px;
+	line-height:1.8em;
+}
+.article .title
+{
+	font-weight:bold;
+}
+
+.article hr
+{
+	border:1px dashed #ccc;
+}

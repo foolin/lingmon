@@ -1,0 +1,89 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register src="WebUserControl/WucHeaderInclude.ascx" tagname="WucHeaderInclude" tagprefix="uc1" %>
+<%@ Register src="WebUserControl/WucTopbarLink.ascx" tagname="WucTopbarLink" tagprefix="uc2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>快乐网-我们一起分享| www.kuaile.us</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+    <meta name="keywords" content="快乐网,快乐,我们,分享,开心,幽默,搞笑,笑话,恶搞,爆笑,顺口溜,哲理,糗事,哈哈,嘻嘻,娱乐,轻松,放松,图片,视频,电影"> 
+    <meta name="description" content="快乐网(www.kuaile.us)，我们一起分享！快乐网是一分享快乐的平台，提供分享最新、搞笑、开心、恶搞、糗事的文字、图片、视频、电影的平台，让你快乐，令你放松，助你减压！"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="js/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <uc1:WucHeaderInclude ID="WucHeaderInclude1" runat="server" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+    
+    <div class="wrapper innerWrapWidth">
+        <div class="topbar">
+	        <div class="innerWrapWidth" style="margin:0 auto;">
+        	    
+                <uc2:WucTopbarLink ID="WucTopbarLink1" runat="server" />
+        	    
+            </div>
+        </div>
+        <div class="header">
+    	    <div class="logo">
+    	        <a href="<%= ResolveClientUrl("~/Default.aspx")%>" title="快乐网(www.kuaile.us)，我们一起分享！">
+        	    <img src="<%= ResolveClientUrl("~/images/KuaiLeLogo3.png")%>" border="0" height="65" />
+        	    </a>
+            </div>
+            <div class="nav">
+        	    <span class="navLink">
+          	    <a href="<%= ResolveClientUrl("~/Default.aspx")%>">首页</a> |
+          	    <a href="<%= ResolveClientUrl("~/Default.aspx?type=new")%>">最新</a> | 
+                <a href="<%= ResolveClientUrl("~/Default.aspx?type=hot")%>">热门</a> | 
+                <a href="<%= ResolveClientUrl("~/Default.aspx?type=hot")%>">热评</a> | 
+                <a href="<%= ResolveClientUrl("~/Default.aspx?type=comments")%>">标签</a> | 
+                <a href="<%= ResolveClientUrl("~/Default.aspx?type=hot")%>">我要分享</a> | 
+                <a href="<%= ResolveClientUrl("~/Article/Search.aspx")%>">搜索</a>
+                <input type="text" name="keyword" id="txtTopKeyword" tip="请输入关键词..." value="" /> <input type="button" onclick="search($('#txtTopKeyword').val())" name="btnSearch" value="搜索" />
+                </span>
+                <span class="search">
+                	
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+       
+        <div class="container">
+            <div class="containerMain" id="containerMain">
+            
+            <asp:ContentPlaceHolder id="CphMain" runat="server">
+            </asp:ContentPlaceHolder>
+            
+            </div>
+            <!-- containerMain -->
+            
+            <div class="containerSider" id="containerSider">
+                
+                <asp:ContentPlaceHolder id="CphSider" runat="server">
+                </asp:ContentPlaceHolder>
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+    
+        <div class="footer">
+            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">关于我们</a>&nbsp;|&nbsp;
+            <a href="<%= ResolveClientUrl("~/About/Agreement.aspx")%>">服务协议</a>&nbsp;|&nbsp;
+            <%--<a href="<%= ResolveClientUrl("~/Help")%>">使用帮助</a>&nbsp;|&nbsp;--%>
+            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">联系方式</a>&nbsp;|&nbsp
+            <a href="http://m.kuaile.us">手机快乐网</a>&nbsp;|&nbsp
+            <a href="http://www.7dong.net" target="_blank">团队博客</a> &nbsp;
+    	    <br />&copy; <%=DateTime.Now.Year %> <b><font color="green">快乐网</font>(<a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a>)</b> All Rights Reserved.
+    	     &nbsp; <A href="http://www.miibeian.gov.cn/" target="_blank" >粤ICP备07000266号-5</A>
+            
+        </div>
+    </div>
+
+    </form>
+</body>
+</html>

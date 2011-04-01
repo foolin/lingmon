@@ -59,6 +59,7 @@ a.orange:hover{
 .header .logo{
 	float:left;
 	30%;
+	margin-left:10px;
 }
 .header .nav{
 	float:right;

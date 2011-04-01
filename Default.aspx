@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网 - 我们一起分享 | 致力打造中国最大互动分享平台" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="齐来网-中国最专业分享网站|齐来分享，快乐你我" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>

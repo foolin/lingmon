@@ -18,6 +18,8 @@ public partial class _Default : PageBase
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
+
         #region 解析是否手机版或者kuaileus.com版，然后进行跳转
         //取主机头
         string httpHost = (Request.ServerVariables["HTTP_HOST"] + "").ToLower();
@@ -33,7 +35,30 @@ public partial class _Default : PageBase
             Response.Redirect("http://www.kuaile.us");
             return;
         }
+        else if (httpHost == "foolin.guli.cc")  //如果输入是foolin.guli.cc，则跳到管理登录页面
+        {
+            Response.Redirect("Manage/Login.aspx");
+            return;
+        }
+        else if (httpHost == "www.guli.cc" || httpHost == "guli.cc")  //如果输入是www.guli.cc或guli.cc，则跳www.kuaile.us
+        {
+            Response.Redirect("http://www.kuaile.us");
+            return;
+        }
         #endregion
+		
+		if(httpHost.Contains("cengzai.com"))
+		{
+			this.Page.Title = "曾在(CengZai.com)—让有情人幸福！年轻人最爱分享情感的网站";
+		}
+		else if(httpHost.Contains("jiaowho.com"))
+		{
+			this.Page.Title = "交互(JiaoWho.com)—互动分享，快乐你我。";
+		}
+		else if(httpHost.Contains("7lai.cn"))
+		{
+			this.Page.Title = "齐来(7lai.cn)—分享生活，分享快乐。";
+		}
 
         //第一次提交
         if (!IsPostBack)

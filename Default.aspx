@@ -125,10 +125,21 @@
             	<div class="title">公告区</div>
                 <div class="content">
                 	<div class="text">
-                	    &nbsp;&nbsp;&nbsp;&nbsp;欢迎光临快乐网，我们的口号是“快乐，我们一起分享！”。<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;或许你生活在忙碌之中，在学习、工作、生活业余之余，利用短短的5分钟时间，来与我们分享一下快乐。
-                    <br /><br />
-                        快乐网：www.kuaile.us
+                	
+                        <asp:Repeater ID="repNoticeList" runat="server">
+                            <ItemTemplate>
+                                <div style="padding:8px 5px; font-weight:bold; font-size:13px;"><%#Eval("Title") %></div>
+                                <div style="color:#333">
+                                <%#Eval("Content") %><br /><br />
+                                </div>
+                                
+                                <div style="padding-right:10px; text-align:right; color:#666;">发布人：<%#Eval("Author") %></div>
+                            </ItemTemplate>
+                            <SeparatorTemplate>
+                            <div style="border-bottom:dashed 1px #ccc; margin:5px;"></div>
+                            </SeparatorTemplate>
+                        </asp:Repeater>
+                        
                     </div>
                 </div>
             </div>

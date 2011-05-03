@@ -54,6 +54,34 @@ namespace KuaiLe.Us.Common
             return firstLine;
         }
 
+
+        /// <summary>
+        /// 转Html
+        /// </summary>
+        /// <param name="strContent"></param>
+        /// <returns></returns>
+        public static string EnHtml(string strContent)
+        {
+            strContent = HttpUtility.HtmlEncode(strContent);
+            strContent = strContent.Replace(" ", "&nbsp;");
+            strContent = strContent.Replace("\n", "<br />");
+            return strContent;
+        }
+
+
+        /// <summary>
+        /// html转文本
+        /// </summary>
+        /// <param name="strContent"></param>
+        /// <returns></returns>
+        public static string DeHtml(string strContent)
+        {
+            strContent = strContent.Replace("&nbsp;", " ");
+            strContent = strContent.Replace("<br />", "\n");
+            return strContent;
+        }
+
+
     }
 
 }

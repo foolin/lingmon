@@ -2,7 +2,6 @@
 
 using System;
 using System.Web;
-using System.Web;
 using KuaiLe.Us.Model;
 using KuaiLe.Us.DAL;
 using KuaiLe.Us.BLL;

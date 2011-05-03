@@ -66,7 +66,10 @@ public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             }
 
             KuaiLe.Us.BLL.ArticleBll artBll = new KuaiLe.Us.BLL.ArticleBll();
-            if (!artBll.Exists(artid))
+            KuaiLe.Us.Model.ArticleModel artModel = null;
+
+            artModel = artBll.GetModel(artid);
+            if (artModel == null)
             {
                 KuaiLe.Us.Common.WebLog.WriteErrLog("不存在文章ID：" + artid);
                 context.Response.StatusCode = 400;
@@ -88,11 +91,25 @@ public class CommentAdd : IHttpHandler, System.Web.SessionState.IRequiresSession
             commentModel.UserIP = Utility.Web.WebAgent.GetIP();
             commentModel.UserName = strCommentUserName;
             commBll.Add(commentModel);
-
+            
+            //更新文章的评论数
+            System.Data.DataSet dsCommentList = commBll.GetList("ArtID='" + artid + "'");
+            if(dsCommentList != null && dsCommentList.Tables.Count > 0)
+            {
+                artModel.Comments = dsCommentList.Tables[0].Rows.Count;
+            }
+            else
+            {
+                artModel.Comments = 0;
+            }
+            artBll.Update(artModel);
+            
+            
             context.Session["PrePostCommentTime"] = DateTime.Now;
             KuaiLe.Us.Common.WebLog.WriteInfoLog("用户发表评论成功！");
             context.Response.StatusCode = 200;
             context.Response.Write("恭喜，发表评论成功！");
+            
             
             return;
 

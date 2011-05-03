@@ -127,6 +127,17 @@ public partial class _Default : PageBase
             repDataList.DataBind();
             Paging1.InitPage(record);
         }
+
+
+
+        //通知
+        DataSet dsNoticeList = new NoticeBll().GetList(5,"", "PostTime DESC");
+        if (dsNoticeList != null && dsNoticeList.Tables.Count > 0 && dsNoticeList.Tables[0].Rows.Count > 0)
+        {
+            repNoticeList.DataSource = dsNoticeList;
+            repNoticeList.DataBind();
+        }
+
     }
 
 }

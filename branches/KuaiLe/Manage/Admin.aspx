@@ -225,6 +225,18 @@
 		    </li> 
 		    
 		    <li> 
+			    <span>公告管理</span>
+			    <ul>
+				    <li> 
+					    <span><a href="Notice/NoticeList.aspx"  tab="true">公告列表</a></span>
+				    </li> 
+				    <li> 
+					    <span><a href="Notice/NoticeAdd.aspx"  tab="true">添加公告</a></span>
+				    </li> 
+			    </ul> 
+		    </li> 
+		    
+		    <li> 
 			    <span>用户管理</span>
 			    <ul>
 				    <li> 

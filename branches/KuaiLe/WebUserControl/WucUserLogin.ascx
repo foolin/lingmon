@@ -21,12 +21,12 @@
 
         $("#LoginUserName").blur(function() {
             var loginUsername = $("#LoginUserName").val() + "";
-            if (loginUsername.length < 5 || loginUsername.length > 20) {
-                formTip("tipLoginUserName", "用户名长度必须为5~20个字符", -1);
+            if (loginUsername.length < 3 || loginUsername.length > 20) {
+                formTip("tipLoginUserName", "用户名长度必须为3~20个字符", -1);
                 return;
             }
             else {
-                formTip("tipLoginUserName", "验证通过", 1);
+                formTip("tipLoginUserName", "用户名ok", 1);
                 return;
             }
         });
@@ -38,7 +38,7 @@
                 return;
             }
             else {
-                formTip("tipLoginPassword", "验证通过", 1);
+                formTip("tipLoginPassword", "密码ok", 1);
                 return;
             }
         });
@@ -57,8 +57,8 @@
     function userLogin() {
         var loginUsername = $("#LoginUserName").val() + "";
         var loginPassword = $("#LoginPassword").val() + "";
-        if (loginUsername.length < 5 || loginUsername.length > 20) {
-            formTip("tipLoginUserName", "用户名长度必须为5~20个字符", -1);
+        if (loginUsername.length < 3 || loginUsername.length > 20) {
+            formTip("tipLoginUserName", "用户名长度必须为3~20个字符", -1);
             return;
         }
 

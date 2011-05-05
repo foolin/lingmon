@@ -35,10 +35,10 @@ public class Register : IHttpHandler, System.Web.SessionState.IRequiresSessionSt
 
             //检查用户名
             bool isValidateUsername = Regex.IsMatch(strUsername, @"^[a-zA-Z-_0-9]+$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            if (!isValidateUsername || strUsername.Length < 5 || strUsername.Length > 20)
+            if (!isValidateUsername || strUsername.Length < 3 || strUsername.Length > 20)
             {
                 context.Response.StatusCode = 400;
-                context.Response.Write("用户名必须是字母、数字和下划线，且介于5~20个字符！");
+                context.Response.Write("用户名必须是字母、数字和下划线，且介于3~20个字符！");
                 return;
             }
             //检查密码

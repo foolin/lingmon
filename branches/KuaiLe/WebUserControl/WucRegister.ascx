@@ -71,8 +71,8 @@
 			    var chkCode = $("#RegChkCode").val() + "";
 			    
 			    reg=/^[a-zA-Z0-9_\-]+$/gi;
-                if(username.length < 5){
-                    regTip("errRegUserName","用户名不能小于5个字符", -1);
+                if(username.length < 3){
+                    regTip("errRegUserName","用户名不能小于3个字符", -1);
                     return false;
                 }
                 else if(!reg.test(username)){
@@ -142,8 +142,8 @@
 		function regCheckUsername(){
 			var username = $("#RegUserName").val() + "";
 			reg=/^[a-zA-Z0-9_\-]+$/gi;
-            if(username.length < 5){
-                regTip("errRegUserName","用户名不能小于5个字符", -1);
+            if(username.length < 3){
+                regTip("errRegUserName","用户名不能小于3个字符", -1);
                 return false;
             }
             else if(!reg.test(username)){

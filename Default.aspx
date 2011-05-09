@@ -14,7 +14,7 @@
 
         	<div class="postArea">
             <div class="areaPadding">
-            		<div class="title">来，与我们分享您的快乐：</div>
+            		<div class="title">来，与我们分享您的快乐： </div>
                     <div class="textareaBox">
                         <textarea name="artContent" id="artContent" maxlen="1000" style="height:80px; font-size:14px;" tip="请在这里输入你要分享的内容..."></textarea>
                     </div>

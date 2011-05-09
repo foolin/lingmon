@@ -4,13 +4,13 @@
 
     <dl>
         <dt>用户名：</dt>
-        <dd><input type="text" name="RegUserName" id="RegUserName" value="" /><span id="errRegUserName"></span></dd>
+        <dd><input type="text" name="RegUserName" id="RegUserName" value="" /><span id="errRegUserName">  </span></dd>
         <dt>密 码：</dt>
         <dd><input type="password" name="RegPassword" id="RegPassword" value="" /><span id="errRegPassword"></span></dd>
         <dt>重复密码：</dt>
         <dd><input type="password" name="RegRePassword" id="RegRePassword" value="" /><span id="errRegRePassword"></span></dd>
         <dt>邮 箱：</dt>
-        <dd><input type="text" name="RegEmail" id="RegEmail"  value="" /><span id="errRegEmail"></span></dd>
+        <dd><input type="text" name="RegEmail" id="RegEmail"  value="" /><span id="errRegEmail"> 用来激活帐户/找回密码，请务必真实</span></dd>
         <dt>验证码：</dt>
         <dd><input type="text" name="RegChkCode" id="RegChkCode"  style="width:50px;" value="" /> 
           	 <img id="imgRegChkCode" src="<%= ResolveClientUrl("~/Handle/ChkCodeImage.ashx")%>?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgRegChkCode')" />

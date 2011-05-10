@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网 - 我们一起分享 | 致力打造中国最大互动分享平台" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网(www.kuaile.us) - 提供分享冷笑话,糗事,开心,搞笑,恶搞,糗事百科,顺口溜,娱乐,幽默,哲理,励志,精彩英语的文字、图片、视频的平台" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>
@@ -55,7 +55,7 @@
                     
                         <div class="item">
                         
-                	        <div class="itemContent" style="height:auto;">
+                	        <div class="itemContent" style="height:auto;word-wrap:break-word;break-all;">
                                 <%#Eval("Content") %>
                             </div>
                             <div  class="moreDetail" style="display:none"> <a href="#" onclick="moreDetail(this); return false;">展开全部>></a>  </div>

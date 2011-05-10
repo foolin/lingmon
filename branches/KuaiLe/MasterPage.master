@@ -80,7 +80,8 @@
             <a href="http://www.7dong.net" target="_blank">团队博客</a> &nbsp;
     	    <br />&copy; <%=DateTime.Now.Year %> <b><font color="green">快乐网</font>(<a class="orange" href="http://www.kuaile.us">www.KuaiLe.Us</a>)</b> All Rights Reserved.
     	     &nbsp; 
-            <script src="http://s21.cnzz.com/stat.php?id=3058738&web_id=3058738&show=pic" language="JavaScript"></script>
+            <script src="http://s21.cnzz.com/stat.php?id=3058738&web_id=3058738&show=pic" language="JavaScript"></script><br />
+			快乐网(kuaile.us) - 我们一起分享!致力打造中国最大互动分享平台。
         </div>
     </div>
 

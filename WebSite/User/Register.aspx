@@ -100,19 +100,79 @@
         $("#<%=tbPassword.ClientID%>").focus(function() {
             $("#tipPassword").removeClass().addClass("tips").html("* 请输入6-16位的密码，区分大小写。");
         }).blur(function() {
-            //$("#tipPassword").removeClass().addClass("okTips").html("√ 密码合法");
+            var pwd = $(this).val() + "";
+            if (pwd.length < 6) {
+                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以小于6位");
+            }
+            else if (pwd.length < 6) {
+                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以大于16位");
+            }
+            else {
+                $("#tipPassword").removeClass().addClass("okTips").html("√ 密码可以使用");
+            }
+
         });
         $("#<%=tbRePassword.ClientID%>").focus(function() {
             $("#tipRePassword").removeClass().addClass("tips").html("* 请重新输入一遍密码。");
         }).blur(function() {
-            //$("#tipRePassword").removeClass().addClass("errTips").html("× 密码错误！");
+            var pwd = $("#<%=tbPassword.ClientID%>").val() + "";
+            var rePwd = $(this).val() + "";
+            if (pwd != rePwd) {
+                $("#tipRePassword").removeClass().addClass("errTips").html("× 两次密码不一致！");
+            }
+            else {
+                $("#tipRePassword").removeClass().addClass("okTips").html("√ 两次密码一致！");
+            }
         });
-        $("#<%=cbAgreement.ClientID%>").focus(function() {
-            $("#tipAgreement").addClass("tips").html("* 请仔细阅读协议并同意才可注册。");
-        }).blur(function() {
-            //$("#tipAgreement").removeClass("tips").html("");
+        $("#<%=cbAgreement.ClientID%>").click(function() {
+            var isCheck = $(this).attr("checked");
+            if (!isCheck) {
+                $("#tipAgreement").removeClass().addClass("errTips").html("× 必须同意协议才可注册。");
+            }
+            else {
+                $("#tipAgreement").removeClass().html("");
+            }
         });
     });
+
+
+    function CheckForm() {
+        var email = $("#<%=tbEmail.ClientID%>").val() + "";
+        if (!isEmail(email)) {
+            $("#tipEmail").removeClass().addClass("errTips").html("× 邮箱不符合要求！");
+            return false;
+        }
+        else {
+            $("#tipEmail").removeClass().addClass("okTips").html("√ 邮箱符合要求");
+        }
+        var pwd = $("#<%=tbPassword.ClientID%>").val() + "";
+        if (pwd.length < 6 || pwd.length > 16) {
+            $("#tipPassword").removeClass().addClass("errTips").html("× 密码不符合要求！");
+            return false;
+        }
+        else {
+            $("#tipPassword").removeClass().addClass("okTips").html("√ 密码符合要求");
+        }
+        var rePwd = $("#<%=tbRePassword.ClientID%>").val() + "";
+        if (rePwd != pwd) {
+            $("#tipRePassword").removeClass().addClass("errTips").html("× 两次密码不一致！");
+            return false;
+        }
+        else {
+            $("#tipRePassword").removeClass().addClass("okTips").html("√ 两次密码一致");
+        }
+        var isCheck = $("#<%=cbAgreement.ClientID%>").attr("checked");
+        if (!isCheck) {
+            $("#tipAgreement").removeClass().addClass("errTips").html("× 必须同意协议才能注册！");
+            return false;
+        }
+        else {
+            $("#tipAgreement").removeClass().html("");
+        }
+
+        return true;
+    }
+    
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="menu" Runat="Server">
@@ -148,6 +208,12 @@
                         <td> <span id="tipRePassword"></span> </td>
                       </tr>
                       <tr>
+                        <td class="txtR">验证码：</td>
+                        <td class="txtL"> 
+                            <asp:TextBox ID="tbCheckCode" TextMode="Password" Width="100px" runat="server"></asp:TextBox> 332692 </td>
+                        <td> <span id="tipCheckCode"></span> </td>
+                      </tr>
+                      <tr>
                         <td class="txtR"></td>
                         <td class="txtL"> 
                             <span class="agreement">
@@ -157,7 +223,7 @@
                       <tr>
                         <td class="txtR"></td>
                         <td class="txtL"> 
-                            <asp:ImageButton ID="ibRegister" ImageUrl="~/images/btn_register2.jpg" 
+                            <asp:ImageButton ID="ibRegister" ImageUrl="~/images/btn_register2.jpg"  OnClientClick="return CheckForm();"
                                 Width="195px" Height="51px" runat="server" onclick="ibRegister_Click" /></td>
                         <td>  </td>
                       </tr>

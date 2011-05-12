@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:DailyClassDal
@@ -43,7 +43,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.DailyClassModel model)
+		public int Add(CengZai.Model.DailyClassModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_DailyClass(");
@@ -72,7 +72,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.DailyClassModel model)
+		public bool Update(CengZai.Model.DailyClassModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_DailyClass set ");
@@ -148,7 +148,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.DailyClassModel GetModel(int ClassID)
+		public CengZai.Model.DailyClassModel GetModel(int ClassID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -159,7 +159,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = ClassID;
 
-			BLPin.Model.DailyClassModel model=new BLPin.Model.DailyClassModel();
+			CengZai.Model.DailyClassModel model=new CengZai.Model.DailyClassModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

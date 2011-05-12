@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace BLPin.Helper
+namespace CengZai.Helper
 {
 	/// <summary>
 	/// DES加密/解密类。
@@ -23,7 +23,7 @@ namespace BLPin.Helper
         /// <returns></returns>
 		public static string Encrypt(string Text) 
 		{
-			return Encrypt(Text,"80pin");
+			return Encrypt(Text,"liufuling");
 		}
 		/// <summary> 
 		/// 加密数据 
@@ -62,7 +62,7 @@ namespace BLPin.Helper
         /// <returns></returns>
 		public static string Decrypt(string Text) 
 		{
-			return Decrypt(Text,"80pin");
+			return Decrypt(Text,"liufuling");
 		}
 		/// <summary> 
 		/// 解密数据 

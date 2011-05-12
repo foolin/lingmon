@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// DailyBll
 	/// </summary>
 	public partial class DailyBll
 	{
-		private readonly BLPin.DAL.DailyDal dal=new BLPin.DAL.DailyDal();
+		private readonly CengZai.DAL.DailyDal dal=new CengZai.DAL.DailyDal();
 		public DailyBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.DailyModel model)
+		public int  Add(CengZai.Model.DailyModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.DailyModel model)
+		public bool Update(CengZai.Model.DailyModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.DailyModel GetModel(int DailyID)
+		public CengZai.Model.DailyModel GetModel(int DailyID)
 		{
 			
 			return dal.GetModel(DailyID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.DailyModel> GetModelList(string strWhere)
+		public List<CengZai.Model.DailyModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.DailyModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.DailyModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.DailyModel> modelList = new List<BLPin.Model.DailyModel>();
+			List<CengZai.Model.DailyModel> modelList = new List<CengZai.Model.DailyModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.DailyModel model;
+				CengZai.Model.DailyModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.DailyModel();
+					model = new CengZai.Model.DailyModel();
 					if(dt.Rows[n]["DailyID"].ToString()!="")
 					{
 						model.DailyID=int.Parse(dt.Rows[n]["DailyID"].ToString());

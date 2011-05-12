@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// StoryBll
 	/// </summary>
 	public partial class StoryBll
 	{
-		private readonly BLPin.DAL.StoryDal dal=new BLPin.DAL.StoryDal();
+		private readonly CengZai.DAL.StoryDal dal=new CengZai.DAL.StoryDal();
 		public StoryBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.StoryModel model)
+		public int  Add(CengZai.Model.StoryModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.StoryModel model)
+		public bool Update(CengZai.Model.StoryModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.StoryModel GetModel(int StoryID)
+		public CengZai.Model.StoryModel GetModel(int StoryID)
 		{
 			
 			return dal.GetModel(StoryID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.StoryModel> GetModelList(string strWhere)
+		public List<CengZai.Model.StoryModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.StoryModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.StoryModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.StoryModel> modelList = new List<BLPin.Model.StoryModel>();
+			List<CengZai.Model.StoryModel> modelList = new List<CengZai.Model.StoryModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.StoryModel model;
+				CengZai.Model.StoryModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.StoryModel();
+					model = new CengZai.Model.StoryModel();
 					if(dt.Rows[n]["StoryID"].ToString()!="")
 					{
 						model.StoryID=int.Parse(dt.Rows[n]["StoryID"].ToString());

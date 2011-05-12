@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// HelpBll
 	/// </summary>
 	public partial class HelpBll
 	{
-		private readonly BLPin.DAL.HelpDal dal=new BLPin.DAL.HelpDal();
+		private readonly CengZai.DAL.HelpDal dal=new CengZai.DAL.HelpDal();
 		public HelpBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.HelpModel model)
+		public int  Add(CengZai.Model.HelpModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.HelpModel model)
+		public bool Update(CengZai.Model.HelpModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.HelpModel GetModel(int HelpID)
+		public CengZai.Model.HelpModel GetModel(int HelpID)
 		{
 			
 			return dal.GetModel(HelpID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.HelpModel> GetModelList(string strWhere)
+		public List<CengZai.Model.HelpModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.HelpModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.HelpModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.HelpModel> modelList = new List<BLPin.Model.HelpModel>();
+			List<CengZai.Model.HelpModel> modelList = new List<CengZai.Model.HelpModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.HelpModel model;
+				CengZai.Model.HelpModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.HelpModel();
+					model = new CengZai.Model.HelpModel();
 					if(dt.Rows[n]["HelpID"].ToString()!="")
 					{
 						model.HelpID=int.Parse(dt.Rows[n]["HelpID"].ToString());

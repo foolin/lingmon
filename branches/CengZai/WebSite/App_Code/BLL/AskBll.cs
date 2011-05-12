@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// AskBll
 	/// </summary>
 	public partial class AskBll
 	{
-		private readonly BLPin.DAL.AskDal dal=new BLPin.DAL.AskDal();
+		private readonly CengZai.DAL.AskDal dal=new CengZai.DAL.AskDal();
 		public AskBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.AskModel model)
+		public int  Add(CengZai.Model.AskModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.AskModel model)
+		public bool Update(CengZai.Model.AskModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.AskModel GetModel(int AskID)
+		public CengZai.Model.AskModel GetModel(int AskID)
 		{
 			
 			return dal.GetModel(AskID);
@@ -90,7 +90,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.AskModel> GetModelList(string strWhere)
+		public List<CengZai.Model.AskModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -98,16 +98,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.AskModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.AskModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.AskModel> modelList = new List<BLPin.Model.AskModel>();
+			List<CengZai.Model.AskModel> modelList = new List<CengZai.Model.AskModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.AskModel model;
+				CengZai.Model.AskModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.AskModel();
+					model = new CengZai.Model.AskModel();
 					if(dt.Rows[n]["AskID"].ToString()!="")
 					{
 						model.AskID=int.Parse(dt.Rows[n]["AskID"].ToString());

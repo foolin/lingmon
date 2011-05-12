@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:UserDal
@@ -40,10 +40,27 @@ namespace BLPin.DAL
 		}
 
 
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string email)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from T_User ");
+            strSql.Append(" where Email=@Email ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Email", SqlDbType.NVarChar,50)};
+            parameters[0].Value = email;
+
+            return db.Exists(strSql.ToString(), parameters);
+        }
+
+
+
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.UserModel model)
+		public int Add(CengZai.Model.UserModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_User(");
@@ -100,7 +117,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.UserModel model)
+		public bool Update(CengZai.Model.UserModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_User set ");
@@ -218,7 +235,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.UserModel GetModel(int UserID)
+		public CengZai.Model.UserModel GetModel(int UserID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -229,7 +246,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = UserID;
 
-			BLPin.Model.UserModel model=new BLPin.Model.UserModel();
+			CengZai.Model.UserModel model=new CengZai.Model.UserModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

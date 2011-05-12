@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// AskReplyBll
 	/// </summary>
 	public partial class AskReplyBll
 	{
-		private readonly BLPin.DAL.AskReplyDal dal=new BLPin.DAL.AskReplyDal();
+		private readonly CengZai.DAL.AskReplyDal dal=new CengZai.DAL.AskReplyDal();
 		public AskReplyBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.AskReplyModel model)
+		public int  Add(CengZai.Model.AskReplyModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.AskReplyModel model)
+		public bool Update(CengZai.Model.AskReplyModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.AskReplyModel GetModel(int ReplyID)
+		public CengZai.Model.AskReplyModel GetModel(int ReplyID)
 		{
 			
 			return dal.GetModel(ReplyID);
@@ -90,7 +90,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.AskReplyModel> GetModelList(string strWhere)
+		public List<CengZai.Model.AskReplyModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -98,16 +98,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.AskReplyModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.AskReplyModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.AskReplyModel> modelList = new List<BLPin.Model.AskReplyModel>();
+			List<CengZai.Model.AskReplyModel> modelList = new List<CengZai.Model.AskReplyModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.AskReplyModel model;
+				CengZai.Model.AskReplyModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.AskReplyModel();
+					model = new CengZai.Model.AskReplyModel();
 					if(dt.Rows[n]["ReplyID"].ToString()!="")
 					{
 						model.ReplyID=int.Parse(dt.Rows[n]["ReplyID"].ToString());

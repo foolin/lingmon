@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// HelpCommentBll
 	/// </summary>
 	public partial class HelpCommentBll
 	{
-		private readonly BLPin.DAL.HelpCommentDal dal=new BLPin.DAL.HelpCommentDal();
+		private readonly CengZai.DAL.HelpCommentDal dal=new CengZai.DAL.HelpCommentDal();
 		public HelpCommentBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.HelpCommentModel model)
+		public int  Add(CengZai.Model.HelpCommentModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.HelpCommentModel model)
+		public bool Update(CengZai.Model.HelpCommentModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.HelpCommentModel GetModel(int ID)
+		public CengZai.Model.HelpCommentModel GetModel(int ID)
 		{
 			
 			return dal.GetModel(ID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.HelpCommentModel> GetModelList(string strWhere)
+		public List<CengZai.Model.HelpCommentModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.HelpCommentModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.HelpCommentModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.HelpCommentModel> modelList = new List<BLPin.Model.HelpCommentModel>();
+			List<CengZai.Model.HelpCommentModel> modelList = new List<CengZai.Model.HelpCommentModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.HelpCommentModel model;
+				CengZai.Model.HelpCommentModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.HelpCommentModel();
+					model = new CengZai.Model.HelpCommentModel();
 					if(dt.Rows[n]["ID"].ToString()!="")
 					{
 						model.ID=int.Parse(dt.Rows[n]["ID"].ToString());

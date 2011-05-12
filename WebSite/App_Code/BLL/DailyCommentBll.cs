@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// DailyCommentBll
 	/// </summary>
 	public partial class DailyCommentBll
 	{
-		private readonly BLPin.DAL.DailyCommentDal dal=new BLPin.DAL.DailyCommentDal();
+		private readonly CengZai.DAL.DailyCommentDal dal=new CengZai.DAL.DailyCommentDal();
 		public DailyCommentBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.DailyCommentModel model)
+		public int  Add(CengZai.Model.DailyCommentModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.DailyCommentModel model)
+		public bool Update(CengZai.Model.DailyCommentModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.DailyCommentModel GetModel(int ID)
+		public CengZai.Model.DailyCommentModel GetModel(int ID)
 		{
 			
 			return dal.GetModel(ID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.DailyCommentModel> GetModelList(string strWhere)
+		public List<CengZai.Model.DailyCommentModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.DailyCommentModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.DailyCommentModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.DailyCommentModel> modelList = new List<BLPin.Model.DailyCommentModel>();
+			List<CengZai.Model.DailyCommentModel> modelList = new List<CengZai.Model.DailyCommentModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.DailyCommentModel model;
+				CengZai.Model.DailyCommentModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.DailyCommentModel();
+					model = new CengZai.Model.DailyCommentModel();
 					if(dt.Rows[n]["ID"].ToString()!="")
 					{
 						model.ID=int.Parse(dt.Rows[n]["ID"].ToString());

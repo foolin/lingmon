@@ -1,5 +1,5 @@
 using System;
-namespace BLPin.Model
+namespace CengZai.Model
 {
 	/// <summary>
 	/// LetterCommentModel:实体类(属性说明自动提取数据库字段的描述信息)

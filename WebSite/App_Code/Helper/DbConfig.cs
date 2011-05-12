@@ -1,6 +1,6 @@
 using System;
 using System.Configuration;
-namespace BLPin.Helper
+namespace CengZai.Helper
 {
     /// <summary>
     /// @Description: 数据库配置文件

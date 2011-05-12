@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:FriendDal
@@ -43,7 +43,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.FriendModel model)
+		public int Add(CengZai.Model.FriendModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_Friend(");
@@ -78,7 +78,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.FriendModel model)
+		public bool Update(CengZai.Model.FriendModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_Friend set ");
@@ -163,7 +163,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.FriendModel GetModel(int ID)
+		public CengZai.Model.FriendModel GetModel(int ID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -174,7 +174,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = ID;
 
-			BLPin.Model.FriendModel model=new BLPin.Model.FriendModel();
+			CengZai.Model.FriendModel model=new CengZai.Model.FriendModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

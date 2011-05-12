@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// FriendBll
 	/// </summary>
 	public partial class FriendBll
 	{
-		private readonly BLPin.DAL.FriendDal dal=new BLPin.DAL.FriendDal();
+		private readonly CengZai.DAL.FriendDal dal=new CengZai.DAL.FriendDal();
 		public FriendBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.FriendModel model)
+		public int  Add(CengZai.Model.FriendModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.FriendModel model)
+		public bool Update(CengZai.Model.FriendModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.FriendModel GetModel(int ID)
+		public CengZai.Model.FriendModel GetModel(int ID)
 		{
 			
 			return dal.GetModel(ID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.FriendModel> GetModelList(string strWhere)
+		public List<CengZai.Model.FriendModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.FriendModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.FriendModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.FriendModel> modelList = new List<BLPin.Model.FriendModel>();
+			List<CengZai.Model.FriendModel> modelList = new List<CengZai.Model.FriendModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.FriendModel model;
+				CengZai.Model.FriendModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.FriendModel();
+					model = new CengZai.Model.FriendModel();
 					if(dt.Rows[n]["ID"].ToString()!="")
 					{
 						model.ID=int.Parse(dt.Rows[n]["ID"].ToString());

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data.Common;
 using System.Collections.Generic;
-namespace BLPin.Helper
+namespace CengZai.Helper
 {
     /// <summary>
     /// @Description: 数据访问辅助基础类

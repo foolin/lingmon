@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:TwitterDal
@@ -43,7 +43,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.TwitterModel model)
+		public int Add(CengZai.Model.TwitterModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_Twitter(");
@@ -76,7 +76,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.TwitterModel model)
+		public bool Update(CengZai.Model.TwitterModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_Twitter set ");
@@ -158,7 +158,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.TwitterModel GetModel(int TwiID)
+		public CengZai.Model.TwitterModel GetModel(int TwiID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -169,7 +169,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = TwiID;
 
-			BLPin.Model.TwitterModel model=new BLPin.Model.TwitterModel();
+			CengZai.Model.TwitterModel model=new CengZai.Model.TwitterModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

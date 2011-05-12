@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// LetterBll
 	/// </summary>
 	public partial class LetterBll
 	{
-		private readonly BLPin.DAL.LetterDal dal=new BLPin.DAL.LetterDal();
+		private readonly CengZai.DAL.LetterDal dal=new CengZai.DAL.LetterDal();
 		public LetterBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.LetterModel model)
+		public int  Add(CengZai.Model.LetterModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.LetterModel model)
+		public bool Update(CengZai.Model.LetterModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.LetterModel GetModel(int LoveID)
+		public CengZai.Model.LetterModel GetModel(int LoveID)
 		{
 			
 			return dal.GetModel(LoveID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.LetterModel> GetModelList(string strWhere)
+		public List<CengZai.Model.LetterModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.LetterModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.LetterModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.LetterModel> modelList = new List<BLPin.Model.LetterModel>();
+			List<CengZai.Model.LetterModel> modelList = new List<CengZai.Model.LetterModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.LetterModel model;
+				CengZai.Model.LetterModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.LetterModel();
+					model = new CengZai.Model.LetterModel();
 					if(dt.Rows[n]["LoveID"].ToString()!="")
 					{
 						model.LoveID=int.Parse(dt.Rows[n]["LoveID"].ToString());

@@ -84,13 +84,16 @@
                 $("#tipEmail").removeClass().addClass("tips").html("正在验证邮箱...");
                 $.ajax({
                     type: "POST",
-                    url: "some.php",
-                    data: "name=John&location=Boston",
+                    url: "../Handle/CheckEmail.ashx",
+                    data: "email=" + email,
                     success: function(msg) {
-                        alert("Data Saved: " + msg);
+                        $("#tipEmail").removeClass().addClass("okTips").html("√ " + msg);
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        $("#tipEmail").removeClass().addClass("errTips").html("× " + xhr.responseText);
                     }
                 });
-                
+
             }
             //$("#tipEmail").removeClass().html("");
         });

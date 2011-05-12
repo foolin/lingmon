@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:WikiVerDal
@@ -43,7 +43,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.WikiVerModel model)
+		public int Add(CengZai.Model.WikiVerModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_WikiVer(");
@@ -82,7 +82,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.WikiVerModel model)
+		public bool Update(CengZai.Model.WikiVerModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_WikiVer set ");
@@ -173,7 +173,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.WikiVerModel GetModel(int VerID)
+		public CengZai.Model.WikiVerModel GetModel(int VerID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -184,7 +184,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = VerID;
 
-			BLPin.Model.WikiVerModel model=new BLPin.Model.WikiVerModel();
+			CengZai.Model.WikiVerModel model=new CengZai.Model.WikiVerModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

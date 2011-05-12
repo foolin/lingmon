@@ -1,16 +1,16 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-//80拼团队 2011年5月9日
-using BLPin.Model;
-namespace BLPin.BLL
+//曾在团队 2011年5月9日
+using CengZai.Model;
+namespace CengZai.BLL
 {
 	/// <summary>
 	/// WikiBll
 	/// </summary>
 	public partial class WikiBll
 	{
-		private readonly BLPin.DAL.WikiDal dal=new BLPin.DAL.WikiDal();
+		private readonly CengZai.DAL.WikiDal dal=new CengZai.DAL.WikiDal();
 		public WikiBll()
 		{}
 		#region  Method
@@ -34,7 +34,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(BLPin.Model.WikiModel model)
+		public int  Add(CengZai.Model.WikiModel model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +42,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.WikiModel model)
+		public bool Update(CengZai.Model.WikiModel model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +66,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.WikiModel GetModel(int WikiID)
+		public CengZai.Model.WikiModel GetModel(int WikiID)
 		{
 			
 			return dal.GetModel(WikiID);
@@ -89,7 +89,7 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.WikiModel> GetModelList(string strWhere)
+		public List<CengZai.Model.WikiModel> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -97,16 +97,16 @@ namespace BLPin.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<BLPin.Model.WikiModel> DataTableToList(DataTable dt)
+		public List<CengZai.Model.WikiModel> DataTableToList(DataTable dt)
 		{
-			List<BLPin.Model.WikiModel> modelList = new List<BLPin.Model.WikiModel>();
+			List<CengZai.Model.WikiModel> modelList = new List<CengZai.Model.WikiModel>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				BLPin.Model.WikiModel model;
+				CengZai.Model.WikiModel model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = new BLPin.Model.WikiModel();
+					model = new CengZai.Model.WikiModel();
 					if(dt.Rows[n]["WikiID"].ToString()!="")
 					{
 						model.WikiID=int.Parse(dt.Rows[n]["WikiID"].ToString());

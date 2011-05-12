@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using BLPin.Helper;
-namespace BLPin.DAL
+using CengZai.Helper;
+namespace CengZai.DAL
 {
 	/// <summary>
 	/// 数据访问类:BlogDal
@@ -43,7 +43,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(BLPin.Model.BlogModel model)
+		public int Add(CengZai.Model.BlogModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_Blog(");
@@ -78,7 +78,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(BLPin.Model.BlogModel model)
+		public bool Update(CengZai.Model.BlogModel model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update T_Blog set ");
@@ -163,7 +163,7 @@ namespace BLPin.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public BLPin.Model.BlogModel GetModel(int BlogID)
+		public CengZai.Model.BlogModel GetModel(int BlogID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -174,7 +174,7 @@ namespace BLPin.DAL
 };
 			parameters[0].Value = BlogID;
 
-			BLPin.Model.BlogModel model=new BLPin.Model.BlogModel();
+			CengZai.Model.BlogModel model=new CengZai.Model.BlogModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{

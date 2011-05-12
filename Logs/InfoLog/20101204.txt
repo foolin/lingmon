@@ -1,7 +1,0 @@
-2010/12/4 2:31:43 Msg:注册用户名：foolin, Email：ling@liufu.org成功！, User：Admin, URL:http://localhost:53012/Code/Register.aspx
-2010/12/4 12:38:47 Msg:注册用户名：ivylu, Email：ling@liufu.org成功！, User：Admin, URL:http://localhost:53012/Code/User/Register.aspx
-2010/12/4 13:27:49 Msg:注册用户名：ivylu, Email：ling@liufu.org成功！, User：Admin, URL:http://localhost:53012/Code/User/Register.aspx
-2010/12/4 14:17:13 Msg:注册用户名：foolin, Email：ling@liufu.org成功！, User：Admin, URL:http://localhost:53012/Code/User/Register.aspx
-2010/12/4 14:24:03 Msg:注册用户名：none, Email：ling@liufu.org成功！, User：Admin, URL:http://localhost:53012/Code/User/Register.aspx
-2010/12/4 14:58:04 Msg:注册用户名：test001, Email：liufuling@sxmobi.com成功！, User：Admin, URL:http://foolin55.gicp.net/User/Register.aspx
-2010/12/4 18:34:00 Msg:注册用户名：ivylu, Email：chang@liufu.org成功！, User：Admin, URL:http://foolin55.gicp.net/User/Register.aspx

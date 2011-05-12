@@ -45,6 +45,7 @@
                         <dt>验证码</dt>
                         <dd> <input type="text" class="input" value="" name="txtPassword" id="Text6" /> 3326 </dd>
                         <dd> <input type="button" class="btn" name="btnLogin" id="Button2" value="登录"/> </dd>
+                        <dd> <br /> </dd>
                         <dd> 忘记密码？ <a href="#">点击这里找回</a> </dd>
                         <dd> 尚未注册？ <span class="font14"> <a href="Register.aspx">点击这里进行注册</a> </span> </dd>
                     </dl>
@@ -59,9 +60,21 @@
 
             <!--栏目-->
            <div class="box"> 
-               <div class="title">尚未有帐号？</div>
+               <div class="title">加入曾在网：</div>
                 <div class="content"> 
+                    <%--<span style="font-size:14px; font-weight:bold">加入曾在网：</span>--%>
+                    <ul style="color:#333">
+                        <li> √&nbsp; 匿名倾述感情，寻求一对一的求助</li>
+                        <li> √&nbsp; 倾听别人的爱情，帮助渡过爱情难关</li>
+                        <li> √&nbsp; 学习爱情经验，让爱情永远幸福</li>
+                        <li> √&nbsp; 一些事，一些情，听听情感的故事</li>
+                        <li> √&nbsp; 给暗恋已久的Ta写情书、表白</li>
+                        <li> √&nbsp; 加入匿名游戏，捉弄好友</li>
+                        <li><b>还在等什么？快快加入吧！</b></li>
+                        <li> &nbsp;</li>
+                    </ul>
                 	<div class="reg"><a href="Register.aspx" class="btnRegister"></a></div> 
+                	<br />
                 </div>
             </div>
 			

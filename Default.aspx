@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网(www.kuaile.us) - 快乐大本营提供分享冷笑话,糗事,开心,搞笑,恶搞,糗事百科,顺口溜,娱乐,幽默,哲理,励志,精彩英语的文字、图片、视频的平台！kuaixin,qiushi,lengxiaohua" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网(www.kuaile.us) - 快乐大本营分享冷笑话(LengXiaoHua),糗事百科(QiuShiBaKe),雷人雷事(LeiRenLeiShi),囧人囧事(JiongRenJiongShi)的平台！" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>
@@ -163,6 +163,13 @@
                 <div class="title">联系方式</div>
                 <div class="content" style="padding:5px; line-height:25px;">
                     <uc1:WucSiderContact ID="WucSiderContact1" runat="server" />
+                </div>
+            </div>
+			
+			<div class="column">
+                <div class="title">友情连接</div>
+                <div class="content" style="padding:5px; line-height:25px;">
+                    <a target="_blank" href="http://www.ejiangle.com.cn/"><img border="0" src="http://www.ejiangle.com.cn/template/2010/images/logo.gif" width="92" height="30"></a>
                 </div>
             </div>
  

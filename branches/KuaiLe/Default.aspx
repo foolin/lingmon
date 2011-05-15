@@ -61,7 +61,7 @@
                             <div  class="moreDetail" style="display:none"> <a href="#" onclick="moreDetail(this); return false;">展开全部>></a>  </div>
                             
                             <div class="itemCtrl">
-                    	        <span class="left"> <span style="font-weight:bold;"><a href="Article/Article.aspx?artid=<%#Eval("ArtID") %>" class="green" target="_blank">#<%#Eval("ArtID") %>乐#</a></span> &nbsp;  <a href="?UserID=<%#Eval("UserID") %>"><%#Eval("NickName") %></a>  发布 <%#Eval("CreateTime") %></span>
+                    	        <span class="left"> <span style="font-weight:bold;"><a href="Article/Article.aspx?artid=<%#Eval("ArtID") %>" title="<%#GetTitle(Eval("Title") + "",Eval("Content") + "") %>" class="green" target="_blank">#<%#Eval("ArtID") %>乐#</a></span> &nbsp;  <a href="?UserID=<%#Eval("UserID") %>"><%#Eval("NickName") %></a>  发布 <%#Eval("CreateTime") %></span>
                      	        <span class="right">
                      	            <div id="digArt-<%#Eval("ArtID") %>">
                         	                <a href="javascript:dig(<%#Eval("ArtID") %>, 0);"><img src="images/digUp.gif" border="0" height="14" />顶</a>(<%#Eval("DigUp") %>) 

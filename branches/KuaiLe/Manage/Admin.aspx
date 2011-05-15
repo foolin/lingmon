@@ -263,7 +263,7 @@
 	<div region="center" >
 	    <div class="easyui-tabs" id="ttWinTabs"  fit="true"  border="false" >
 	        <div  title="欢迎使用本系统！"  fit="true"  style="padding:0px;">
-	            <iframe name="mainFrame" id="mainFrame" src="about:blank" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe>
+	            <iframe name="mainFrame" id="mainFrame" src="Article/ArtList.aspx?type=uncheck" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe>
 	        </div>
 	    </div>
 	</div>

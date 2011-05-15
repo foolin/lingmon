@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网(www.kuaile.us) - 快乐大本营分享冷笑话(LengXiaoHua),糗事百科(QiuShiBaKe),雷人雷事(LeiRenLeiShi),囧人囧事(JiongRenJiongShi)的平台！" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="快乐网-快乐大本营分享冷笑话、糗事百科、雷人囧事" %>
 <%@ Register Assembly="Utility" Namespace="Utility.Web" TagPrefix="cc1" %>
 
 <%@ Register src="WebUserControl/WucSiderContact.ascx" tagname="WucSiderContact" tagprefix="uc1" %>
@@ -128,7 +128,7 @@
                 	
                         <asp:Repeater ID="repNoticeList" runat="server">
                             <ItemTemplate>
-                                <div style="padding:8px 5px; font-weight:bold; font-size:13px;"><%#Eval("Title") %></div>
+                                <h1 style="padding:8px 5px; font-weight:bold; font-size:13px;"><%#Eval("Title") %></h1>
                                 <div style="color:#333">
                                 <%#Eval("Content") %><br /><br />
                                 </div>
@@ -169,6 +169,7 @@
 			<div class="column">
                 <div class="title">友情连接</div>
                 <div class="content" style="padding:5px; line-height:25px;">
+					<a target="_blank" href="http://www.kaixin001.com/"><img border="0" src="http://img1.kaixin001.com.cn/i2/kaixinlogo.gif"  height="30"></a>
                     <a target="_blank" href="http://www.ejiangle.com.cn/"><img border="0" src="http://www.ejiangle.com.cn/template/2010/images/logo.gif" width="92" height="30"></a>
                 </div>
             </div>

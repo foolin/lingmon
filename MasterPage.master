@@ -7,8 +7,8 @@
 <head runat="server">
     <title>快乐网-我们一起分享| www.kuaile.us</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
-    <meta name="keywords" content="快乐网,快乐,我们,分享,开心,幽默,搞笑,笑话,恶搞,爆笑,顺口溜,哲理,糗事,哈哈,嘻嘻,娱乐,轻松,放松,图片,视频,电影"> 
-    <meta name="description" content="快乐网(www.kuaile.us)，我们一起分享！快乐网是一分享快乐的平台，提供分享最新、搞笑、开心、恶搞、糗事的文字、图片、视频、电影的平台，让你快乐，令你放松，助你减压！"> 
+    <meta name="keywords" content="快乐网 冷笑话 糗事百科"> 
+    <meta name="description" content="快乐网(www.kuaile.us)，分享冷笑话、雷人雷事、糗事百科、恶搞、囧人囧事！"> 
     <meta http-equiv="X-UA-Compatible" content="IE=7" /> 
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="js/themes/default/easyui.css" rel="stylesheet" type="text/css" />

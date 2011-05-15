@@ -140,4 +140,23 @@ public partial class _Default : PageBase
 
     }
 
+
+    /// <summary>
+    /// 取标题
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    public string GetTitle(string title, string content)
+    {
+        title = title + "";
+        if (title == "" && !string.IsNullOrEmpty(content))
+        {
+            title = Helper.GetFirstLine(content, 20);
+        }
+
+        return title;
+    }
+
+
 }

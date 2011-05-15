@@ -43,6 +43,9 @@ public partial class Article_Article : PageBase
             return;
         }
 
+
+        this.Page.Title = GetTitle(Article.Title, Article.Content) + "_快乐网";
+
     }
 
 

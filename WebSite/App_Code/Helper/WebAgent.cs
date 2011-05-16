@@ -12,7 +12,7 @@ using System.Collections;
 
 //using System.Messaging;
 
-namespace CengZai.Web
+namespace CengZai.Helper
 {
 	/// <summary>
 	/// Name:Web代理
@@ -950,6 +950,32 @@ namespace CengZai.Web
         public static string GetURL()
         {
             return HttpContext.Current.Request.Url.AbsoluteUri;
+        }
+
+
+        /// <summary>
+        /// 检验提交合法URl
+        /// </summary>
+        /// <returns></returns>
+        public static bool ValidatePostUrl()
+        {
+            bool bReturn = false;
+            string strPreHost = "";
+            string strHost = "";
+            if (HttpContext.Current.Request.UrlReferrer != null)
+            {
+                strPreHost = HttpContext.Current.Request.UrlReferrer.Host + "";
+            }
+            if (HttpContext.Current.Request.Url != null)
+            {
+                strHost = HttpContext.Current.Request.Url.Host + "";
+            }
+            if (!string.IsNullOrEmpty(strHost) && strPreHost == strHost)
+            {
+                bReturn = true;
+            }
+
+            return bReturn;
         }
 
 

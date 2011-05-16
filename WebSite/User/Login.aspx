@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="User_Login" %>
+﻿<%@ Page Title="登录用户" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="User_Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
@@ -46,8 +46,9 @@
                         <dd> <input type="text" class="input" value="" name="txtPassword" id="Text6" /> 3326 </dd>
                         <dd> <input type="button" class="btn" name="btnLogin" id="Button2" value="登录"/> </dd>
                         <dd> <br /> </dd>
-                        <dd> 忘记密码？ <a href="#">点击这里找回</a> </dd>
-                        <dd> 尚未注册？ <span class="font14"> <a href="Register.aspx">点击这里进行注册</a> </span> </dd>
+                        <dd class="font12"> 忘记密码？ <a href="#">点击这里找回</a> </dd>
+                        <dd class="font12"> 尚未注册？ <span> <a href="Register.aspx">点击这里进行注册</a> </span> </dd>
+                        <dd class="font12"> 尚未激活？ <a href="ReSendActiveCode.aspx">点击重发激活邮件</a> </dd>
                     </dl>
                     
             </div>

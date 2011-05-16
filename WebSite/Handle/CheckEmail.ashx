@@ -9,8 +9,7 @@ public class CheckEmail : IHttpHandler {
     
     public void ProcessRequest (HttpContext context) {
         context.Response.ContentType = "text/plain";
-        string preUrl = context.Request.UrlReferrer + "";
-        if (string.IsNullOrEmpty(preUrl) || preUrl.ToLower().IndexOf(Config.SiteDomain.ToLower()) == -1)
+        if (!WebAgent.ValidatePostUrl())
         {
             context.Response.StatusCode = 400;
             context.Response.Write("网址非法！");
@@ -29,7 +28,7 @@ public class CheckEmail : IHttpHandler {
         try
         {
             UserBll bll = new UserBll();
-            //isExist = bll.Exists(email);
+            isExist = bll.Exists(email);
         }
         catch(Exception ex)
         {

@@ -33,6 +33,51 @@ namespace CengZai.Helper
                 return System.Configuration.ConfigurationManager.AppSettings["SiteDomain"] + "";
             }
         }
+
+
+
+
+        /************ 邮箱相关配置 ***********/
+
+        //From
+        public static string MailFrom
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["MailFrom"] + "";
+            }
+        }
+
+
+        //MailUserName
+        public static string MailUserName
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["MailUserName"] + "";
+            }
+        }
+
+
+        //MailPassword
+        public static string MailPassword
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["MailPassword"] + "";
+            }
+        }
+
+
+
+        //MailSmtpServer
+        public static string MailSmtpServer
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["MailSmtpServer"] + "";
+            }
+        }
     }
 
 }

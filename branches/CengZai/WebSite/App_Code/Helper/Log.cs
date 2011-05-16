@@ -25,7 +25,7 @@ namespace CengZai.Helper
                 {
                     Directory.CreateDirectory(dir);
                 }
-                string file = dir + DateTime.Now.ToString("yyyy-MM-dd") + ".log";
+                string file = dir + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".log";
                 
                 return Add(file, msg);
             }

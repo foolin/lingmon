@@ -62,6 +62,20 @@ namespace CengZai.DAL
 		/// </summary>
 		public int Add(CengZai.Model.UserModel model)
 		{
+            int userID = 0;
+            try
+            {
+                string strCheckSql = " select count(0) from where Email=@Email ";
+                SqlParameter[] chkParams = { new SqlParameter("", SqlDbType.NVarChar, 50)};
+                chkParams[0].Value = model.Email;
+                userID = Convert.ToInt32(db.GetSingle(strCheckSql, chkParams));
+            }
+            catch { }
+            if (userID > 0)
+            {
+                return 0;
+            }
+
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into T_User(");
 			strSql.Append("Email,Password,NickName,Sex,Birth,Motto,Face,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime)");

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="User_Register" %>
+﻿<%@ Page Title="用户注册" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="User_Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
@@ -40,11 +40,21 @@
 	height:25px;
 	line-height:25px;
 	font-weight:bold;
-	color:#f90;
 	color:#090;
+	color:#F60;
 	padding:2px 5px;
 	width:200px;
 	font-size:14pt;
+	background:#fffceb;
+	border:1px solid #ccc;
+}
+.regForm .select
+{
+	height:25px;
+	line-height:25px;
+	font-weight:bold;
+	color:#F60;
+	font-size:14px;
 	background:#fffceb;
 	border:1px solid #ccc;
 }
@@ -54,7 +64,14 @@
 	height:30px;
 	display:block;
 }
-.regForm  .agreement input
+.regForm .agreement input
+{
+	padding:0;
+	height:auto;
+	line-height:normal;
+	width:auto;
+}
+.regForm .normal input
 {
 	padding:0;
 	height:auto;
@@ -77,7 +94,7 @@
             $("#tipEmail").removeClass().addClass("tips").html("* 请输入常用邮箱，作为登录帐号。");
         }).blur(function() {
             var email = $(this).val();
-            if (!isEmail(email)) {
+            if (!Utils.isEmail(email)) {
                 $("#tipEmail").removeClass().addClass("errTips").html("× 邮箱不合法！");
             }
             else {
@@ -102,10 +119,10 @@
         }).blur(function() {
             var pwd = $(this).val() + "";
             if (pwd.length < 6) {
-                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以小于6位");
+                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以小于6位！");
             }
             else if (pwd.length < 6) {
-                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以大于16位");
+                $("#tipPassword").removeClass().addClass("errTips").html("× 密码不可以大于16位！");
             }
             else {
                 $("#tipPassword").removeClass().addClass("okTips").html("√ 密码可以使用");
@@ -117,11 +134,45 @@
         }).blur(function() {
             var pwd = $("#<%=tbPassword.ClientID%>").val() + "";
             var rePwd = $(this).val() + "";
-            if (pwd != rePwd) {
+            if (rePwd.length < 6) {
+                $("#tipRePassword").removeClass().addClass("errTips").html("× 密码不可以小于6位！");
+                return false;
+            }
+            else if (pwd != rePwd) {
                 $("#tipRePassword").removeClass().addClass("errTips").html("× 两次密码不一致！");
             }
             else {
-                $("#tipRePassword").removeClass().addClass("okTips").html("√ 两次密码一致！");
+                $("#tipRePassword").removeClass().addClass("okTips").html("√ 两次密码一致");
+            }
+        });
+        $("#<%=tbNickName.ClientID%>").focus(function() {
+            $("#tipNickName").removeClass().addClass("tips").html("* 昵称作为您的显示名称，2-10个字符，可中文。");
+        }).blur(function() {
+            var nickName = $("#<%=tbNickName.ClientID%>").val() + "";
+
+            if (Utils.charCount(nickName) < 2) {
+                $("#tipNickName").removeClass().addClass("errTips").html("× 昵称不可以小于2位！");
+                return false;
+            }
+            if (Utils.charCount(nickName) > 10) {
+                $("#tipNickName").removeClass().addClass("errTips").html("× 昵称不可以大于10位！");
+                return false;
+            }
+            else {
+                $("#tipNickName").removeClass().addClass("okTips").html("√ 昵称可以使用");
+            }
+        });
+        $("#<%=tbVerifyCode.ClientID%>").focus(function() {
+            refreshCode("#imgRegChkCode"); //刷新验证码
+            $("#tipVerifyCode").removeClass().addClass("tips").html("* 请输入验证码 ");
+        }).blur(function() {
+            var verifyCode = $("#<%=tbVerifyCode.ClientID%>").val() + "";
+            if (verifyCode.length < 1) {
+                $("#tipVerifyCode").removeClass().addClass("errTips").html("× 请输入验证码！");
+                return false;
+            }
+            else {
+                $("#tipVerifyCode").removeClass().html("");
             }
         });
         $("#<%=cbAgreement.ClientID%>").click(function() {
@@ -138,7 +189,7 @@
 
     function CheckForm() {
         var email = $("#<%=tbEmail.ClientID%>").val() + "";
-        if (!isEmail(email)) {
+        if (!Utils.isEmail(email)) {
             $("#tipEmail").removeClass().addClass("errTips").html("× 邮箱不符合要求！");
             return false;
         }
@@ -154,12 +205,24 @@
             $("#tipPassword").removeClass().addClass("okTips").html("√ 密码符合要求");
         }
         var rePwd = $("#<%=tbRePassword.ClientID%>").val() + "";
-        if (rePwd != pwd) {
+        if (rePwd.length < 6) {
+            $("#tipRePassword").removeClass().addClass("errTips").html("× 密码不可以小于6位！");
+            return false;
+        }
+        else if (rePwd != pwd) {
             $("#tipRePassword").removeClass().addClass("errTips").html("× 两次密码不一致！");
             return false;
         }
         else {
             $("#tipRePassword").removeClass().addClass("okTips").html("√ 两次密码一致");
+        }
+        var verifyCode = $("#<%=tbVerifyCode.ClientID%>").val() + "";
+        if (verifyCode.length < 1) {
+            $("#tipVerifyCode").removeClass().addClass("errTips").html("× 请输入验证码！");
+            return false;
+        }
+        else {
+            $("#tipVerifyCode").removeClass().html("");
         }
         var isCheck = $("#<%=cbAgreement.ClientID%>").attr("checked");
         if (!isCheck) {
@@ -208,10 +271,27 @@
                         <td> <span id="tipRePassword"></span> </td>
                       </tr>
                       <tr>
+                        <td class="txtR" style="width:80px;">昵  称：</td>
+                        <td class="txtL" style="width:210px;"> 
+                            <asp:TextBox ID="tbNickName" runat="server"></asp:TextBox> </td>
+                        <td> <span id="tipNickName"></span> </td>
+                      </tr>
+                      <tr>
+                        <td class="txtR" style="width:80px;">性  别：</td>
+                        <td class="txtL" style="width:210px;"> 
+                            <asp:DropDownList ID="ddlSex" CssClass="select"  runat="server">
+                                <asp:ListItem Text="女生" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="男生" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="保密" Value="0"></asp:ListItem>
+                            </asp:DropDownList> </td>
+                        <td> <span id="tipSex"></span> </td>
+                      </tr>
+                      <tr>
                         <td class="txtR">验证码：</td>
                         <td class="txtL"> 
-                            <asp:TextBox ID="tbCheckCode" TextMode="Password" Width="100px" runat="server"></asp:TextBox> 332692 </td>
-                        <td> <span id="tipCheckCode"></span> </td>
+                            <asp:TextBox ID="tbVerifyCode" Width="80px" runat="server"></asp:TextBox> <img id="imgRegChkCode" src="<%= ResolveClientUrl("~/Handle/VerifyCode.ashx")%>?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgRegChkCode')" />
+          	 <a href="javascript:refreshCode('#imgRegChkCode')" class="font12">看不清？</a></td>
+                        <td> <span id="tipVerifyCode"></span> </td>
                       </tr>
                       <tr>
                         <td class="txtR"></td>

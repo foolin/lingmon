@@ -244,6 +244,7 @@ a:hover{ color:#F00;}
 .fleft{ float:left;}
 .fright{ float:right;}
 .clear{ clear:both;}
+.font12{ font-size:12px;}
 .font14{ font-size:14px;}
 .hr{ border-bottom:dashed 1px #ccc;}
 .txtL{ text-align:left;}

@@ -121,6 +121,13 @@
             	<input type="text" name="keyword" tip="请输入关键词..." value="" /> <input type="button" name="Search" value="搜索" />
             </div>
             --%>
+			
+			<div class="loginForm column" id="idQQEmailList" runat="server">
+                <div class="content" style="text-align:center; padding:10px;">
+                    <!--以下是QQ邮件列表订阅嵌入代码--><a target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=0f9b11460e44f25f8fb60d08efa4da0a5c2150add40f693a"><img border="0" alt="填写您的邮件地址，订阅我们的精彩内容：" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_dark_l.png" /></a>
+                </div>
+            </div>
+			
             <div class="loginForm column">
             	<div class="title">公告区</div>
                 <div class="content">

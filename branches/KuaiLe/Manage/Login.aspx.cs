@@ -15,8 +15,8 @@ using KuaiLe.Us.Common;
 
 public partial class Manage_Login : System.Web.UI.Page
 {
-    private readonly string _USERNAME = "foolin@kuaile.us";
-    private readonly string _PASSWORD = "foolin2ivy";
+    private readonly string _USERNAME = "ivy";
+    private readonly string _PASSWORD = "lu3227728";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -33,7 +33,7 @@ public partial class Manage_Login : System.Web.UI.Page
             Session["LoginOK"] = "OK";
             WebLog.WriteInfoLog("登录成功！");
 
-            Response.Redirect("Index.aspx");
+            Response.Redirect("Admin.aspx");
         }
         else
         {

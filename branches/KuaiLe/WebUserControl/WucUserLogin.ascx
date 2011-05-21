@@ -6,6 +6,7 @@
     <dt>密 码：</dt>
     <dd><input type="password" name="LoginPassword" id="LoginPassword" value="" /> <span id="tipLoginPassword"></span> <a href="<%=GB_SitePath %>/User/FindPassword.aspx">忘记密码？</a> </dd>
     <dd><input type="button" name="btnUserLogin" id="btnUserLogin" class="btn" value="登录" />  <a href="<%=GB_SitePath %>/User/Register.aspx">注册</a></dd>
+    <dd style="font-size:12px;">尚未激活？<a href="<%=GB_SitePath %>/User/ReSendActiveEmail.aspx">点击这里重发激活邮件</a></dd>
 </dl>
 
 

@@ -21,7 +21,7 @@ public partial class Rss : System.Web.UI.Page
         rss.Generator = "KuaiLe.Us v1.0";   //生成该频道的程序名称 MightyInHouse Content System v2.3
         rss.Link = "http://www.kuaile.us";
         rss.ManagingEditor = "Contact@kuaile.us";   //内容负责人的Email  
-        rss.Title = "快乐网 - 我们一起分享 | 致力打造中国最大的互动分享平台";
+        rss.Title = "快乐网-分享冷笑话、糗事百科、雷人囧事";
 
         //循环读取列表
         try

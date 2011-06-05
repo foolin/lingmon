@@ -1,65 +1,78 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Web.master.cs" Inherits="Web" %>
+ï»¿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Web.master.cs" Inherits="MasterPage" %>
+
+<%@ Register src="WebUserControls/wucMenu.ascx" tagname="wucMenu" tagprefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÔøÔÚÍø£¨CengZai.com£©¡ªÈÃ°®Çé×ßµÃ¸üÔ¶£¡Ò»¸öÍì¾È°®ÇéºÍ»éÒöµÄÇé¸ĞÍøÕ¾¡£</title>
-<meta name="keywords" content="ÔøÔÚ,Çé¸Ğ,ÔøÔÚÍø,Çé¸ĞÍø,ÔøÔÚÇé¸ĞÍø,°®Çé,»éÒö,Íì¾È,Õü¾È"/>
-<meta name="description" content="ÔøÔÚÇé¸ĞÍø¡ªÈÃ°®Çé×ßµÃ¸üÔ¶£¡Ò»¸öÍì¾È°®ÇéºÍ»éÒöµÄÇé¸ĞÍøÕ¾£¬ÄäÃû½»Á÷£¬¸§Î¿Çé¸Ğ£¡"/>
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<head runat="server">
+    <title></title>
+    <meta name="keywords" content="æ›¾åœ¨ æƒ…æ„Ÿç½‘ æŒ½æ•‘çˆ±æƒ…"/>
+    <meta name="description" content="æ›¾åœ¨(Cengzai.com)â€”è®©çˆ±æƒ…èµ°å¾—æ›´è¿œï¼Œè®©æœ‰æƒ…äººå¹¸ç¦ï¼ä¸€ä¸ªæŒ½æ•‘çˆ±æƒ…å’Œå©šå§»çš„æƒ…æ„Ÿç½‘ç«™ï¼Œå¹´è½»äººæœ€çˆ±åˆ†äº«çœŸå®æƒ…æ„Ÿçš„ç¤¾åŒºï¼"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
     <link href="<%= ResolveClientUrl("~/css/common.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%= ResolveClientUrl("~/js/jquery.min.js")%>" type="text/javascript"></script>
     <script src="<%= ResolveClientUrl("~/js/jquery.pngFix.js")%>" type="text/javascript"></script>
+    <script type="text/javascript">
+        //åˆ·æ–°
+        function refreshCode(id) {
+            $(id).attr("src", '<%= ResolveClientUrl("~/Handle/VerifyCode.ashx")%>?t=' + new Date().getTime());
+        }
+    </script>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
+    
 </head>
 <body>
-<form runat="server">
-<div class="header">
- 	<div class="top">
-   		<div class="logo">
-        	<img src="<%= ResolveClientUrl("~/images/cengzailogo.png")%>" border="0" />
+    <form id="form1" runat="server">
+    <div>
+        <div class="header">
+ 	        <div class="top">
+   		        <div class="logo">
+        	        <img src="<%= ResolveClientUrl("~/images/cengzailogo.png")%>" style="border:0" />
+                </div>
+		        <div class="banner">
+		            ä¸»é¡µ | ç©ºé—´ | é—®ç­”
+                </div>
+		        <div class="clear"></div>
+		        <uc1:wucMenu ID="wucMenu1" runat="server" />
+            </div>
+            <!-- Top End -->
+
         </div>
-		<div class="banner">
+        <!-- Header End -->
+
+        <div class="mainWrap">
+        <div class="main">
+
+            <asp:ContentPlaceHolder id="content" runat="server">
+                
+            </asp:ContentPlaceHolder>
+                
         </div>
-		<div class="clear"></div>
-        <asp:ContentPlaceHolder id="menu" runat="server">
-        </asp:ContentPlaceHolder>
+        </div>
+        <!-- Main End -->
+
+        <div class="footer">
+	        <div class="copyright">
+
+                <!--åº•éƒ¨è¿æ¥ï¼šbottomlink-->
+                <div class="bottomlink">
+                    <a href="<%= ResolveClientUrl("~/Default.aspx")%>">æ›¾åœ¨é¦–é¡µ</a> - 
+                    <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">å…³äºæ›¾åœ¨</a> - 
+                    <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">è”ç³»æˆ‘ä»¬</a> - 
+                    <a href="<%= ResolveClientUrl("~/About/Privacy.aspx")%>">éšç§åè®®</a> - 
+                    <a href="#About/Help.aspx">ä½¿ç”¨å¸®åŠ©</a> - 
+                    <a href="#http://www.7dong.net">æ„è§åé¦ˆ</a> 
+                </div>
+                <div>
+    	         &copy; 2011  <a href="#">æ›¾åœ¨ç½‘(CengZai.com)</a> All Rights Reservedã€‚ç²¤ICPå¤‡07000266å·
+    	        </div>
+            </div>
+            <!-- Copyright End -->
+        </div>
+        <!-- Footer End -->
     </div>
-    <!-- Top End -->
-
-</div>
-<!-- Header End -->
-
-<div class="mainWrap">
-<div class="main">
-
-    <asp:ContentPlaceHolder id="content" runat="server">
-        
-    </asp:ContentPlaceHolder>
-        
-</div>
-</div>
-<!-- Main End -->
-
-<div class="footer">
-	<div class="copyright">
-        <!--µ×²¿Á¬½Ó£ºbottomlink-->
-        <div class="bottomlink">
-            <a href="<%= ResolveClientUrl("~/Default.aspx")%>">ÔøÔÚÊ×Ò³</a> | 
-            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">¹ØÓÚÔøÔÚ</a> | 
-            <a href="<%= ResolveClientUrl("~/About/AboutUs.aspx")%>">ÁªÏµÎÒÃÇ</a> | 
-            <a href="<%= ResolveClientUrl("~/About/Privacy.aspx")%>">ÒşË½Ğ­Òé</a> | 
-            <a href="#About/Help.aspx">Ê¹ÓÃ°ïÖú</a> | 
-            <a href="#http://www.7dong.net">Òâ¼û·´À¡</a> 
-        </div>
-    	 &copy; 2011  <a href="#">ÔøÔÚÍø(CengZai.com)</a> All Rights Reserved¡£ÔÁICP±¸07000266ºÅ
-    </div>
-    <!-- Copyright End -->
-</div>
-<!-- Footer End -->
-
-</form>
+    </form>
 </body>
 </html>

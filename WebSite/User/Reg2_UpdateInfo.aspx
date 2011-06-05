@@ -1,18 +1,18 @@
-﻿<%@ Page Title="用户登录" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="User_Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="Reg2_UpdateInfo.aspx.cs" Inherits="User_Reg2_UpdateInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="../css/user.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-    .loginForm {
+    .login {
     }
-    .loginForm dt,.loginForm dd{
+    .login dt,.login dd{
 	    margin:3px 0;
 	    padding:3px;
     }
-    .loginForm .btn{
+    .btn{
 	    padding:10px 15px;
     }
-    .loginForm .input
+    .login .input
     {
 	    height:25px;
 	    line-height:25px;
@@ -30,18 +30,18 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="content" Runat="Server">
 
  		<div class="partMain part">
+        	<div class="formWrap">
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
         	
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-           <div class="formWrap">
-           
-                <div class="title">用户登录</div>
-                <div class="intro">曾在（CengZai.com），一个交流真实情感的社区，致力于挽救爱情和婚姻，让有情人幸福！</div>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                
+                <div class="title">完善详细资料</div>
+                <div class="intro">完善您的用户资料，让本站更好为您服务！</div>
    
         	    <div style="padding-left:30px">
-                    <dl class="loginForm font14">
+                    <dl class="login font14">
                         <dt> 邮箱</dt>
                         <dd><asp:TextBox ID="tbEmail" CssClass="input" runat="server"></asp:TextBox> <a href="ReSendActiveEmail.aspx" class="font12">尚未激活？</a> </dd>
                         <dt> 密码</dt>
@@ -50,17 +50,18 @@
                         <dd> <asp:TextBox ID="tbVerifyCode" CssClass="input" Width="80px" runat="server"></asp:TextBox> <img id="imgRegChkCode" src="<%= ResolveClientUrl("~/Handle/VerifyCode.ashx")%>?t=<%=DateTime.Now %>" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('#imgRegChkCode')" />
           	                <a href="javascript:refreshCode('#imgRegChkCode')">看不清？</a> </dd>
                         <dd> 
-                            <asp:Button ID="btnLogin" CssClass="btn" runat="server" Text="登录" onclick="btnLogin_Click" /> </dd>
+                            <asp:Button ID="btnLogin" CssClass="btn" runat="server" Text="保存" />
+                            <asp:Button ID="btnGoNext" CssClass="btn" runat="server" Text="跳过此步" />
+                        </dd>
                         <dd> <br />尚未注册？ <span> <a href="Register.aspx">点击这里进行注册</a>  </dd>
                     </dl>
                     
 
                </div>  
                
-               
+               </ContentTemplate>
+               </asp:UpdatePanel>
             </div>
-            </ContentTemplate>
-            </asp:UpdatePanel>
         </div>
         <!-- partMain End -->
         

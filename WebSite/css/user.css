@@ -1,0 +1,24 @@
+﻿.formWrap
+{
+	font-size:14px;
+	padding:10px 20px;
+	
+}
+.formWrap .title
+{
+	margin:10px;
+	padding:10px;
+	font-size:26px;
+	font-family:"幼圆","黑体";
+	font-weight:bold;
+}
+.formWrap .intro
+{
+	color:Gray;
+	border:1px dashed #ccc;
+	border-bottom:dashed 1px #ccc;
+	background:#fafafa;
+	font-size:13px;
+	padding:8px;
+	margin:10px;
+}

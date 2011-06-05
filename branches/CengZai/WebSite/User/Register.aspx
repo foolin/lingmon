@@ -1,32 +1,9 @@
-﻿<%@ Page Title="用户注册" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="User_Register" %>
+﻿<%@ Page Title="用户注册" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="User_Register" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../css/user.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-.regForm
-{
-	font-size:14px;
-	padding:10px 20px;
-	
-}
-.regForm div,.regForm table
-{
-	padding:10px;
-	margin:10px;
-}
-.regForm .title
-{
-	font-size:26px;
-	font-family:"幼圆","黑体";
-	font-weight:bold;
-}
-.regForm .intro
-{
-	color:Gray;
-	border:1px dashed #ccc;
-	border-bottom:dashed 1px #ccc;
-	background:#fafafa;
-	font-size:13px;
-}
 .regForm table
 {
 	font-size:14px;
@@ -40,8 +17,8 @@
 	height:25px;
 	line-height:25px;
 	font-weight:bold;
-	color:#090;
 	color:#F60;
+	color:#095;
 	padding:2px 5px;
 	width:200px;
 	font-size:14pt;
@@ -85,8 +62,7 @@
 	line-height:normal;
 	height:auto;
 }
-
-</style>
+    </style>
 <script type="text/javascript" src="../js/cengzai.js"></script>
 <script type="text/javascript">
     $(function() {
@@ -238,19 +214,18 @@
     
 </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="menu" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" Runat="Server">
 
  		<div class="partMain part">
         	
              <asp:ScriptManager ID="ScriptManager1" runat="server">
              </asp:ScriptManager>
+             
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>
-                 <div class="regForm">
+                 <div class="formWrap regForm">
                      <div class="title">注册帐号</div>
-                     <div class="intro">注册曾在(CengZai.com)帐号，分享和倾诉情感，找回您和Ta曾经的甜蜜和幸福，让爱情走到最后！</div>
+                     <div class="intro">注册曾在(CengZai.com)帐号，分享和倾诉情感，找回您和Ta曾经的甜蜜和幸福，让爱情走得更远！</div>
                     <table>
                       <tr>
                         <td class="txtR" style="width:80px;">邮  箱：</td>
@@ -297,7 +272,7 @@
                         <td class="txtR"></td>
                         <td class="txtL"> 
                             <span class="agreement">
-                            <asp:CheckBox ID="cbAgreement" Checked="true" runat="server" /> 同意<a href="../Abount/Agreemtment.aspx">《曾在网络服务协议》</a> </span> </td>
+                            <asp:CheckBox ID="cbAgreement" Checked="true" runat="server" /> 同意<a href="../Abount/Agreemtment.aspx" target="_blank">《曾在网络服务协议》</a> </span> </td>
                         <td> <span id="tipAgreement"></span> </td>
                       </tr>
                       <tr>

@@ -84,6 +84,16 @@ namespace CengZai.BLL
 			return dal.GetModel(UserID);
 		}
 
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public CengZai.Model.UserModel GetModel(string email)
+        {
+
+            return dal.GetModel(email);
+        }
+
+
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
@@ -188,6 +198,43 @@ namespace CengZai.BLL
 		//{
 			//return dal.GetList(PageSize,PageIndex,strWhere);
 		//}
+
+
+        /// <summary>
+        /// 根据用户名和密码
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="statusCode"></param>
+        /// <returns></returns>
+        public UserModel GetModel(string email, string password, out int statusCode)
+        {
+            statusCode = 0;
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return null;
+            }
+
+            string md5Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(password, "MD5");
+            UserModel user = dal.GetModel(email);
+
+            if (user == null)
+            {
+                //用户名不存在
+                statusCode = -1;
+                return null;
+            }
+            if (user.Password.ToLower() != md5Password.ToLower())
+            {
+                //密码不正确
+                statusCode = -2;
+                return null;
+            }
+
+            //正确
+            statusCode = 1;
+            return user;
+        }
 
 		#endregion  Method
 	}

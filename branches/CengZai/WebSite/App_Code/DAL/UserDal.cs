@@ -257,68 +257,36 @@ namespace CengZai.DAL
 			strSql.Append(" where UserID=@UserID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@UserID", SqlDbType.Int,4)
-};
+            };
 			parameters[0].Value = UserID;
 
 			CengZai.Model.UserModel model=new CengZai.Model.UserModel();
 			DataSet ds=db.Query(strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
-			{
-				if(ds.Tables[0].Rows[0]["UserID"].ToString()!="")
-				{
-					model.UserID=int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
-				}
-				model.Email=ds.Tables[0].Rows[0]["Email"].ToString();
-				model.Password=ds.Tables[0].Rows[0]["Password"].ToString();
-				model.NickName=ds.Tables[0].Rows[0]["NickName"].ToString();
-				if(ds.Tables[0].Rows[0]["Sex"].ToString()!="")
-				{
-					model.Sex=int.Parse(ds.Tables[0].Rows[0]["Sex"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Birth"].ToString()!="")
-				{
-					model.Birth=DateTime.Parse(ds.Tables[0].Rows[0]["Birth"].ToString());
-				}
-				model.Motto=ds.Tables[0].Rows[0]["Motto"].ToString();
-				model.Face=ds.Tables[0].Rows[0]["Face"].ToString();
-				model.ActivateCode=ds.Tables[0].Rows[0]["ActivateCode"].ToString();
-				if(ds.Tables[0].Rows[0]["RegTime"].ToString()!="")
-				{
-					model.RegTime=DateTime.Parse(ds.Tables[0].Rows[0]["RegTime"].ToString());
-				}
-				model.RegIP=ds.Tables[0].Rows[0]["RegIP"].ToString();
-				if(ds.Tables[0].Rows[0]["LastLoginTime"].ToString()!="")
-				{
-					model.LastLoginTime=DateTime.Parse(ds.Tables[0].Rows[0]["LastLoginTime"].ToString());
-				}
-				model.LastLoginIP=ds.Tables[0].Rows[0]["LastLoginIP"].ToString();
-				if(ds.Tables[0].Rows[0]["LoginCount"].ToString()!="")
-				{
-					model.LoginCount=int.Parse(ds.Tables[0].Rows[0]["LoginCount"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Level"].ToString()!="")
-				{
-					model.Level=int.Parse(ds.Tables[0].Rows[0]["Level"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Credit"].ToString()!="")
-				{
-					model.Credit=decimal.Parse(ds.Tables[0].Rows[0]["Credit"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["Status"].ToString()!="")
-				{
-					model.Status=int.Parse(ds.Tables[0].Rows[0]["Status"].ToString());
-				}
-				if(ds.Tables[0].Rows[0]["FindPwdTime"].ToString()!="")
-				{
-					model.FindPwdTime=DateTime.Parse(ds.Tables[0].Rows[0]["FindPwdTime"].ToString());
-				}
-				return model;
-			}
-			else
-			{
-				return null;
-			}
+            return ToModel(ds);
 		}
+
+
+        /// <summary>
+        /// 根据邮件来取用户
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public CengZai.Model.UserModel GetModel(string email)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 UserID,Email,Password,NickName,Sex,Birth,Motto,Face,ActivateCode,RegTime,RegIP,LastLoginTime,LastLoginIP,LoginCount,Level,Credit,Status,FindPwdTime from T_User ");
+            strSql.Append(" where Email=@Email");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Email", SqlDbType.NVarChar,50)
+            };
+            parameters[0].Value = email;
+
+            CengZai.Model.UserModel model = new CengZai.Model.UserModel();
+            DataSet ds = db.Query(strSql.ToString(), parameters);
+            return ToModel(ds);
+        }
+
 
 		/// <summary>
 		/// 获得数据列表
@@ -381,7 +349,77 @@ namespace CengZai.DAL
 			return db.RunProcedure("UP_GetRecordByPage",parameters,"ds");
 		}*/
 
+
+
+        /// <summary>
+        /// 转换成Model
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns></returns>
+        public CengZai.Model.UserModel ToModel(DataSet ds)
+        {
+            CengZai.Model.UserModel model = null;
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                model = new CengZai.Model.UserModel();
+                if (ds.Tables[0].Rows[0]["UserID"].ToString() != "")
+                {
+                    model.UserID = int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
+                }
+                model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                model.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                model.NickName = ds.Tables[0].Rows[0]["NickName"].ToString();
+                if (ds.Tables[0].Rows[0]["Sex"].ToString() != "")
+                {
+                    model.Sex = int.Parse(ds.Tables[0].Rows[0]["Sex"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Birth"].ToString() != "")
+                {
+                    model.Birth = DateTime.Parse(ds.Tables[0].Rows[0]["Birth"].ToString());
+                }
+                model.Motto = ds.Tables[0].Rows[0]["Motto"].ToString();
+                model.Face = ds.Tables[0].Rows[0]["Face"].ToString();
+                model.ActivateCode = ds.Tables[0].Rows[0]["ActivateCode"].ToString();
+                if (ds.Tables[0].Rows[0]["RegTime"].ToString() != "")
+                {
+                    model.RegTime = DateTime.Parse(ds.Tables[0].Rows[0]["RegTime"].ToString());
+                }
+                model.RegIP = ds.Tables[0].Rows[0]["RegIP"].ToString();
+                if (ds.Tables[0].Rows[0]["LastLoginTime"].ToString() != "")
+                {
+                    model.LastLoginTime = DateTime.Parse(ds.Tables[0].Rows[0]["LastLoginTime"].ToString());
+                }
+                model.LastLoginIP = ds.Tables[0].Rows[0]["LastLoginIP"].ToString();
+                if (ds.Tables[0].Rows[0]["LoginCount"].ToString() != "")
+                {
+                    model.LoginCount = int.Parse(ds.Tables[0].Rows[0]["LoginCount"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Level"].ToString() != "")
+                {
+                    model.Level = int.Parse(ds.Tables[0].Rows[0]["Level"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Credit"].ToString() != "")
+                {
+                    model.Credit = decimal.Parse(ds.Tables[0].Rows[0]["Credit"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["Status"].ToString() != "")
+                {
+                    model.Status = int.Parse(ds.Tables[0].Rows[0]["Status"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["FindPwdTime"].ToString() != "")
+                {
+                    model.FindPwdTime = DateTime.Parse(ds.Tables[0].Rows[0]["FindPwdTime"].ToString());
+                }
+
+            }
+
+
+            return model;
+        }
+
 		#endregion  Method
 	}
+
+
 }
 

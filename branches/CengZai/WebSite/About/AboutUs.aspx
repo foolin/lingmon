@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AboutUs.aspx.cs" Inherits="About_AboutUs" %>
+﻿<%@ Page Title="关于曾在" Language="C#" MasterPageFile="~/Web.master" AutoEventWireup="true" CodeFile="AboutUs.aspx.cs" Inherits="About_AboutUs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
@@ -26,9 +26,6 @@ li{
 	color:#666;
 }
 </style>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="menu" Runat="Server">
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" Runat="Server">
  		<div class="partMain part">

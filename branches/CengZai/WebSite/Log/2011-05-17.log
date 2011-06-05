@@ -1,0 +1,3 @@
+2011-5-17 0:05:39 发送邮件出错！异常：命令顺序不正确。 服务器响应为: Error: need EHLO and AUTH first !
+2011-5-17 0:05:40 无法发送注册邮箱：foolin@cengzai.com，异常：命令顺序不正确。 服务器响应为: Error: need EHLO and AUTH first !
+2011-5-17 0:08:15 Request.Url.Hostlocalhost

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页-曾在网</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="bookmark" href="/favicon.ico" type="image/x-icon" />
+<link href="styles/home.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="wrapper" id="wrapper">
+
+<div class="header">
+	<div class="inner">
+		<div class="bd">
+			<h1><a href="/Home">曾在网</a></h1>
+			<div class="nav">
+				<ul class="nav-list">
+					<li><a href="/Home">首页</a></li>
+                    <li><a href="/Friends">好友</a></li>
+					<li class="current"><a href="/Help">求助</a></li>
+                    <li><a href="/Ask">问答</a></li>
+                    <li><a href="/Story">故事</a></li>
+                    <li><a href="/Wiki">百科</a></li>
+				</ul>
+			</div>
+			<div class="links">
+				<ul class="linksList">
+					<li><a href="/Home">我的主页</a></li>
+					<li><a href="/Message">消息</a></li>
+					<li><a class="toggle-dropdown" href="#" id="header_set"><span class="toggle-dropdown-inner">设置</span></a>
+					</li>
+					<li><a href="#" onclick="XYlogout();return false">退出</a></li>
+				</ul>
+			</div>
+			<div class="sprite search">
+				<form id="HeaderSearch" class="search_top" onsubmit="return false">
+				<fieldset>
+					<legend>搜索</legend>
+					<label for="name" style="display:none;">搜索...</label><input name="name" id="name" type="text" autocomplete="off" class="search_top" onfocus="if(this.value=='搜索…'){this.value='';}" maxlength="20" value="搜索…" /><button type="button" class="bt_search_top" onclick="return false;">搜索…</button>
+				</fieldset>
+				</form>
+			</div>
+			<div class="header-alpha"></div>
+		</div>
+	</div>
+</div>
+
+<div class="main">
+	<div class="inner">
+	<!-- main begin -->

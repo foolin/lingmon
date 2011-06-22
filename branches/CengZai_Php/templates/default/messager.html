@@ -1,0 +1,47 @@
+<!--{template "home_header"}-->
+
+<div class="message">
+<div class="msgTitle"><span>{conf site_name}提示信息</span></div>
+<div class="msgContent">
+<ul style="font-size:14px;list-style-type:none; padding:20px 50px 0;">
+    <!--{if is_array($message)==false}-->
+				<li><span class="opreate_span">{$message}</span></li>
+				<!--{else}-->
+				<!--{loop $message $one_message}-->
+				<li><span class="opreate_span">{$one_message}</span></li>
+				<!--{/loop}-->
+				<!--{/if}-->
+    <li class="li_nostyle" style="margin:5px 0">
+				<span class="opreate_span">
+					<!--{if $time!==null}-->
+						
+						<!--{if $time!==0}-->
+						<span id='redirect_status'><span id='msg_time'>{$time}</span>秒后{$to_title}</span>，
+                        <script language="JavaScript" type="text/javascript">
+						function showTimeStatus()
+						{
+							var timeObj=document.getElementById('msg_time');
+							if(timeObj.innerHTML==1)
+							{
+								document.getElementById('redirect_status').innerHTML="正在{$to_title}";
+								location.href='{$redirectto}';
+								return false;
+							}
+							timeObj.innerHTML-=1;
+
+							setTimeout(showTimeStatus,1000);
+						}
+						showTimeStatus();
+						</script>
+						<!--{/if}-->
+						<a href="{$redirectto}">如果您的浏览器没有自动跳转，请点这里继续</a>
+					<!--{else}-->
+						<a href="{$redirectto}">{$to_title}</a>
+					<!--{/if}-->
+				</span></li>
+			</ul>
+    </div>
+</div>
+
+
+<!--{template "home_footer"}-->

@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {$this->title} - {conf site_name}</title>
+
+<style type="text/css">
+	#content {width:100%;}
+	.reg-input-auto{
+		z-index:9999;
+	}
+	.reg-input-auto .matchbox{
+		width:178px; float:left; margin-right:6px; _margin-right:3px;
+	}
+	.reg-input-auto .formIcon{
+		margin:6px 0 0 0;
+	}
+</style>
+<link href="styles/index_login.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="wrap">
+        <div class="logo"><h1 class="txt-hidden">曾在网</h1></div>
+        <div class="loginBar">
+            <form action="{conf site_url}/index.php?mod=index&cmd=do_login" method="post" id="login-form">
+                <input type="hidden" name="method" value="do"/>
+                <table>
+                    <col width="159"/>
+                    <col width="119"/>
+                    <col width="*"/>
+					<tr>
+                        <td class="t1">邮箱：</td>
+                        <td class="t1">密码：</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="emailInfo" style="display:none;">邮箱地址</span><input type="text" id="login-email" class="input" name="email" value="" maxlength="50"/></td>
+                        <td><span class="pwInfo" style="display:none;">密码</span><input type="password" id="login-pwd" class="input password" value="" name="password" maxlength="30"/></td>
+                        <td><button type="submit" class="btn" id="login-btn"></button></td>
+                    </tr>
+                    <tr>
+                        <td class="t1"><input type="checkbox" class="checkbox" name="rememberMe" id="checkbox" value="1" checked="checked"/><label for="checkbox" class="checkbox">下次自动登录</label></td>
+                        <td class="t1"><a href="http://www.dajie.com/lostpassword" class="t1">找回密码</a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="main">
+    <div class="container">
+        <div class="clearfix">
+        
+          <div class="leftColumn">
+            <h3 class="yahei">最新动态</h3>
+              <div class="doList">
+                  <div class="cover"></div>
+                  <ul id="newsroll">
+
+                          <li class="clearfix" style="display:none;">
+                              <div class="pic"><img src="http://4.head00.dj10.net/2011/04/15/066/13028492660003174s.jpg"/></div>
+                              <span class="time g9">1分钟内</span>
+                              <p class="large info"><span class="b blue uName">王海英</span>收到了<span class="blue">北京磊友信息科技有限公司</span><span class="blue">行政主管</span>一职的邀请</p>
+                              <p class="g9 title break">人事助理·北京航天金税技术有限公司</p>
+                          </li>
+                          <li class="clearfix" style="display:none;">
+                              <div class="pic"><img src="http://4.head00.dj10.net/2011/04/15/066/13028492660003174s.jpg"/></div>
+                              <span class="time g9">1分钟内</span>
+                              <p class="large info"><span class="b blue uName">王海英</span>收到了<span class="blue">北京磊友信息科技有限公司</span><span class="blue">行政主管</span>一职的邀请</p>
+                              <p class="g9 title break">人事助理·北京航天金税技术有限公司</p>
+                          </li>
+                          <li class="clearfix" style="display:none;">
+                              <div class="pic"><img src="http://4.head00.dj10.net/2011/04/15/066/13028492660003174s.jpg"/></div>
+                              <span class="time g9">1分钟内</span>
+                              <p class="large info"><span class="b blue uName">王海英</span>收到了<span class="blue">北京磊友信息科技有限公司</span><span class="blue">行政主管</span>一职的邀请</p>
+                              <p class="g9 title break">人事助理·北京航天金税技术有限公司</p>
+                          </li>
+                          <li class="clearfix" style="display:none;">
+                              <div class="pic"><img src="http://4.head00.dj10.net/2011/04/15/066/13028492660003174s.jpg"/></div>
+                              <span class="time g9">1分钟内</span>
+                              <p class="large info"><span class="b blue uName">王海英</span>收到了<span class="blue">北京磊友信息科技有限公司</span><span class="blue">行政主管</span>一职的邀请</p>
+                              <p class="g9 title break">人事助理·北京航天金税技术有限公司</p>
+                          </li>
+                          <li class="clearfix" style="display:none;">
+                              <div class="pic"><img src="http://4.head00.dj10.net/2011/04/15/066/13028492660003174s.jpg"/></div>
+                              <span class="time g9">1分钟内</span>
+                              <p class="large info"><span class="b blue uName">王海英</span>收到了<span class="blue">北京磊友信息科技有限公司</span><span class="blue">行政主管</span>一职的邀请</p>
+                              <p class="g9 title break">人事助理·北京航天金税技术有限公司</p>
+                          </li>
+                                    <li class="clearfix" style="display:none;">
+
+                                        <div class="pic"><img src="http://2.head00.dj10.net/2011/03/15/094/13001856940003762s.jpg"/></div>
+
+                                        <span class="time g9">1分钟内</span>
+
+                                        <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
+
+                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+
+                                    </li>
+                                    <li class="clearfix" style="display:none;">
+
+                                        <div class="pic"><img src="http://2.head00.dj10.net/2011/03/15/094/13001856940003762s.jpg"/></div>
+
+                                        <span class="time g9">1分钟内</span>
+
+                                        <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
+
+                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+
+                                    </li>
+                                    <li class="clearfix" style="display:none;">
+
+                                        <div class="pic"><img src="http://2.head00.dj10.net/2011/03/15/094/13001856940003762s.jpg"/></div>
+
+                                        <span class="time g9">1分钟内</span>
+
+                                        <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
+
+                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+
+                                    </li>
+                                    <li class="clearfix" style="display:none;">
+
+                                        <div class="pic"><img src="http://2.head00.dj10.net/2011/03/15/094/13001856940003762s.jpg"/></div>
+
+                                        <span class="time g9">1分钟内</span>
+
+                                        <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
+
+                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+
+                                    </li>
+                                    <li class="clearfix" style="display:none;">
+
+                                        <div class="pic"><img src="http://2.head00.dj10.net/2011/03/15/094/13001856940003762s.jpg"/></div>
+
+                                        <span class="time g9">1分钟内</span>
+
+                                        <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
+
+                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+
+                                    </li>
+
+                  </ul>
+              </div>
+            </div>
+
+            <div class="rightcolumn">
+                <div class="loginMain">
+                    <div class="border">
+                        <h1 class="regTitle">立刻注册，加入曾在！</h1>
+                        <div class="regist-main regForm">
+                            <dl>
+                                <dt>邮  箱：</dt>
+                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dt>密  码：</dt>
+                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dt>重复密码：</dt>
+                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dt>验证码：</dt>
+                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dt> <input type="checkbox" name="cbPrivacy" value="1" /> 同意注册协议 </dt>
+                                <dt> </dt>
+                                <dd> <input type="button" class="btnRegister" name="btnRegister" value="立刻注册" </dd>
+                                <dd>&nbsp;  </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="bottomPanel">
+<div class="wrap clearfix">
+    <div class="pannel about">
+        <h3>关于我们</h3>
+            <ul class="list">
+                <li><a href="#About/AboutUs.aspx">关于曾在</a></li>
+				<li><a href="#About/AboutUs.aspx">加入曾在</a></li>
+				<li><a href="#About/AboutUs.aspx">联系我们</a></li>
+				<li><a href="#About/AboutUs.aspx">隐私声明</a></li>
+				<li><a href="#About/AboutUs.aspx">留言建议</a></li>
+            </ul>
+    </div>
+     <div class="pannel partner">
+        <h3>合作伙伴</h3>
+    </div>
+    <div class="pannel update">
+        <h3>我们在不断改进</h3>
+       <ul class="list">
+           <ul>
+                <li>5月25日<span>中兴捧月-程序设计大赛开始</span></li>
+                <li>5月13日<span>评价管理功能上线</span></li>
+                <li>4月29日<span>支持上传附件作品和简历</span></li>
+                <li>4月29日<span>职位类别字典升级</span></li>
+            </ul>
+       </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="footer">
+	Copyright &copy; 2011 CengZai. All Rights Reserved. <a href="about/aboutus.aspx" target="_blank">曾在网（CengZai.com）</a> 版权所有
+</div>
+
+<script type="text/javascript">
+	$('#login-email, #login-pwd').val('');
+		$('#login-email,#login-pwd').bind($.browser.msie ? 'propertychange': 'change', function() {
+			if (this.value != '') {
+				$(this).parent().find('span').hide();
+			} else {
+				$(this).parent().find('span').show();
+			}
+		}).blur(function(){
+			if (this.value != '') {
+				$(this).parent().find('span').hide();
+			} else {
+				$(this).parent().find('span').show();
+			}
+		});
+
+		$(function(){
+			$('#login-email,#login-pwd').blur();
+		});
+
+		$('#login-email,#login-pwd').each(function(){
+			if (this.value != '') {
+				$(this).parent().find('span').hide();
+			} else {
+				$(this).parent().find('span').show();
+			}
+		});
+
+		$('.emailInfo, .pwInfo').click(function(){
+			$(this).hide();
+			$(this).parent().find('input').focus()
+		});
+
+		$('#login-email,#login-pwd').focus(function(){
+			$(this).parent().find('span').hide();
+		});
+
+		$("#login-form").submit(function() {
+			$("#login-email").val($("#login-email").val().replace(/ | /g, ''));
+			if ($("#login-email").val() == '') {
+				alert("请输入你的邮箱地址");
+				$("#login-email").focus(function(){
+					 $('.emailInfo').hide()
+				});
+				return false;
+			}
+
+			if ($("#login-pwd").val() == '') {
+				alert("请输入你的登录密码");
+				$("#login-pwd").focus();
+				return false;
+			}
+			return true;
+		});
+
+
+
+	$(function() {
+		newsroll()
+	});
+
+	function newsroll() {
+		$('#newsroll li').hide();
+		$('#newsroll li:gt(' + ($('#newsroll li').length - 5) + ')').show();
+		window.setInterval(function() {
+			$('#newsroll li:visible:first').prev().css('opacity', 0).slideDown("fast", function(){
+				$(this).animate({opacity:1}, 1000, function(){
+					  $(this).css({'opacity':1,'background':'#fff'});
+					if ($('#newsroll li:hidden').length == 0) {
+						$('#newsroll li').hide();
+						$('#newsroll li:gt(' + ($('#newsroll li').length - 5) + ')').show()
+					}
+				});
+			});
+		}, 4000);
+	}
+
+
+
+</script>
+
+
+</body>
+</html>

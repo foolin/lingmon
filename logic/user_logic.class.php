@@ -1,84 +1,66 @@
 <?php
-class UserLogic
-{
-	var $post = array();
-	var $get = array();
-	var $cmd = '';
 
-	public function __construct()
+class UserLogic extends BaseLogic
+{
+	public function __construct(&$config)
 	{
-		$this->get = $_GET;
-		$this->post = $_POST;
+		parent::init($config);
 	}
 
-	public function Run()
+	public function execute()
 	{
-		
-		$cmd = $this->get['cmd'];
-		
-		if('login' == $cmd)
-		{
-			$this->show_login();
-		}
-		else if('dologin' == $cmd)
+		$cmd = $this->request('cmd');
+		if('dologin' == $cmd)
 		{
 			$this->do_login();
 		}
-		else if('register' == $cmd)
-		{
-			$this->show_register();
-		}
-		else if('doregister' == $cmd)
+		if('doregister' == $cmd)
 		{
 			$this->do_register();
 		}
 		else
 		{
-			$this->show_login_index();
+			$this->show_index();
 		}
-
 	}
 
-	public function show_login()
+	
+	public function show_index()
 	{
-		die('show_login:' + $this->cmd);
-		Header("Location:http://cengzai.test.com/?cmd=show_login");
+		$this->title = '首页-年轻人的情感网站，挽救爱情的情感社区';
+		include $this->tpl->get_tpl('index_login');
 	}
 
 	public function do_login()
 	{
-		die('do_login');
-		Header("Location:http://cengzai.test.com/?cmd=do_login");
-	}
-
-	public function show_register()
-	{
-		die('show_register');
-		Header("Location:http://cengzai.test.com/?cmd=show_register");
+		$this->messager('暂无测试登录', 'http://www.baidu.com');
+		die('test');
 	}
 
 	public function do_register()
 	{
-		die('do_register');
-		Header("Location:http://cengzai.test.com/?cmd=do_register");
+		
+		$user = array();
+		$email = $this->post['reg_email'];
+		$password = $this->post['reg_password'];
+		$repassword = $this->post['reg_repassword'];
+		$chkcode = $this->post['reg_chkcode'];
+		//
+		session_start();
+		$server_chkcode = $_SESSION['reg_chkcode'].'';
+		if($chkcode != $server_chkcode)
+		{
+			die("<script>window.alert('验证码不正确！');history.back();</script>");
+		}
+		else
+		{
+			die('验证成功！');
+		}
 
-/*
-		include_once ROOT_PATH.'model/user_model.class.php';
-		$user_model = new UserModel($config);
-		$list = $user_model->get_list();
-		$user = array(
-					 'username' => 'foolin',
-					 'password' => 'password',
-					 'email' => 'foolin@126.com',
-					 'nickname' => '负卐零'
-					 );
-		//$uid = $user_model->add($user);
-		//echo 'uid:' . $uid . '<br />';*/
+		if($email){};
+
+		$this->messager('恭喜您，注册成功!', "您帐号需要激活才能登录，我们已经发送一封激活邮件到您的邮箱[$email]，请及时登录邮箱进行激活！", null , null);
 	}
-	
-	public function show_login_index()
-	{
-		require $this->tpl->gettpl('index_login');
-	}
+
 }
 ?>

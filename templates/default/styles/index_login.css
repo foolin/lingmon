@@ -511,7 +511,7 @@ a {
 	color:#095;
 	padding:2px 5px;
 	width:200px;
-	font-size:14pt;
+	font-size:14px;
 	background:#fffceb;
 	border:1px solid #ccc;
 }
@@ -542,6 +542,7 @@ a {
 	background:url(../images/reg/btn-bg.gif) no-repeat;
 	border:0;
 	font-family:"微软雅黑","黑体";
+	cursor:pointer;
 }
 
 .dot-list ul.list li {

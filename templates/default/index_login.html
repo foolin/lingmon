@@ -24,9 +24,9 @@
 
 <div class="header">
     <div class="wrap">
-        <div class="logo"><h1 class="txt-hidden">曾在网</h1></div>
+        <div class="logo"><h1 class="txt-hidden">{conf site_name}</h1></div>
         <div class="loginBar">
-            <form action="{conf site_url}/index.php?mod=index&cmd=do_login" method="post" id="login-form">
+            <form action="{conf site_url}/index.php?mod=index&cmd=dologin" method="post" id="login-form">
                 <input type="hidden" name="method" value="do"/>
                 <table>
                     <col width="159"/>
@@ -43,8 +43,8 @@
                         <td><button type="submit" class="btn" id="login-btn"></button></td>
                     </tr>
                     <tr>
-                        <td class="t1"><input type="checkbox" class="checkbox" name="rememberMe" id="checkbox" value="1" checked="checked"/><label for="checkbox" class="checkbox">下次自动登录</label></td>
-                        <td class="t1"><a href="http://www.dajie.com/lostpassword" class="t1">找回密码</a></td>
+                        <td class="t1"><input type="checkbox" class="checkbox" name="remember" id="checkbox" value="1" checked="checked"/><label for="checkbox" class="checkbox">下次自动登录</label></td>
+                        <td class="t1"><a href="{conf site_url}/index.php?mod=index&cmd=find_password" class="t1">找回密码</a></td>
                         <td></td>
                     </tr>
                 </table>
@@ -146,7 +146,7 @@
 
                                         <p class="large info"><span class="b blue uName">蒋枝兵</span>对<span class="blue">何碧雅</span>发布的职位<span class="blue">产品培训讲师</span>发起了提问</p>
 
-                                        <p class="g9 title break">车辆工程·华南理工大学</p>
+                                        <p class="g9 title break">车辆工程·华南理工 aaa 大学</p>
 
                                     </li>
 
@@ -159,20 +159,22 @@
                     <div class="border">
                         <h1 class="regTitle">立刻注册，加入曾在！</h1>
                         <div class="regist-main regForm">
+                        	<form action="{conf site_url}/index.php?mod=user&cmd=doregister" method="post" id="reg-Form">
                             <dl>
                                 <dt>邮  箱：</dt>
-                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dd><input type="text" class="input" name="reg_email" value="" /> </dd>
                                 <dt>密  码：</dt>
-                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dd><input type="password" class="input" name="reg_password" value="" /> </dd>
                                 <dt>重复密码：</dt>
-                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
+                                <dd><input type="password" class="input" name="reg_repassword" value="" /> </dd>
                                 <dt>验证码：</dt>
-                                <dd><input type="text" class="input" name="txtEmail" value="" /> </dd>
-                                <dt> <input type="checkbox" name="cbPrivacy" value="1" /> 同意注册协议 </dt>
+                                <dd><input type="text" class="input" name="reg_chkcode" value="" />  <img id="imgVerifyCode" src="inc/verifycode.php?t={eval echo time()}" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('imgVerifyCode')" />  </dd>
+                                <dt style="font-size:12px; line-height:25px;"> <input type="checkbox" checked="checked" style="height:20px; line-height:20px;" name="reg_agreement" value="1" /> 我已阅读并同意 <a href="{conf site_url}/index.php?mod=other&cmd=agreement" target="_blank">《曾在网络服务协议》</a> </dt>
                                 <dt> </dt>
-                                <dd> <input type="button" class="btnRegister" name="btnRegister" value="立刻注册" </dd>
+                                <dd> <input type="submit" class="btnRegister" name="btnRegister" value="立刻注册"  /> </dd>
                                 <dd>&nbsp;  </dd>
                             </dl>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -296,6 +298,12 @@
 		}, 4000);
 	}
 
+	//刷新
+
+	function refreshCode(id) {
+		var img = document.getElementById(id);
+		img.src = "inc/verifycode.php?t=" + new Date().getTime();
+	}
 
 
 </script>

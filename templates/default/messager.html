@@ -1,20 +1,19 @@
 <!--{template "home_header"}-->
 
 <div class="message">
-<div class="msgTitle"><span>{conf site_name}提示信息</span></div>
+<div class="msgTitle"><span>{$title}</span></div>
 <div class="msgContent">
 <ul style="font-size:14px;list-style-type:none; padding:20px 50px 0;">
     <!--{if is_array($message)==false}-->
-				<li><span class="opreate_span">{$message}</span></li>
+				<li><span class="opreate_span" style="text-indent:2em;">{$message}</span></li>
 				<!--{else}-->
 				<!--{loop $message $one_message}-->
-				<li><span class="opreate_span">{$one_message}</span></li>
+				<li><span class="opreate_span" style="text-indent:2em;">{$one_message}</span></li>
 				<!--{/loop}-->
 				<!--{/if}-->
     <li class="li_nostyle" style="margin:5px 0">
 				<span class="opreate_span">
 					<!--{if $time!==null}-->
-						
 						<!--{if $time!==0}-->
 						<span id='redirect_status'><span id='msg_time'>{$time}</span>秒后{$to_title}</span>，
                         <script language="JavaScript" type="text/javascript">

@@ -1,79 +1,101 @@
 <?php
+
+/*******************************************************************
+ * Copyright (C)2011 Ling Team.
+ *
+ * @Desc: CengZai.com 程序入口
+ *
+ * @Author: Foolin
+ *
+ * @Email: Foolin@126.com
+ *
+ * @Date: 2011-06-23 22:23:26
+ *******************************************************************/
+
+
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 define('IN_LINGLIB',true);
+ini_set("arg_seperator.output", "&amp;");
+ini_set("magic_quotes_runtime", 0);
 define('ROOT_PATH',dirname(__FILE__) . '/');
 define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
+		
+
 
 @header('Content-Type: text/html; charset=utf-8');
 @header('P3P: CP="CAO PSA OUR"');
 
-
 require(ROOT_PATH . "config.php");
-require(ROOT_PATH . "lib/string.class.php");
 
-if($_GET)
+if($config['debug'])
 {
-	$_GET = String::haddslashes($_GET,1);
-}
-if($_POST)
-{
-	$_POST = String::haddslashes($_POST);
+	include(ROOT_PATH . "lib/io.class.php");
+	Io::clear_dir(ROOT_PATH . 'cache/templates/');
 }
 
 
-App::run($config);
+
+App::run($config);	//运行
 
 
+//程序入口类
 class App
 {
 	public function run(&$config)
 	{
+		include(ROOT_PATH . "lib/string.class.php");
+		if($_GET)
+		{
+			$_GET = String::haddslashes($_GET,1);
+		}
+		if($_POST)
+		{
+			$_POST = String::haddslashes($_POST);
+		}
+		
+		//取模块参数
 		$mod = App::get_mod();
 
-		if('index' == $mod)
-		{
-			include ROOT_PATH . 'logic/index_logic.class.php';
-			$index_logic = new IndexLogic($config);
-			$index_logic->execute();
-		}
-		else if('message' == $mod)
-		{
+		//包含文件
+		include_once ROOT_PATH.'logic/base_logic.class.php';
+		include_once ROOT_PATH . 'logic/'. $mod['file'] .'.class.php';
 
-		}
+		//实例化类
+		$logic = new $mod['class']($config);
+		$logic->execute(); 		//执行
 	}
 
 
-	public function get_mod($default='index')
+	//取模块
+	// 返回$['file']文件名,$['class']类名
+	public function get_mod($default='user')
 	{
-
 		$arrmods = array(
-				'index'=>1,
-				'home'=>1,
-				'login'=>1,
-				'register'=>1,
-				'find_register'=>1,
-				'user_active'=>1,
-				'get_password'=>1,
+				'user'=> array(
+					'file' => 'user_logic',
+					'class' => 'UserLogic',
+				),
+				'home'=> array(
+					'file' => 'home_logic',
+					'class' => 'HomeLogic',	
+				),
+				'other'=> array(
+					'file' => 'other_logic',
+					'class' => 'OtherLogic',	
+				),
 			);
 		
-		if(isset($_POST['mod']))
-		{
-		}
-		else if(isset($_GET['mod']))
-		{
-		}
-		else
-		{
-		}
 		@$mod = (isset($_POST['mod']) ? $_POST['mod'] : $_GET['mod']);
 
 		if(!isset($arrmods[$mod])) 
 		{
-			$mod = ($default ? $default : 'index');
+			$mod = ($default ? $default : 'user');
 		}
+		
 		
 		$_POST['mod'] = $_GET['mod'] = $mod;	
 		
-		return $mod;
+		return $arrmods[$mod];
 	}
 }
 

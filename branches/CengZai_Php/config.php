@@ -3,6 +3,7 @@
 !defined('IN_LINGLIB') && exit('Access Denied');
 
 $config = array(
+  'debug' => 1,
 
   'site_name' => '曾在网',
   'site_domain' => 'cengzai.com',

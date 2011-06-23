@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>首页-曾在网</title>
+<title>{$this->title}-{conf site_name}</title>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="bookmark" href="/favicon.ico" type="image/x-icon" />
 <link href="styles/home.css" rel="stylesheet" type="text/css" />
+<link href="styles/article.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -15,12 +16,12 @@
 <div class="header">
 	<div class="inner">
 		<div class="bd">
-			<h1><a href="/Home">曾在网</a></h1>
+			<h1><a href="{conf site_url}/index.php">曾在网</a></h1>
 			<div class="nav">
 				<ul class="nav-list">
-					<li><a href="/Home">首页</a></li>
+					<li class="current"><a href="{conf site_url}/index.php">首页</a></li>
                     <li><a href="/Friends">好友</a></li>
-					<li class="current"><a href="/Help">求助</a></li>
+					<li><a href="/Help">求助</a></li>
                     <li><a href="/Ask">问答</a></li>
                     <li><a href="/Story">故事</a></li>
                     <li><a href="/Wiki">百科</a></li>

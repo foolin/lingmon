@@ -19,7 +19,7 @@ class BaseLogic
 	}
 
 	//取参数
-	public function request_string($key, $is_get_first = 1)
+	public function request($key, $is_get_first = 1)
 	{
 		$querystring = '';
 		if(1 == $is_get_first)
@@ -49,10 +49,8 @@ class BaseLogic
 	}
 
 
-	function messager($message, $redirectto='',$time = -1)
+	function messager($title, $message, $redirectto='',$time = -1)
 	{
-		global $rewrite;
-
 		if ($time===-1)
         {
 			$time=(is_numeric($this->config['msg_time'])?$this->config['msg_time']:5);
@@ -70,8 +68,11 @@ class BaseLogic
 			
 			$redirectto=($redirectto!=='')?$redirectto:($from_referer=Util::referer());
 		}
-		$title="消息提示:".(is_array($message)?implode(',',$message):$message);
-		$title=strip_tags($title);
+
+		if(empty($title))
+		{
+			$title = "消息提示";
+		}
 
 		include($this->tpl->get_tpl('messager'));
 		

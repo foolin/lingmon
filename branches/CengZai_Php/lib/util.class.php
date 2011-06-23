@@ -56,9 +56,6 @@ class Util{
 
 		if($referer=="" || (strpos($referer,":/"."/")!==false && strpos($referer,$DOMAIN)===false))
 		{
-			global $rewrite;
-			if($rewrite) $default = $rewrite->format_url($default,false);
-
 			return $default;
 		}
 		return $referer;

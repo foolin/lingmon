@@ -28,6 +28,7 @@ class App
 	public function run(&$config)
 	{
 		$mod = App::get_mod();
+
 		if('index' == $mod)
 		{
 			include ROOT_PATH . 'logic/index_logic.class.php';

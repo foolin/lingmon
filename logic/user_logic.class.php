@@ -5,7 +5,7 @@ class UserLogic
 	var $get = array();
 	var $cmd = '';
 
-	public function UserLogic()
+	public function __construct()
 	{
 		$this->get = $_GET;
 		$this->post = $_POST;

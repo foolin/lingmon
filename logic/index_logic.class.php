@@ -3,7 +3,7 @@ require_once ROOT_PATH.'logic/base_logic.class.php';
 
 class IndexLogic extends BaseLogic
 {
-	public function IndexLogic(&$config)
+	public function __construct(&$config)
 	{
 		parent::init($config);
 	}

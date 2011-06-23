@@ -133,7 +133,6 @@ class Template
 	//编译
 	function compile()
 	{
-		global $rewrite;
 		//$变量名->变量名[数字字母_-."'[]$]
 		$var_regexp = "((\\\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)(-\>[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)?(\[[a-zA-Z0-9_\-\.\"\'\[\]\$\x7f-\xff]+\])*)";
 		//常量
@@ -187,10 +186,6 @@ class Template
 		if(!empty($this->link_file_type))
 		{
 			$this->modify_links();
-		}
-		if($rewrite)
-		{
-			$this->template_string=$rewrite->output($this->template_string,true);
 		}
 	}
 	

@@ -13,14 +13,13 @@
  *******************************************************************/
 
 
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-define('IN_LINGLIB',true);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);	//过滤一些Notice提示
 ini_set("arg_seperator.output", "&amp;");
 ini_set("magic_quotes_runtime", 0);
+define('IN_LINGLIB',true);
 define('ROOT_PATH',dirname(__FILE__) . '/');
 define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 		
-
 
 @header('Content-Type: text/html; charset=utf-8');
 @header('P3P: CP="CAO PSA OUR"');

@@ -23,7 +23,11 @@
 							if(timeObj.innerHTML==1)
 							{
 								document.getElementById('redirect_status').innerHTML="正在{$to_title}";
-								location.href='{$redirectto}';
+								<!--{if $history_back }-->
+								history.go(-1);
+								<!--{else}-->
+								location.href='{$redirect_to}';
+								<!--{/if}-->
 								return false;
 							}
 							timeObj.innerHTML-=1;
@@ -33,9 +37,15 @@
 						showTimeStatus();
 						</script>
 						<!--{/if}-->
-						<a href="{$redirectto}">如果您的浏览器没有自动跳转，请点这里继续</a>
+
+						<!--{if $history_back }-->
+						<a href="#" onclick="history.go(-1); return false;">如果您的浏览器没有自动跳转，请点这里继续</a>
+						<!--{else}-->
+						<a href="{$redirect_to}">如果您的浏览器没有自动跳转，请点这里继续</a>
+						<!--{/if}-->
+						
 					<!--{else}-->
-						<a href="{$redirectto}">{$to_title}</a>
+						<a href="{$redirect_to}">{$to_title}</a>
 					<!--{/if}-->
 				</span></li>
 			</ul>

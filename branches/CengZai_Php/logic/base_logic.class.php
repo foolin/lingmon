@@ -48,35 +48,39 @@ class BaseLogic
 		return $querystring;
 	}
 
-
-	function messager($title, $message, $redirectto='',$time = -1)
+	
+	//消息框
+	function messager($title, $message, $redirect_to='',$time = -1)
 	{
+		$history_back = false;
 		if ($time===-1)
         {
 			$time=(is_numeric($this->config['msg_time'])?$this->config['msg_time']:5);
 		}
-
-
-		$to_title=($redirectto==='' or $redirectto==-1)?"返回上一页":"跳转到指定页面";
-
-		if($redirectto===null)
+		
+		if($redirect_to===null or $redirect_to==='' or $redirect_to==-1)
 		{
-			$return_msg=$return_msg===false?"&nbsp;":$return_msg;
+			$history_back = true;
+			$to_title = "返回上一页";
+			$redirect_to=Util::referer();
 		}
 		else
 		{
-			
-			$redirectto=($redirectto!=='')?$redirectto:($from_referer=Util::referer());
+			$to_title = "跳转到指定页面";
+			if(strtolower($redirect_to) == 'refresh')
+			{
+				$redirect_to = Util::referer();
+			}
 		}
 
 		if(empty($title))
 		{
 			$title = "消息提示";
 		}
+		$this->title = $title;
 
 		include($this->tpl->get_tpl('messager'));
 		
 	}
-
 }
 ?>

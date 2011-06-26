@@ -26,7 +26,7 @@
     <div class="wrap">
         <div class="logo"><h1 class="txt-hidden">{conf site_name}</h1></div>
         <div class="loginBar">
-            <form action="{conf site_url}/index.php?mod=index&cmd=dologin" method="post" id="login-form">
+            <form action="{conf site_url}/index.php?mod=index&cmd=do_login" method="post" id="login-form">
                 <input type="hidden" name="method" value="do"/>
                 <table>
                     <col width="159"/>
@@ -159,7 +159,7 @@
                     <div class="border">
                         <h1 class="regTitle">立刻注册，加入曾在！</h1>
                         <div class="regist-main regForm">
-                        	<form action="{conf site_url}/index.php?mod=user&cmd=doregister" method="post" id="reg-Form">
+                        	<form action="{conf site_url}/index.php?mod=user&cmd=do_register" method="post" id="reg-Form">
                             <dl>
                                 <dt>邮  箱：</dt>
                                 <dd><input type="text" class="input" name="reg_email" value="" /> </dd>
@@ -218,7 +218,7 @@
 
 
 <div class="footer">
-	Copyright &copy; 2011 CengZai. All Rights Reserved. <a href="about/aboutus.aspx" target="_blank">曾在网（CengZai.com）</a> 版权所有
+	Copyright &copy; 2011 {conf site_domain}. All Rights Reserved. <a href="{conf site_url}/index.php?mod=other&cmd=about" target="_blank">{conf site_name}({conf site_domain})</a> 版权所有
 </div>
 
 <script type="text/javascript">

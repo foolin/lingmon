@@ -2,6 +2,10 @@
 //禁止独立访问
 !defined('IN_LINGLIB') && exit('Access Denied');
 
+//设置默认时间
+date_default_timezone_set('PRC'); 
+
+//配置文件
 $config = array(
 	//是否调试
 	'debug' => 1,
@@ -34,10 +38,12 @@ $config = array(
 	'smtp_port'=>'25',
 	'smtp_user' => 'noreply@cengzai.com',
 	'smtp_password' => 'lingmon',
-	'smtp_from' => 'noreply@cengzai.com',
-
+	'smtp_from' => 'noreply@cengzai.com(曾在网)',
 
 )
+
+
+
 
 
 

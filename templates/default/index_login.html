@@ -162,13 +162,13 @@
                         	<form action="{conf site_url}/index.php?mod=user&cmd=do_register" method="post" id="reg-Form">
                             <dl>
                                 <dt>邮  箱：</dt>
-                                <dd><input type="text" class="input" name="reg_email" value="" /> </dd>
+                                <dd><input type="text" class="input" name="reg_email" value="" /> 必须合法邮箱</dd>
                                 <dt>密  码：</dt>
-                                <dd><input type="password" class="input" name="reg_password" value="" /> </dd>
+                                <dd><input type="password" class="input" name="reg_password" value="" /> 6~20位字符</dd>
                                 <dt>重复密码：</dt>
                                 <dd><input type="password" class="input" name="reg_repassword" value="" /> </dd>
                                 <dt>验证码：</dt>
-                                <dd><input type="text" class="input" name="reg_chkcode" value="" />  <img id="imgVerifyCode" src="inc/verifycode.php?t={eval echo time()}" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('imgVerifyCode')" />  </dd>
+                                <dd><input type="text" class="input" name="reg_verify_code" value="" />  <img id="imgVerifyCode" src="inc/verifycode.php?t={eval echo time()}" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('imgVerifyCode')" />  </dd>
                                 <dt style="font-size:12px; line-height:25px;"> <input type="checkbox" checked="checked" style="height:20px; line-height:20px;" name="reg_agreement" value="1" /> 我已阅读并同意 <a href="{conf site_url}/index.php?mod=other&cmd=agreement" target="_blank">《曾在网络服务协议》</a> </dt>
                                 <dt> </dt>
                                 <dd> <input type="submit" class="btnRegister" name="btnRegister" value="立刻注册"  /> </dd>

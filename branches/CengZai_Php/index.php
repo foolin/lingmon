@@ -12,27 +12,28 @@
  * @Date: 2011-06-23 22:23:26
  *******************************************************************/
 
-
-error_reporting(E_ERROR | E_WARNING | E_PARSE);	//过滤一些Notice提示
 ini_set("arg_seperator.output", "&amp;");
 ini_set("magic_quotes_runtime", 0);
 define('IN_LINGLIB',true);
 define('ROOT_PATH',dirname(__FILE__) . '/');
 define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 		
-
 @header('Content-Type: text/html; charset=utf-8');
 @header('P3P: CP="CAO PSA OUR"');
 
-require(ROOT_PATH . "config.php");
 
+require(ROOT_PATH . "config.php");
 if($config['debug'])
 {
+	//每次都清空模板
 	include(ROOT_PATH . "lib/io.class.php");
 	Io::clear_dir(ROOT_PATH . 'cache/templates/');
 }
-
-
+else
+{
+	//只打印错误消息
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);	//过滤一些Notice提示
+}
 
 App::run($config);	//运行
 

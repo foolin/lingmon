@@ -82,5 +82,24 @@ class BaseLogic
 		include($this->tpl->get_tpl('messager'));
 		
 	}
+
+	function send_mail($to, $cc='', $subject='', $body='')
+	{
+		include_once ROOT_PATH. '/lib/smtp.class.php';
+
+
+		$smtp = new smtp($this->config['smtp_server'], $this->config['smtp_port'], true
+							, $this->config['smtp_user'], $this->config['smtp_password']);
+		$smtp->debug = TRUE;
+		/*
+		$body_header = '<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"></HEAD><BODY>';
+		$body_footer = '</BODY></HTML>';
+		$body = $body_header . $body . $body_footer;
+		*/
+		$smtp -> sendmail($to, $this->config['smtp_from'], $subject, $body, 'HTML', $cc);
+
+
+	}
+
 }
 ?>

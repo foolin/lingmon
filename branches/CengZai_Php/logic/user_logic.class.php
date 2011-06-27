@@ -45,6 +45,18 @@ class UserLogic extends BaseLogic
 
 	public function do_register()
 	{
+		
+		$this->send_mail('(刘灵)252687345@qq.com','', '恭喜刘灵，注册曾在网(cengzai.com)成功2!', "您帐号需要激活才能登录，我们已经发送一封激活邮件到您的邮箱[liufuling@cengzai.com]2，请及时登录邮箱进行激活！");
+		//sendmail("smtp.exmail.qq.com","noreply@cengzai.com","lingmon","ling@Liufu.org","noreply@cengzai.com","title_test","body_test");
+		die('ok!' . getdate());
+		/*
+		$smtp = new smtp('smtp.exmail.qq.com', 25, true, 'noreply@cengzai.com', 'lingmon');
+		$smtp -> sendmail('ling@liufu.org','onreply@cengzai.com','测试PHP发送邮件','这是PHP邮件内容。', 'HTML','liufuling@sxmobi.com');
+		*/
+		die('send ok!');
+
+		sendmail("smtp.exmail.qq.com","noreply@cengzai.com","lingmon","ling@Liufu.org","曾在<noreply@cengzai.com>","title_test","body_test");
+		
 		$this->messager('恭喜您，注册成功!', "您帐号需要激活才能登录，我们已经发送一封激活邮件到您的邮箱[$email]，请及时登录邮箱进行激活！", 'refresh' , 10);
 		$user = array();
 		$email = $this->post['reg_email'];

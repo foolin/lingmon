@@ -13,6 +13,15 @@ class Util{
 		die("Class util can not instantiated!");
 	}
 
+	//判断邮箱是否合法
+	function is_email($email){
+		if(ereg("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+",$email)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 
 	/**
      * random
@@ -62,53 +71,6 @@ class Util{
 	}
 
 
-   function chkcode($code){
-		$codelen = strlen($code);
-		$im = imagecreate(50,20);
-		$font_type = ROOT_PATH."/templates/default/styles/ant2.ttf";
-		$bgcolor = ImageColorAllocate($im, 235,245,255);//近白色
-		$iborder = ImageColorAllocate($im, 70,80,90); //近黑色
-
-		$fontColor = ImageColorAllocate($im, 164,164,164);
-		$fontColor1 = ImageColorAllocate($im, 20,80,255); //近蓝色
-		$fontColor2 = ImageColorAllocate($im, 50,50,50);//近黑色
-		$fontColor3 = ImageColorAllocate($im, 255,80,20);//近红色
-		$fontColor4 = ImageColorAllocate($im, 20,200,20); //近绿色
-
-		$lineColor = ImageColorAllocate($im, 110,220,220);//淡蓝色
-
-		for($j=3;$j<=16;$j=$j+4) imageline($im,2,$j,48,$j,$lineColor);
-		for($j=2;$j<52;$j=$j+(mt_rand(3,6))) imageline($im,$j,2,$j-6,18,$lineColor);
-		imagerectangle($im, 0, 0, 49, 19, $iborder);
-		$strposs = array();
-		for($i=0;$i<$codelen;$i++){
-		if(function_exists("imagettftext")){
-		$strposs[$i][0] = $i*10+6;
-		$strposs[$i][1] = mt_rand(15,18);
-		imagettftext($im, 11, 5, $strposs[$i][0]+1, $strposs[$i][1]+1, $fontColor, $font_type, $code[$i]);
-		}
-		else{
-		imagestring($im, 5, $i*10+6, mt_rand(2,4), $code[$i], $fontColor2);
-		}
-		}
-		for($i=0;$i<$codelen;$i++){
-		if(function_exists("imagettftext")){
-		$fontC=${'fontColor'.mt_rand(1,4)};
-		imagettftext($im, 11,5, $strposs[$i][0], $strposs[$i][1], $fontC, $font_type, $code[$i]);
-		}
-		}
-		header("Pragma:no-cache\r\n");
-		header("Cache-Control:no-cache\r\n");
-		header("Expires:0\r\n");
-		if(function_exists("imagejpeg")){
-			header("content-type:image/jpeg\r\n");
-			imagejpeg($im);
-		}else{
-			header("content-type:image/png\r\n");
-			imagepng($im);
-		}
-		ImageDestroy($im);
-   }
 
 	/**
      * image_compress

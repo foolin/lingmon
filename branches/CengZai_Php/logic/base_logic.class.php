@@ -50,7 +50,7 @@ class BaseLogic
 
 	
 	//消息框
-	function messager($title, $message, $redirect_to='',$time = -1)
+	function messager($title, $message='', $redirect_to='',$time = -1)
 	{
 		$history_back = false;
 		if ($time===-1)
@@ -80,6 +80,8 @@ class BaseLogic
 		$this->title = $title;
 
 		include($this->tpl->get_tpl('messager'));
+
+		exit;
 		
 	}
 
@@ -90,7 +92,7 @@ class BaseLogic
 
 		$smtp = new smtp($this->config['smtp_server'], $this->config['smtp_port'], true
 							, $this->config['smtp_user'], $this->config['smtp_password']);
-		$smtp->debug = TRUE;
+		$smtp->debug = FALSE;
 		/*
 		$body_header = '<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"></HEAD><BODY>';
 		$body_footer = '</BODY></HTML>';

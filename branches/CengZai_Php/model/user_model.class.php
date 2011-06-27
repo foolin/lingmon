@@ -9,10 +9,19 @@ class UserModel extends BaseModel
 	{
 		parent::init($config);
 	}
-	
-	public function add($user)
+
+
+	//判断是否存在邮箱
+	public function exists_email($email)
 	{
-		$sql = "INSERT INTO {$this->db->table_prefix}user (username, password, email, nickname) VALUES('$user[username]', '$user[password]', '$user[email]', '$user[nickname]') ";
+		$sql = "SELECT COUNT(0) FROM {$this->db->table_prefix}user WHERE email='$email'";
+		return $this->db->result_first($sql);
+	}
+	
+	public function add($email, $password, $regtime='', $regip='127.0.0.1', $status=0)
+	{
+
+		$sql = "INSERT INTO {$this->db->table_prefix}user (email, password, regtime, regip, status) VALUES('$email', '$password', '$regtime', '$regip', '$status') ";
 
 		$this->db->query($sql);
 		return $this->db->insert_id();

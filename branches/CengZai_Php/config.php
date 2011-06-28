@@ -15,9 +15,6 @@ $config = array(
 	'site_domain' => 'cengzai.com',
 	'site_url' => 'http://cengzai.test.com',
 
-	//消息框
-	'msg_time' => 5,
-
 	//模板
 	'template_path' => 'default',
 	'template_root_path' => './templates/',

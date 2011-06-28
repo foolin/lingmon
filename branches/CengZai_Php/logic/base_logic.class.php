@@ -19,10 +19,10 @@ class BaseLogic
 	}
 
 	//取参数
-	public function request($key, $is_get_first = 1)
+	public function request($key, $is_get_first = false)
 	{
 		$querystring = '';
-		if(1 == $is_get_first)
+		if(false == $is_get_first)
 		{
 			if(isset($this->get[$key]))
 			{
@@ -50,27 +50,29 @@ class BaseLogic
 
 	
 	//消息框
-	function messager($title, $message='', $redirect_to='',$time = -1)
+	function messager($title, $message='', $redirect_to=null,$time = null)
 	{
 		$history_back = false;
-		if ($time===-1)
+
+		if ($time===null)
         {
-			$time=(is_numeric($this->config['msg_time'])?$this->config['msg_time']:5);
+			$time = 0;
 		}
 		
-		if($redirect_to===null or $redirect_to==='' or $redirect_to==-1)
+		if($redirect_to===null or $redirect_to==-1)
 		{
 			$history_back = true;
 			$to_title = "返回上一页";
 			$redirect_to=Util::referer();
 		}
+		elseif($redirect_to==='')
+		{
+			$to_title = "跳转到指定页面";
+			$redirect_to = Util::referer();
+		}
 		else
 		{
 			$to_title = "跳转到指定页面";
-			if(strtolower($redirect_to) == 'refresh')
-			{
-				$redirect_to = Util::referer();
-			}
 		}
 
 		if(empty($title))

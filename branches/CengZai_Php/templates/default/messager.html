@@ -5,16 +5,16 @@
 <div class="msgContent">
 <ul style="font-size:14px;list-style-type:none; padding:20px 50px 0;">
     <!--{if is_array($message)==false}-->
-				<li><span class="opreate_span" style="text-indent:2em;">{$message}</span></li>
+				<li><span class="opreate_span">{$message}</span></li>
 				<!--{else}-->
 				<!--{loop $message $one_message}-->
-				<li><span class="opreate_span" style="text-indent:2em;">{$one_message}</span></li>
+				<li><span class="opreate_span">{$one_message}</span></li>
 				<!--{/loop}-->
 				<!--{/if}-->
     <li class="li_nostyle" style="margin:5px 0">
 				<span class="opreate_span">
-					<!--{if $time!==null}-->
-						<!--{if $time!==0}-->
+					<!--{if $time!==0}-->
+						
 						<span id='redirect_status'><span id='msg_time'>{$time}</span>秒后{$to_title}</span>，
                         <script language="JavaScript" type="text/javascript">
 						function showTimeStatus()
@@ -36,7 +36,6 @@
 						}
 						showTimeStatus();
 						</script>
-						<!--{/if}-->
 
 						<!--{if $history_back }-->
 						<a href="#" onclick="history.go(-1); return false;">如果您的浏览器没有自动跳转，请点这里继续</a>
@@ -45,7 +44,11 @@
 						<!--{/if}-->
 						
 					<!--{else}-->
+						<!--{if $history_back }-->
+						<a href="#" onclick="history.go(-1); return false;">{$to_title}</a>
+						<!--{else}-->
 						<a href="{$redirect_to}">{$to_title}</a>
+						<!--{/if}-->
 					<!--{/if}-->
 				</span></li>
 			</ul>

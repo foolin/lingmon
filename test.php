@@ -1,5 +1,9 @@
 <?php
-echo md5('hello');
-date_default_timezone_set('PRC'); 
-echo date('Y-m-d H:i:s');
+ include dirname(__FILE__) . '/lib/util.class.php';
+ echo Util::get_url().'<br />';
+
+
+ echo Util::get_domain().'<br />';
+
+ //print_r($_SERVER);
 ?>

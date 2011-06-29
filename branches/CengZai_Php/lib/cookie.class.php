@@ -65,7 +65,7 @@ class Cookie
         }
 	}
 	
-	function delete($name)
+	function remove($name)
 	{
 		$name_list=func_get_args();
 		foreach ($name_list as $name)
@@ -74,7 +74,7 @@ class Cookie
 		}
 	}
 	
-	function clear_all()
+	function remove_all()
 	{
 		$prefix_len=strlen($this->_prefix);
 		foreach ((array)$this->_cookie as $name=>$value)

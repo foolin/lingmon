@@ -11,6 +11,7 @@ class UserLogic extends BaseLogic
 	{
 		include_once ROOT_PATH . 'model/user_model.class.php';
 
+		
 
 		$cmd = $this->request('cmd');
 		switch($cmd)
@@ -29,6 +30,11 @@ class UserLogic extends BaseLogic
 			case 'activate':
 				$this->do_activate();
 				break;
+
+			//注销登录
+			case 'logout':
+				$this->logout();
+				break;
 			
 			//默认首页
 			default:
@@ -42,6 +48,14 @@ class UserLogic extends BaseLogic
 	
 	function show_index()
 	{
+		//如果登录，则跳转
+		if($this->is_login())
+		{
+			$url = "{$this->config['site_url']}/index.php?mod=home&cmd=my";
+			Util::go($url);
+		}
+		
+		//否则显示登录框
 		$this->title = '首页-年轻人的情感网站，挽救爱情的情感社区';
 		include $this->tpl->get_tpl('index_login');
 	}
@@ -78,10 +92,11 @@ class UserLogic extends BaseLogic
 		$new_user['logincount'] = $user['logincount'] + 1;
 		$user_model -> base_update($new_user, "userid='". $user['userid'] ."'");
 		
+		//保存Cookie
 		$auth_code = Util::auth_code($user['userid'] . '|' . $user['password'], 'ENCODE');
-		
 		$this->cookie->set('auth', $auth_code, ($this->config['cookie_expire']*86400));
 
+		//判断是否第一次登录
 		if($user['logincount'] <= 0)
 		{
 			$this->messager('恭喜登录成功！', '尊敬的'.$user['email'].'，您已经成功登录，您需要完善一下资料！',
@@ -89,10 +104,24 @@ class UserLogic extends BaseLogic
 		}
 		else
 		{
+			$url = $this->config['site_url'] . '/index.php?mod=home&cmd=my';
+			Util::go($url);
 			$this->messager('恭喜登录成功！', '尊敬的'.$user['email'].'，您已经成功登录，请在为您跳转，请稍后！',
-			$this->config['site_url'] . '/index.php?mod=home&cmd=my', 3);
+			$url, 3);
 		}
 
+	}
+
+	function logout()
+	{
+		$name = "尊敬的用户";
+		if(is_array($this->user))
+		{
+			$name = empty($this->user['nickname']) ? $this->user['email'] : $this->user['nickname'];
+		}
+		$this->cookie->remove('auth');
+		$this->messager('成功退出！', $name.',您已经成功登录，请在为您跳转，请稍后！',
+			$this->config['site_url'] . '/index.php?mod=user&cmd=login', 3);
 	}
 
 	//注册处理

@@ -28,6 +28,14 @@ class UserModel extends BaseModel
 		return $this->base_get_model($where);
 	}
 
+	
+	//判断用户是否存在
+	function check_user($userid, $password)
+	{
+		$sql = "SELECT COUNT(0) FROM {$this->db_table} WHERE userid='{$userid}' AND Password='{$password}' ";
+		return $this->db->result_first($sql) > 0;
+	}
+
 	/*
 	function add($email, $password, $regtime='', $regip='127.0.0.1', $status=0)
 	{

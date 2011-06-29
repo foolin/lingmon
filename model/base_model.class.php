@@ -138,7 +138,7 @@ class BaseModel
 
 	
 	//取单个数据
-	function base_get_model($where)
+	function base_get_model($where, $order='')
 	{
 		if(isset($where) && !empty($where))
 		{
@@ -149,7 +149,16 @@ class BaseModel
 			$where = '';
 		}
 
-		$sql = " SELECT * FROM {$this->db_table} {$where} LIMIT 0,1 ";
+		if(isset($order) && !empty($order))
+		{
+			$order = " ORDER BY {$order} ";
+		}
+		else
+		{
+			$order = '';
+		}
+
+		$sql = " SELECT * FROM {$this->db_table} {$where} {$order} LIMIT 0,1 ";
 
 		return $this->db->fetch_first($sql);
 	}

@@ -2,8 +2,7 @@
 //禁止独立访问
 !defined('IN_LINGLIB') && exit('Access Denied');
 
-//设置默认时间
-date_default_timezone_set('PRC'); 
+
 
 //配置文件
 $config = array(
@@ -14,6 +13,7 @@ $config = array(
 	'site_name' => '曾在网',
 	'site_domain' => 'cengzai.com',
 	'site_url' => 'http://cengzai.test.com',
+	'auth_key' => 'linglib',
 
 	//模板
 	'template_path' => 'default',
@@ -36,6 +36,12 @@ $config = array(
 	'smtp_user' => 'noreply@cengzai.com',
 	'smtp_password' => 'lingmon',
 	'smtp_from' => 'noreply@cengzai.com(曾在网)',
+
+	//Cookie设置
+	'cookie_domain' => '',
+	'cookie_expire' => '30',
+	'cookie_path' => '/',
+	'cookie_prefix' => 'CengZai_lwti2_',
 
 )
 

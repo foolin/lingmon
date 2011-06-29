@@ -19,10 +19,15 @@ define('IN_LINGLIB',true);
 define('ROOT_PATH',dirname(__FILE__) . '/');
 define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 
-require(dirname(__FILE__) . '/'. "config.php");
+
+require(dirname(__FILE__) . '/inc/config.php');
+require(dirname(__FILE__) . '/inc/global.php');
 
 @header('Content-Type: text/html; charset=utf-8');
 @header('P3P: CP="CAO PSA OUR"');
+
+//Session开始
+session_start();
 
 
 if($config['debug'])

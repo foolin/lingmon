@@ -118,9 +118,22 @@ class BaseLogic
 		$smtp -> sendmail($to, $this->config['smtp_from'], $subject, $body, 'HTML', $cc);
 	}
 
+
+	//判断是否登录
 	function is_login()
 	{
 		return $this->user && is_array($this->user);
+	}
+
+
+	//检查是否登录，如果未登录，则跳转
+	function check_login()
+	{
+		if(!$this->is_login())
+		{
+			$url = $this->config['site_url'] . '/index.php?mod=user&cmd=login';
+			Util::go($url);
+		}
 	}
 
 }

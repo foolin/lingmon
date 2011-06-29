@@ -9,6 +9,9 @@ class HomeLogic extends BaseLogic
 
 	function execute()
 	{
+		//判断是否登录
+		$this->check_login();
+
 		$cmd = $this->request('cmd');
 		switch($cmd)
 		{

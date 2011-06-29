@@ -9,7 +9,7 @@ define('IN_LINGLIB','1');
 $code = "我是liuFuLing99";
 
 $cookie = new Cookie($config, $_COOKIE);
-$cookie -> delete('auth');
+$cookie -> remove('auth');
 
 $encode = Util::auth_code($code, 'ENCODE', 'ling',  0);
 

@@ -9,6 +9,9 @@ class UserLogic extends BaseLogic
 
 	function execute()
 	{
+		include_once ROOT_PATH . 'model/user_model.class.php';
+
+
 		$cmd = $this->request('cmd');
 		switch($cmd)
 		{
@@ -45,17 +48,61 @@ class UserLogic extends BaseLogic
 
 	function do_login()
 	{
-		$this->messager('暂无测试登录', 'aaaa',null, null);
+		$email = $this->request('email');
+		$password = $this->request('password');
+		if(empty($email) || !Util::is_email($email))
+		{
+			$this->messager('登录邮箱不正确！', '请输入正确的邮箱',null, 5);
+		}
+		if(empty($password))
+		{
+			$this->messager('密码不能为空','请输入正确的密码', null, 5);
+		}
+
+		//读取用户，验证密码
+		$user_model = new UserModel($this->config);
+		$user = $user_model -> get_user($email);
+		if(!$user || !is_array($user))
+		{
+			$this->messager('用户名不存在','请输入正确的用户名或密码',null, 5);
+		}
+		if($user['password'] != md5($password))
+		{
+			$this->messager('用户名或者密码不正确','请输入正确的用户名或密码',null, 5);
+		}
+
+		//更新登录ip、时间
+		$new_user = array();
+		$new_user['lastlogintime'] = Util::date() ;
+		$new_user['lastloginip'] = Util::get_ip();
+		$new_user['logincount'] = $user['logincount'] + 1;
+		$user_model -> base_update($new_user, "userid='". $user['userid'] ."'");
+		
+		$auth_code = Util::auth_code($user['userid'] . '|' . $user['password'], 'ENCODE');
+		
+		$this->cookie->set('auth', $auth_code, ($this->config['cookie_expire']*86400));
+
+		if($user['logincount'] <= 0)
+		{
+			$this->messager('恭喜登录成功！', '尊敬的'.$user['email'].'，您已经成功登录，您需要完善一下资料！',
+			$this->config['site_url'] . '/index.php?mod=user&cmd=reg_step2', 3);
+		}
+		else
+		{
+			$this->messager('恭喜登录成功！', '尊敬的'.$user['email'].'，您已经成功登录，请在为您跳转，请稍后！',
+			$this->config['site_url'] . '/index.php?mod=home&cmd=my', 3);
+		}
+
 	}
 
 	//注册处理
 	function do_register()
 	{
 		
-		$email = $this->post['reg_email'];
-		$password = $this->post['reg_password'];
-		$repassword = $this->post['reg_repassword'];
-		$verify_code = $this->post['reg_verify_code'];
+		$email = $this->request('reg_email');
+		$password = $this->request('reg_password');
+		$repassword = $this->request('reg_repassword');
+		$verify_code = $this->request('reg_verify_code');
 		
 		if(!isset($this->post['reg_agreement']) || $this->post['reg_agreement'] != 1)
 		{
@@ -63,7 +110,7 @@ class UserLogic extends BaseLogic
 			exit;
 		}
 
-		session_start();
+
 		$server_verify_code = $_SESSION['verify_code'];
 		if(empty($verify_code))
 		{
@@ -88,12 +135,10 @@ class UserLogic extends BaseLogic
 
 
 		$password = md5($password);
-		$regtime = date('Y-m-d H:i:s');
+		$regtime = Util::date();
 		$regip = Util::get_ip();
 		$status = 0;
-
-
-		include_once ROOT_PATH . 'model/user_model.class.php';
+		
 		$user_model = new UserModel($this->config);
 		$is_exists = $user_model->exists_email($email);
 		if($is_exists)
@@ -138,7 +183,7 @@ class UserLogic extends BaseLogic
 		$user = array();
 		$user['status'] = 9;
 		$user['face'] = 9;
-		$user['lastlogintime'] = date("Y-m-d H:i:s");
+		$user['lastlogintime'] = Util::date();
 
 		$email = $this->request('email',true);
 		$code = $this->request('code',true);
@@ -148,7 +193,6 @@ class UserLogic extends BaseLogic
 			exit;
 		}
 
-		include_once ROOT_PATH . 'model/user_model.class.php';
 		$user_model = new UserModel($this->config);
 		//验证用户是否存在
 		$user = $user_model->get_user($email);
@@ -160,12 +204,12 @@ class UserLogic extends BaseLogic
 
 		if($user['status'] < 0)
 		{
-			$this->messager($email."帐号被锁定！", "对不起，激活失败，帐号被锁定！", Util::get_domain_url() . '/index.php', null);
+			$this->messager($email."帐号被锁定！", "对不起，激活失败，帐号被锁定！", $this->config['site_url'] . '/index.php', null);
 			exit;
 		}
 		elseif($user['status'] > 0)
 		{
-			$this->messager($email."帐号已经激活！", "您的帐号已经激活，无需重复激活！", Util::get_domain_url() . '/index.php', null);
+			$this->messager($email."帐号已经激活！", "您的帐号已经激活，无需重复激活！", $this->config['site_url'] . '/index.php', null);
 			exit;
 		}
 		

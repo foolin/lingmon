@@ -1,6 +1,7 @@
 <?php
 require(ROOT_PATH . "lib/template.class.php");
 require(ROOT_PATH.'lib/util.class.php');
+require(ROOT_PATH . 'lib/cookie.class.php');
 
 class BaseLogic
 {
@@ -8,7 +9,9 @@ class BaseLogic
 	var $title = '';
 	var $post = array();
 	var $get = array();
-	var $tpl = false;
+	var $tpl = null;
+	var $cookie = null;
+	var $user = null;
 
 	public function init(&$config)
 	{
@@ -16,6 +19,18 @@ class BaseLogic
 		$this->post = $_POST;
 		$this->config = $config;
 		$this->tpl = new Template($config);
+		$this->cookie = new Cookie($config, $_COOKIE);
+
+		//验证是否已经登录
+		$userid = 0;
+		$password = '';
+		if(($auth_code=$this->cookie->get('auth')))
+		{
+			list($userid, $password)=explode("|", Util::auth_code($auth_code,'DECODE'));
+		}
+		include_once ROOT_PATH . 'model/user_model.class.php';
+		$user_model = new UserModel($this->config);
+		$this->user = $user_model -> base_get_model("userid='". $userid ."' AND password='". $password ."' ");
 	}
 
 	//取参数
@@ -101,8 +116,11 @@ class BaseLogic
 		$body = $body_header . $body . $body_footer;
 		*/
 		$smtp -> sendmail($to, $this->config['smtp_from'], $subject, $body, 'HTML', $cc);
+	}
 
-
+	function is_login()
+	{
+		return $this->user && is_array($this->user);
 	}
 
 }

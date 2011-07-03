@@ -99,7 +99,7 @@ class UserLogic extends BaseLogic
 		//判断是否第一次登录
 		if($user['logincount'] <= 0)
 		{
-			$this->messager('恭喜登录成功！', '尊敬的'.$user['email'].'，您已经成功登录，您需要完善一下资料！',
+			$this->messager('恭喜登录成功！', '尊敬的'.$user['nickname'].'，您已经成功登录，您需要完善一下资料！',
 			$this->config['site_url'] . '/index.php?mod=user&cmd=reg_step2', 3);
 		}
 		else
@@ -131,6 +131,7 @@ class UserLogic extends BaseLogic
 		$email = $this->request('reg_email');
 		$password = $this->request('reg_password');
 		$repassword = $this->request('reg_repassword');
+		$nickname = trim($this->request('reg_nickname'));
 		$verify_code = $this->request('reg_verify_code');
 		
 		if(!isset($this->post['reg_agreement']) || $this->post['reg_agreement'] != 1)
@@ -161,6 +162,12 @@ class UserLogic extends BaseLogic
 			$this->messager('密码长度不对', '密码长度必须位于6~20位字符', null, 5);
 			exit;
 		}
+		
+		if(strlen($nickname) < 2 || strlen($nickname) > 12)
+		{
+			$this->messager('昵称长度不合法', '昵称长度必须在2~12个字符之间', null, 5);
+			exit;
+		}
 
 
 		$password = md5($password);
@@ -184,14 +191,17 @@ class UserLogic extends BaseLogic
 		$user['regtime'] = $regtime;
 		$user['regip'] = $regip;
 		$user['status'] = $status;
+		$user['nickname'] = $nickname;
+		
+		//注册
 		$userid = $user_model -> base_add($user);
 		
-
+		
 		if($userid > 0)
 		{
 			$active_url = Util::get_domain_url(). "/index.php?mod=user&cmd=activate&email=".$email."&code=".md5($regtime);
 			
-			$email_title = '恭喜您注册曾在网(cengzai.com)成功!';
+			$email_title = $nickname .'恭喜您注册曾在网(cengzai.com)成功!';
 			$email_content = "尊敬的".$email.": <br/>您注册曾在网(CengZai.com)成功，您帐号是：".$email."，请保管好您的密码。帐号需要激活才能正常登录，<a href='".$active_url."'>请点击这里</a>或者以下连接进行激活：<br /><a href='".$active_url."'>".$active_url."</a>  ";
 
 			//发送邮件

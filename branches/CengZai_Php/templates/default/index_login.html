@@ -167,6 +167,8 @@
                                 <dd><input type="password" class="input" name="reg_password" value="" /> 6~20位字符</dd>
                                 <dt>重复密码：</dt>
                                 <dd><input type="password" class="input" name="reg_repassword" value="" /> </dd>
+								<dt>昵  称：</dt>
+                                <dd><input type="text" class="input" name="reg_nickname" value="" /> 2~12个字符</dd>
                                 <dt>验证码：</dt>
                                 <dd><input type="text" class="input" name="reg_verify_code" value="" />  <img id="imgVerifyCode" src="inc/verifycode.php?t={eval echo time()}" alt="刷新验证码" style="cursor:pointer;" onclick="refreshCode('imgVerifyCode')" />  </dd>
                                 <dt style="font-size:12px; line-height:25px;"> <input type="checkbox" checked="checked" style="height:20px; line-height:20px;" name="reg_agreement" value="1" /> 我已阅读并同意 <a href="{conf site_url}/index.php?mod=other&cmd=agreement" target="_blank">《曾在网络服务协议》</a> </dt>

@@ -51,6 +51,26 @@ a:hover {
 .wrapper {
 	font-size: 12px;
 }
+.clear{
+	clear:both;
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.btn{
+	width:108px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	font-weight:bold;
+	color:#FFF;
+	background:url(../images/reg/btn-bg.gif) no-repeat;
+	border:0;
+	cursor:pointer;
+}
 /************ header **********/
 .header {
 	position:relative;
@@ -270,4 +290,94 @@ a:hover {
 }
 .message li{
 	padding:5px;
+}
+
+/**** home content ************/
+.main{
+	line-height:1.8em;
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.clear{
+	clear:both;
+}
+.block{
+	display:block;
+}
+.mainSider{
+	width:25%;
+	float:left;
+	overflow:hidden;
+}
+.mainContainer{
+	width:75%;
+	float:left;
+	overflow:hidden;
+}
+.mainInner{
+	padding:10px;
+}
+
+.mainContainerCenter{
+	float:left;
+	width:75%;
+}
+.mainContainerSider{
+	float:right;
+	width:23%;
+}
+
+.myImg{
+	float:left; 
+	width:45%; 
+	display:block; 
+	overflow:hidden;
+}
+.myImg img{
+	border:solid 1px #ccc;
+	padding:3px;
+	background:#F9F9F9;
+}
+.myInfo{
+	float:left;
+	width:55%;
+	display:block;
+	overflow:hidden;
+}
+.myInfo dl{
+	font-size:12px;
+	line-height:1.8em;
+	margin:5px;
+}
+.myInfo dt{
+	font-size:14px;
+	font-weight:bold;
+}
+.myInfo dd{
+	color:#033;
+}
+
+
+/***** mood modues *********/
+
+.divPostMood{
+	background:#ECF5FF;
+	border:1px solid #f0f0f0;
+}
+#txtMood{
+	margin:0 auto;
+	width:98%;
+	height:60px;
+	border:0;
+	margin:5px;
+}
+.divBtnMood{
+	padding:2px 5px 5px 5px;
+}
+.divBtnMood .btn{
+	float:right;
 }

@@ -37,7 +37,7 @@ table {
 	border-collapse:collapse
 }
 a {
-	color:#069;
+	color:#06F;
 	text-decoration:none
 }
 a:hover {
@@ -308,6 +308,11 @@ a:hover {
 .block{
 	display:block;
 }
+.img{
+	border:solid 1px #ccc;
+	padding:3px;
+	background:#F9F9F9;
+}
 .mainSider{
 	width:25%;
 	float:left;
@@ -337,11 +342,7 @@ a:hover {
 	display:block; 
 	overflow:hidden;
 }
-.myImg img{
-	border:solid 1px #ccc;
-	padding:3px;
-	background:#F9F9F9;
-}
+
 .myInfo{
 	float:left;
 	width:55%;
@@ -380,4 +381,53 @@ a:hover {
 }
 .divBtnMood .btn{
 	float:right;
+}
+
+.list{
+	margin-top:5px;
+	margin-bottom:5px;
+	padding:5px 0;
+	border-bottom:solid 1px #e3e3e3;
+}
+.list .listFace{
+	width:15%;
+	float:left;
+}
+.list .listItem{
+	float:right;
+	width:83%;
+}
+
+.list .listItem .title{
+	font-size:14px;
+	font-weight:bold;
+	padding-bottom:5px;
+	color:#444;
+}
+.list .listItem .content{
+	font-size:13px;
+	padding-top:5px;
+	padding-bottom:5px;
+	color:#333;
+}
+
+.list .listItem .ctrl{
+	color:#999;
+	font-size:12px;
+	background:#F6F6F6;
+	padding:5px;
+}
+
+.list .listItem .ctrl .input{
+	width:98%;
+	border:solid 1px #CCC;
+	line-height:1.5em;
+	padding:1px 3px;
+	color:#999;
+}
+.list .listItem .ctrl textarea.input{
+	color:#000;
+}
+.list .listItem .ctrl .btnGray{
+	padding:3px 5px;
 }

@@ -65,6 +65,7 @@ class App
 
 		//包含文件
 		include_once ROOT_PATH.'logic/base_logic.class.php';
+		include_once ROOT_PATH.'model/base_model.class.php';
 		include_once ROOT_PATH . 'logic/'. $mod['file'] .'.class.php';
 
 		//实例化类
@@ -85,6 +86,10 @@ class App
 				'home'=> array(
 					'file' => 'home_logic',
 					'class' => 'HomeLogic',	
+				),
+				'letter'=> array(
+					'file' => 'letter_logic',
+					'class' => 'LetterLogic',	
 				),
 				'other'=> array(
 					'file' => 'other_logic',

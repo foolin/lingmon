@@ -90,10 +90,10 @@ class UserLogic extends BaseLogic
 		$new_user['lastlogintime'] = Util::date() ;
 		$new_user['lastloginip'] = Util::get_ip();
 		$new_user['logincount'] = $user['logincount'] + 1;
-		$user_model -> base_update($new_user, "userid='". $user['userid'] ."'");
+		$user_model -> base_update($new_user, "uid='". $user['uid'] ."'");
 		
 		//保存Cookie
-		$auth_code = Util::auth_code($user['userid'] . '|' . $user['password'], 'ENCODE');
+		$auth_code = Util::auth_code($user['uid'] . '|' . $user['password'], 'ENCODE');
 		$this->cookie->set('auth', $auth_code, ($this->config['cookie_expire']*86400));
 
 		//判断是否第一次登录
@@ -183,7 +183,7 @@ class UserLogic extends BaseLogic
 			exit;
 		}
 
-		//$userid = $user_model -> add($email, $password, $regtime, $regip, $status);
+		//$uid = $user_model -> add($email, $password, $regtime, $regip, $status);
 
 		$user = array();
 		$user['email'] = $email;
@@ -194,10 +194,10 @@ class UserLogic extends BaseLogic
 		$user['nickname'] = $nickname;
 		
 		//注册
-		$userid = $user_model -> base_add($user);
+		$uid = $user_model -> base_add($user);
 		
 		
-		if($userid > 0)
+		if($uid > 0)
 		{
 			$active_url = Util::get_domain_url(). "/index.php?mod=user&cmd=activate&email=".$email."&code=".md5($regtime);
 			
@@ -262,7 +262,7 @@ class UserLogic extends BaseLogic
 		//更新
 		$update_user = array();
 		$update_user['status'] = 1;
-		$user_model -> base_update($update_user, 'userid=' . $user['userid']);
+		$user_model -> base_update($update_user, 'uid=' . $user['uid']);
 		
 		$go_url = 'index.php?mod=user&cmd=login';
 		$this->messager($email."激活成功！",  $email . "，恭喜您的帐号激活成功，您现在可以登录了！",  $go_url, 5);

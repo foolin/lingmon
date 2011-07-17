@@ -1,7 +1,5 @@
 <?php
 
-require_once ROOT_PATH . 'model/base_model.class.php';
-
 class UserModel extends BaseModel
 {
 	
@@ -30,9 +28,9 @@ class UserModel extends BaseModel
 
 	
 	//判断用户是否存在
-	function check_user($userid, $password)
+	function check_user($uid, $password)
 	{
-		$sql = "SELECT COUNT(0) FROM {$this->db_table} WHERE userid='{$userid}' AND Password='{$password}' ";
+		$sql = "SELECT COUNT(0) FROM {$this->db_table} WHERE uid='{$uid}' AND Password='{$password}' ";
 		return $this->db->result_first($sql) > 0;
 	}
 

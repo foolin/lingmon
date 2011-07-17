@@ -60,20 +60,24 @@ class Db {
 
 	}
 
+	//查询并转为数组
 	function fetch_array($query, $result_type = MYSQL_ASSOC) {
 		return mysql_fetch_array($query, $result_type);
 	}
 
+	//查询并返回第一行第一列数据
 	function result_first($sql) {
 		$query = $this->query($sql);
 		return $this->result($query, 0);
 	}
 
+	//查询并返回第一行数据
 	function fetch_first($sql) {
 		$query = $this->query($sql);
 		return $this->fetch_array($query);
 	}
 
+	//查询
 	function fetch_all($sql, $id = '') {
 		$arr = array();
 		$query = $this->query($sql);

@@ -1,0 +1,65 @@
+<!--{template "home_header"}-->
+
+		<div class="mainSider">
+        <div class="mainInner">
+
+            <div class="siderMenu">
+				<!--{template "letter_nav"}-->
+			</div>
+            
+        </div>
+        </div>
+        
+        <div class="mainContainer">
+        <div class="mainInner">
+        
+        	<div class="mainContainerCenter">
+            	
+                <div class="mainTitle">{$letter[title]}</div>
+				
+				<div class="letterContent">
+					{$letter['content']}
+				</div>
+
+				<hr>
+				
+                
+                <div class="list">
+				<!--{loop $reply_list $item}-->
+                    <div class="item">
+                        <div class="image">
+                                <a href="#" title="新匿信"><img src="images/letter_new.jpg" width="80" border="0" /></a>
+                        </div>
+                        <div class="text">
+                            <div class="title">
+                            <a href="{conf site_url}/index.php?mod=letter&cmd=detail&id={$item['id']}">{$item[title]}</a> 
+                            </div>
+                            <div class="content">
+                                {$item[content]}
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+				<!--{/loop}-->
+                </div>
+
+				<div class="reply">
+					快速回复
+				</div>
+                
+            
+            </div>
+            <!--mainContainerCenter-->
+        	<div class="mainContainerSider">
+            	<input type="button" class="btn" value="回信" onclick="location.href='{conf site_url}/index.php?mod=letter&cmd=reply&letterid={$letter['id']}';" />
+            </div>
+            <!--mainContainerSider-->
+			<div class="clear"></div>
+            
+        </div>
+        </div>
+        <div class="clear">
+        </div>
+
+<!--{template "home_footer"}-->

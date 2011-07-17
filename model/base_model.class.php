@@ -13,7 +13,8 @@
 
 class BaseModel
 {
-	protected $db;
+	//protected $db;
+	public $db;
 	protected $db_table = '';
 	
 	//初始化
@@ -32,6 +33,15 @@ class BaseModel
 							 , $config['db_name'], $config['db_table_prefix'], $config['db_charset']);
 		//$this->db->connect('127.0.0.1:3306', 'root', '123456', 'cengzai', 'cz_', 'utf8');
 
+	}
+
+	//设置表名
+	function set_db_table($table_name = '')
+	{
+		if(isset($table_name) && !empty($table_name))
+		{
+			$this->db_table = $this->db->table_prefix . $table_name;
+		}
 	}
 
 	
@@ -136,6 +146,49 @@ class BaseModel
 		return $this->db->fetch_all($sql);
 	}
 
+	//取分页列表
+	// array['list'], array['total']
+	function base_get_page_list($where='', $order='', $page_index=1, $page_size=20)
+	{
+		$total_sql = " SELECT count(0) FROM {$this->db_table} ";
+		$sql = " SELECT * FROM {$this->db_table} ";
+
+		if(isset($where) && !empty($where))
+		{
+			$total_sql .=  " WHERE {$where} ";
+			$sql .= " WHERE {$where} ";
+		}
+
+		if(isset($order) && !empty($order))
+		{
+			$sql .= " ORDER BY {$order} ";
+		}
+
+		$sql .= "  LIMIT {$page_index},{$page_size}  ";
+
+
+		
+		$page_index = $page_index -1;
+		if($page_index < 0)
+		{
+			$page_index = 0;
+		}
+		if($page_size < 0)
+		{
+			$page_size = 20;
+		}
+
+		$_total =  $this->db->result_first($total_sql) ;
+		$_list = $this->db->fetch_all($sql);
+
+		$return = array(
+				'list' => $_list,
+				'total' => $_total
+			);
+
+		return $return;
+	}
+
 	
 	//取单个数据
 	function base_get_model($where, $order='')
@@ -165,7 +218,7 @@ class BaseModel
 
 
 	//删除
-	function base_delete($where)
+	function base_del($where)
 	{
 		if(!isset($where))
 		{

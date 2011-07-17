@@ -22,15 +22,15 @@ class BaseLogic
 		$this->cookie = new Cookie($config, $_COOKIE);
 
 		//验证是否已经登录
-		$userid = 0;
+		$uid = 0;
 		$password = '';
 		if(($auth_code=$this->cookie->get('auth')))
 		{
-			list($userid, $password)=explode("|", Util::auth_code($auth_code,'DECODE'));
+			list($uid, $password)=explode("|", Util::auth_code($auth_code,'DECODE'));
 		}
 		include_once ROOT_PATH . 'model/user_model.class.php';
 		$user_model = new UserModel($this->config);
-		$this->user = $user_model -> base_get_model("userid='". $userid ."' AND password='". $password ."' ");
+		$this->user = $user_model -> base_get_model("uid='". $uid ."' AND password='". $password ."' ");
 	}
 
 	//取参数
@@ -65,7 +65,7 @@ class BaseLogic
 
 	
 	//消息框
-	function messager($title, $message='', $redirect_to=null,$time = null)
+	function messager($title, $message='', $redirect_to=null, $time = null)
 	{
 		$history_back = false;
 

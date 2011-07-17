@@ -7,7 +7,12 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="bookmark" href="/favicon.ico" type="image/x-icon" />
 <link href="styles/home.css" rel="stylesheet" type="text/css" />
+{if $this->request('mod')=='letter'}
+<link href="styles/letter.css" rel="stylesheet" type="text/css" />
+{/if}
 <link href="styles/article.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/dialog/artDialog.min.js"></script>
 </head>
 
 <body>
@@ -19,16 +24,25 @@
 			<h1><a href="{conf site_url}/index.php">曾在网</a></h1>
 			<div class="nav">
 				<ul class="nav-list">
-					<li class="current"><a href="{conf site_url}/index.php">首页</a></li>
-					<li><a href="/Help">心情</a></li>
-                    <li><a href="/Ask">谈心</a></li>
-                    <li><a href="/Story">故事</a></li>
-					<li><a href="/Friends">好友</a></li>
+					<li {eval if($this->request('mod')=='home') echo 'class="current"'}><a href="{conf site_url}/index.php">首页</a></li>
+					<li {eval if($this->request('mod')=='mood') echo 'class="current"'}><a href="{conf site_url}/index.php?mod=mood">心情</a></li>
+					<li {eval if($this->request('mod')=='letter') echo 'class="current"'}><a class="msg-notify" href="{conf site_url}/index.php?mod=letter&cmd=add">匿信</a>
+                    </li>
+					<li {eval if($this->request('mod')=='ask') echo 'class="current"'}><a class="msg-notify" href="{conf site_url}/index.php?mod=letter&cmd=add">问答</a>
+                    </li>
+					<li {eval if($this->request('mod')=='clinic') echo 'class="current"'}><a class="msg-notify" href="{conf site_url}/index.php?mod=letter&cmd=add">诊所</a>
+                    </li>
+					<li {{eval if($this->request('mod')=='zine') echo 'class="current"'}><a href="{conf site_url}/index.php?mod=story">情刊</a></li>
+					<li {eval if($this->request('mod')=='friend') echo 'class="current"'}><a href="{conf site_url}/index.php?mod=friend">好友</a></li>
 				</ul>
 			</div>
 			<div class="links">
 				<ul class="linksList">
+					{if isset($this->user['nickname'])}
+					<li><a href="/Home">{$this->user['nickname']}</a></li>
+					{else}
 					<li><a href="/Home">我的主页</a></li>
+					{/if}
 					<li><a href="/Message">消息</a></li>
 					<li><a class="toggle-dropdown" href="#" id="header_set"><span class="toggle-dropdown-inner">设置</span></a>
 					</li>

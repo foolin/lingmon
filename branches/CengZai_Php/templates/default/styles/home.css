@@ -313,20 +313,26 @@ a:hover {
 	padding:3px;
 	background:#F9F9F9;
 }
+/*********** main ******/
 .mainSider{
-	width:25%;
+	width:24%;
 	float:left;
 	overflow:hidden;
 }
 .mainContainer{
 	width:75%;
-	float:left;
+	float:right;
 	overflow:hidden;
 }
 .mainInner{
 	padding:10px;
 }
-
+.mainTitle{
+	font-size:18px;
+	font-family:"黑体", "宋体", "微软雅黑", "Courier New";
+	padding-top:10px;
+	padding-bottom:10px;
+}
 .mainContainerCenter{
 	float:left;
 	width:75%;
@@ -383,51 +389,100 @@ a:hover {
 	float:right;
 }
 
-.list{
+.list .item{
 	margin-top:5px;
 	margin-bottom:5px;
 	padding:5px 0;
 	border-bottom:solid 1px #e3e3e3;
 }
-.list .listFace{
+.list .item .image{
 	width:15%;
 	float:left;
 }
-.list .listItem{
+.list .item .text{
 	float:right;
 	width:83%;
 }
 
-.list .listItem .title{
+.list .item .text .title{
 	font-size:14px;
 	font-weight:bold;
 	padding-bottom:5px;
 	color:#444;
 }
-.list .listItem .content{
+.list .item .text .content{
 	font-size:13px;
 	padding-top:5px;
 	padding-bottom:5px;
 	color:#333;
 }
 
-.list .listItem .ctrl{
+.list .item .text .ctrl{
 	color:#999;
 	font-size:12px;
 	background:#F6F6F6;
 	padding:5px;
 }
 
-.list .listItem .ctrl .input{
+.list .item .text .ctrl .input{
 	width:98%;
 	border:solid 1px #CCC;
 	line-height:1.5em;
 	padding:1px 3px;
 	color:#999;
 }
-.list .listItem .ctrl textarea.input{
+.list .item .text .ctrl textarea.input{
 	color:#000;
 }
-.list .listItem .ctrl .btnGray{
+.list .item .text .ctrl .btnGray{
 	padding:3px 5px;
 }
+
+
+/********* sider *****/
+.siderMenu{
+}
+
+.siderMenu h3{
+	font-size:14px;
+	line-height:30px;
+	background:#F6F6F6;
+	color:#333;
+}
+.siderMenu ul{
+	list-style:none;
+}
+.siderMenu ul li{
+}
+
+.siderMenu .hr{
+	padding-top:5px;
+	margin-bottom:5px;
+	border-bottom:solid 1px #ccc;
+}
+
+/************* 分页 ********/
+.pager{
+}
+.pager span,.pager a,.pager a:hover{
+	padding:1px 8px;
+	border:solid 1px #ccc;
+	display:inline-block;
+
+}
+.pager a{
+	text-decoration:none;
+}
+.pager a:hover{
+	color:#F00;
+	text-decoration:none;
+	background:#FFE8E8;
+	border-color:#F00;
+}
+
+
+/********消息提示　********/
+.msg-notify{position:relative;#zoom:1}
+.msg-notify .msg-count{position:absolute;top:6px;left:auto;right:6px;padding:1px 4px;background-color:#df5757;border-radius:3px;color:white;vertical-align:text-top;line-height:1.2;font-family:tahoma;font-size:10px;font-weight:700;white-space:nowrap;-webkit-text-size-adjust:none}
+.msg-notify .msg-notify:hover{text-decoration:none}
+.msg-notify .msg-count .arrow{display:none;width:0;height:0;overflow:hidden;position:absolute;bottom:-4px;left:4px;border-top:4px solid #df5757;border-right:4px dashed transparent}

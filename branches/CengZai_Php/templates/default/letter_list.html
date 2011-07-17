@@ -1,0 +1,65 @@
+<!--{template "home_header"}-->
+
+		<div class="mainSider">
+        <div class="mainInner">
+
+            <div class="siderMenu">
+				<!--{template "letter_nav"}-->
+			</div>
+            
+        </div>
+        </div>
+        
+        <div class="mainContainer">
+        <div class="mainInner">
+        
+        	<div class="mainContainerCenter">
+            	
+                <div class="mainTitle">我的匿名信</div>
+                <div class="type">
+					<a href="{conf site_url}/index.php?mod=letter&cmd=list">全部</a> | 
+					<a href="{conf site_url}/index.php?mod=letter&cmd=list&type=receive">收到的匿信</a>  | 
+					<a href="{conf site_url}/index.php?mod=letter&cmd=list&type=send">发送的匿信</a>
+				</div>
+                <div class="list">
+				<!--{loop $list $item}-->
+                    <div class="item">
+                        <div class="image">
+                                <a href="#" title="新匿信"><img src="images/letter_new.jpg" width="80" border="0" /></a>
+                        </div>
+                        <div class="text">
+                            <div class="title">
+                            <a href="{conf site_url}/index.php?mod=letter&cmd=detail&id={$item['id']}">{$item[title]}</a> 
+                            </div>
+                            <div class="content">
+                                {$item[content]}
+                            </div>
+                            <div class="ctrl">
+                            <a href="#Reply">回复</a> <a href="#Delete">删除</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+				<!--{/loop}-->
+                </div>
+                
+                <div class="pager">
+					{$pager}
+                </div>
+				
+            
+            </div>
+            <!--mainContainerCenter-->
+        	<div class="mainContainerSider">
+            	<input type="button" class="btn" value="写匿名信" onclick="location.href='{conf site_url}/index.php?mod=letter&cmd=add';" />
+            </div>
+            <!--mainContainerSider-->
+			<div class="clear"></div>
+            
+        </div>
+        </div>
+        <div class="clear">
+        </div>
+
+<!--{template "home_footer"}-->

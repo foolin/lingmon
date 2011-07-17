@@ -1,0 +1,95 @@
+<!--{template "home_header"}-->
+
+		<div class="mainSider">
+        <div class="mainInner">
+        
+        
+            <div class="siderMenu">
+				<!--{template "letter_nav"}-->
+                <div class="hr"></div>
+			</div>
+            
+            
+        </div>
+        </div>
+        
+        <div class="mainContainer">
+        <div class="mainInner">
+        
+        	<div class="mainContainerCenter">
+            
+            	<div class="mainTitle">撰写匿名信</div>
+            
+				<form name="form1" id="form1" method="post" action="{conf site_url}/index.php?mod=letter&cmd=do_add">
+                
+				<input type="hidden" name="hdIsDraft" id="hdIsDraft" value="0" />
+				<input type="hidden" name="hdDraftId" id="hdDraftId" value="{$draft[id]}" />
+                
+
+				<div class="divTitle">
+					<h3>主题 &nbsp; <span>(可不填)<span></h3>
+					<input type="text" class="text" name="txtTitle" value="{$draft[title]}" />
+				</div>
+
+				<div class="divContent">
+                	<h3>内容</h3>
+                    <textarea name="txtContent" style="font-size:14px" id="txtContent" class="text">{$draft[content]}</textarea>
+				</div>
+                
+                <div class="divCtrl">
+                	<input type="submit" class="btn" value="投递"/>
+					<input type="submit" class="btn" value="保存草稿" onclick="return onDraft();"/>
+                </div>
+                
+                </form>
+                
+            </div>
+            <!--mainContainerCenter-->
+        	<div class="mainContainerSider">
+            	<h3>签到</h3>2030天
+            </div>
+            <!--mainContainerSider-->
+			<div class="clear"></div>
+            
+        </div>
+        </div>
+        <div class="clear"> </div>
+
+<!--{template "home_footer"}-->
+
+<script charset="utf-8" src="js/editor/kindeditor-min.js"></script>
+<script>
+	KE.show({
+		id : 'txtContent',
+		resizeMode : 1,
+		allowPreviewEmoticons : false,
+		allowUpload : false,
+		items : [
+		'bold', 'italic', 'underline',
+		'removeformat', '|', 'insertorderedlist',
+		'insertunorderedlist','|','undo', 'redo']
+	});
+
+
+	function onDraft(){
+		$("#hdIsDraft").val('1');
+		return true;
+	}
+
+
+	//取消
+	function onCancel(){
+		$.dialog({
+			title: '温馨提示',
+			content: '取消撰写匿名信将丢失刚才编写内容，是否取消撰写匿名信？',
+			yesText: '确定取消',
+			noText: '我点击错了',
+			yesFn: function(){
+				location.href='{conf site_url}/index.php?mod=letter&cmd=list';
+			},
+			noFn: function(){
+			}
+		});
+	}
+	
+</script>

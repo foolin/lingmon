@@ -15,14 +15,14 @@ a:hover
 	background:blue;
 	color:#fff;
 }
-dl.artlist{
+div.artlist{
 	line-height:1.8em;
 }
-dl.artlist dt{
+div.artlist .title{
 	color:#090;
 	background:#F5F5F5;
 }
-dl.artlist dd{
+div.artlist .content{
 	margin:0;
 }
 .artlist .info{

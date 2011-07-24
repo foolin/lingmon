@@ -62,18 +62,18 @@ public partial class wap_default : WapBase
         StringBuilder sb = new StringBuilder();
         if (dsList != null && dsList.Tables.Count > 0 && dsList.Tables[0].Rows.Count > 0)
         {
-            sb.Append("<dl class=\"artlist\">");
+            sb.Append("<div class=\"artlist\">");
             foreach (DataRow dr in dsList.Tables[0].Rows)
             {
                 if ((dr["Content"] + "").Length > 500)
                 {
                     continue;
                 }
-                sb.Append("<dt> # " + dr["ArtID"] + "乐</dt>");
-                sb.Append("<dd>" + dr["Content"] + "</dd>");
-                sb.Append("<dd class=\"info\">" + dr["NickName"] + " 发布于 " + dr["CreateTime"] + "</dd>");
+                sb.Append("<div class=\"title\"> # " + dr["ArtID"] + "乐</div>");
+                sb.Append("<div class=\"content\">" + dr["Content"] + "</div>");
+                sb.Append("<div class=\"info\">" + dr["NickName"] + " 发布于 " + dr["CreateTime"] + "</div>");
             }
-            sb.Append("</dl>");
+            sb.Append("</div>");
 
             MakePager(sb, page, pageSize, record);
         }
